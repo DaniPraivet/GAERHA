@@ -1,5 +1,6 @@
 package dev.danipraivet.controlador;
 
+import dev.danipraivet.modelo.entidades.Departamento;
 import dev.danipraivet.modelo.entidades.Empleado;
 import dev.danipraivet.modelo.entidades.Fichaje;
 import dev.danipraivet.modelo.enumeraciones.Rol;
@@ -31,9 +32,7 @@ import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ControladorRRHH implements Initializable {
 
@@ -45,6 +44,11 @@ public class ControladorRRHH implements Initializable {
     private final ServicioEmpleado servicioEmpleado = new ServicioEmpleado();
     private final ServicioAutenticacion servicioAuth = new ServicioAutenticacion();
     private final ObservableList<Empleado> empleados = FXCollections.observableArrayList();
+    private final ObservableList<Fichaje> fichajes = FXCollections.observableArrayList();
+    @FXML
+    public Label lblTotalHorasMes;
+    @FXML
+    private Label lblFechaHora;
     @FXML
     private Label lblBienvenidaRRHH;
     @FXML
@@ -68,6 +72,20 @@ public class ControladorRRHH implements Initializable {
     @FXML
     private TableColumn<Empleado, String> colEstado;
     @FXML
+    private TableView<Fichaje> tablaHistorial;
+    @FXML
+    private TableColumn<Fichaje, LocalDate> colFecha;
+    @FXML
+    private TableColumn<Fichaje, String> colEntrada;
+    @FXML
+    private TableColumn<Fichaje, String> colSalida;
+    @FXML
+    private TableColumn<Fichaje, String> colTurno;
+    @FXML
+    private TableColumn<Fichaje, String> colHoras;
+    @FXML
+    private TableColumn<Fichaje, String> colEstadoFichaje;
+    @FXML
     private TextField txtFormCod;
     @FXML
     private TextField txtFormNombre;
@@ -83,6 +101,8 @@ public class ControladorRRHH implements Initializable {
     private TextField txtFormTelefono;
     @FXML
     private TextField txtFormUsername;
+    @FXML
+    private MFXComboBox<Departamento> cmbFormDpto;
     @FXML
     private MFXPasswordField txtFormContrasena;
     @FXML
@@ -120,8 +140,54 @@ public class ControladorRRHH implements Initializable {
             String f = texto.toLowerCase();
             return e.getNombreCompleto().toLowerCase().contains(f) || e.getDni().toLowerCase().contains(f) || e.getUsername().toLowerCase().contains(f);
         })));
-
+        configurarTabla();
+        Platform.runLater(this::actualizarVista);
         Platform.runLater(this::cargarDatos);
+    }
+
+    private void actualizarVista() {
+        lblBienvenidaRRHH.setText("Bienvenido, " + GestorSesion.getNombreCompleto());
+        lblFechaHora.setText(LocalDate.now().format(FMT_FECHA));
+
+        boolean fichado = servicioFichaje.estaFichadoHoy();
+        actualizarBotonFichaje(fichado);
+        cargarHistorial();
+    }
+
+    private void cargarHistorial() {
+        List<Fichaje> lista = servicioFichaje.getMesActual();
+        fichajes.setAll(lista);
+        double totalHoras = lista.stream().filter(f -> f.getHorasTrabajadas() != null).mapToDouble(f -> f.getHorasTrabajadas().doubleValue()).sum();
+        lblTotalHorasMes.setText(String.format("Total mes: %.1f h", totalHoras));
+    }
+
+    private void configurarTabla() {
+        colFecha.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("fecha"));
+        colFecha.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(LocalDate item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item.format(FMT_FECHA));
+            }
+        });
+        colEntrada.setCellValueFactory(cd -> new SimpleStringProperty(cd.getValue().getEntradaHora() != null ? cd.getValue().getEntradaHora().format(FMT_HORA) : "--:--"));
+        colSalida.setCellValueFactory(cd -> new SimpleStringProperty(cd.getValue().getSalidaHora() != null ? cd.getValue().getSalidaHora().format(FMT_HORA) : "--:--"));
+        colTurno.setCellValueFactory(cd -> new SimpleStringProperty(cd.getValue().getTurnoEntrada() != null ? cd.getValue().getTurnoEntrada().getEtiqueta() : ""));
+        colHoras.setCellValueFactory(cd -> new SimpleStringProperty(cd.getValue().getHorasFormateadas()));
+        colEstadoFichaje.setCellValueFactory(cd -> new SimpleStringProperty(cd.getValue().getEstado()));
+
+        tablaHistorial.setRowFactory(tv -> new TableRow<>() {
+            @Override
+            protected void updateItem(Fichaje f, boolean empty) {
+                super.updateItem(f, empty);
+                if (empty || f == null) setStyle("");
+                else if ("Trabajando".equals(f.getEstado())) setStyle("-fx-background-color: #e8f5e9;");
+                else if ("Ausente".equals(f.getEstado())) setStyle("-fx-background-color: #fff3e0;");
+                else setStyle("");
+            }
+        });
+        tablaHistorial.setItems(fichajes);
+        tablaHistorial.setPlaceholder(new Label("No hay fichajes este mes."));
     }
 
     @FXML
@@ -231,11 +297,12 @@ public class ControladorRRHH implements Initializable {
         boolean fichado = servicioFichaje.estaFichadoHoy();
         if (fichado) {
             btnFicharRRHH.setText("Salida");
-            btnFicharRRHH.setStyle("-fx-background-color: #e53935; -fx-text-fill: white;");
+            btnFicharRRHH.setStyle("-fx-background-color: #e53935; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
             lblEstadoRRHH.setText("Actualmente trabajando");
+            lblEstadoRRHH.setStyle("-fx-text-fill: #e53935; -fx-font-size: 16px; -fx-font-weight: bold;");
         } else {
             btnFicharRRHH.setText("Entrada");
-            btnFicharRRHH.setStyle("-fx-background-color: #43a047; -fx-text-fill: white;");
+            btnFicharRRHH.setStyle("-fx-background-color: #43a047; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-cursor: hand;");
             lblEstadoRRHH.setText("No fichado");
         }
     }
@@ -243,7 +310,7 @@ public class ControladorRRHH implements Initializable {
     private void actualizarBotonFichaje(boolean fichado) {
         if (fichado) {
             btnFicharRRHH.setText("Salida");
-            btnFicharRRHH.setStyle("-fx-background-color: #e53935; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
+            btnFicharRRHH.setStyle("-fx-text-fill: #e53935; -fx-font-size: 16px; -fx-font-weight: bold;");
 
             Optional<Fichaje> f = servicioFichaje.getFichajeHoy();
             f.ifPresent(fi -> {
@@ -253,7 +320,7 @@ public class ControladorRRHH implements Initializable {
             });
         } else {
             lblEstadoRRHH.setText("Entrada");
-            lblEstadoRRHH.setStyle("-fx-background-color: #43a047; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
+            lblEstadoRRHH.setStyle("-fx-text-fill: #43a047; -fx-font-size: 16px; -fx-font-weight: bold;");
             lblEstadoRRHH.setText("No estas fichado hoy.");
             lblEstadoRRHH.setTextFill(Color.web("#757575"));
         }
@@ -289,6 +356,18 @@ public class ControladorRRHH implements Initializable {
 
     private void configurarFormulario() {
         cmbFormRol.setItems(FXCollections.observableArrayList(Rol.values()));
+        List<Empleado> empleadoConDepartamentos = servicioEmpleado.listarTodos();
+        List<Departamento> departamentos = new ArrayList<>();
+        for (Empleado e : empleadoConDepartamentos) {
+            Departamento d = e.getDepartamento();
+            if (d != null && d.getNombre() != null && !d.getNombre().isBlank()) {
+                departamentos.add(d);
+            }
+        }
+        Set<Departamento> conjuntoDepartamentos = new HashSet<>(departamentos);
+        conjuntoDepartamentos.removeIf(d -> d.getNombre().isBlank());
+        List<Departamento> listaFinal = new ArrayList<>(conjuntoDepartamentos);
+        cmbFormDpto.setItems(FXCollections.observableArrayList(listaFinal));
         habilitarFormulario(false);
     }
 
@@ -307,6 +386,7 @@ public class ControladorRRHH implements Initializable {
         txtFormDni.setText(e.getDni());
         txtFormEmail.setText(e.getEmail() != null ? e.getEmail() : "");
         txtFormTelefono.setText(e.getTelefono() != null ? e.getTelefono() : "");
+        cmbFormDpto.setText(e.getDepartamento() != null ? e.getDepartamento().getNombre() : "");
         txtFormUsername.setText(e.getUsername());
         txtFormContrasena.clear();
         cmbFormRol.setValue(e.getRol());
@@ -328,6 +408,7 @@ public class ControladorRRHH implements Initializable {
             e.setDni(txtFormDni.getText().trim().toUpperCase());
             e.setEmail(txtFormEmail.getText().trim());
             e.setTelefono(txtFormTelefono.getText().trim());
+            e.setDepartamento(cmbFormDpto.getValue() != null ? cmbFormDpto.getValue() : new Departamento("",""));
             e.setUsername(txtFormUsername.getText().trim().toLowerCase());
             e.setRol(cmbFormRol.getValue() != null ? cmbFormRol.getValue() : Rol.EMPLEADO);
             return e;
@@ -345,6 +426,7 @@ public class ControladorRRHH implements Initializable {
         txtFormDni.clear();
         txtFormEmail.clear();
         txtFormTelefono.clear();
+        cmbFormDpto.clear();
         txtFormUsername.clear();
         txtFormContrasena.clear();
         cmbFormRol.setValue(Rol.EMPLEADO);
@@ -358,6 +440,7 @@ public class ControladorRRHH implements Initializable {
         txtFormDni.setDisable(!habilitar);
         txtFormEmail.setDisable(!habilitar);
         txtFormTelefono.setDisable(!habilitar);
+        cmbFormDpto.setDisable(!habilitar);
         txtFormUsername.setDisable(!habilitar);
         txtFormContrasena.setDisable(!habilitar);
         cmbFormRol.setDisable(!habilitar);
