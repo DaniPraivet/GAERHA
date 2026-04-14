@@ -1,7 +1,7 @@
 package dev.danipraivet.vista;
 
-import dev.danipraivet.controlador.ControladorAdmin;
 import dev.danipraivet.modelo.datos.GestorConexiones;
+import dev.danipraivet.modelo.utilidades.GestorInactividad;
 import io.github.palexdev.materialfx.theming.JavaFXThemes;
 import io.github.palexdev.materialfx.theming.MaterialFXStylesheets;
 import io.github.palexdev.materialfx.theming.UserAgentBuilder;
@@ -43,6 +43,12 @@ public class Aplicacion extends Application {
             escenarioPrincipal.setScene(escena);
             escenarioPrincipal.setTitle("Control de Asistencia - " + vista);
             log.info("Navegando a vista: {}", vista);
+
+            if ("Login".equals(vista)) {
+                GestorInactividad.detener();
+            } else {
+                GestorInactividad.iniciar(escena);
+            }
 
         } catch (IOException | NullPointerException e) {
             log.error("Error al cargar la vista '{}': {}", vista, e.getMessage());
@@ -91,6 +97,7 @@ public class Aplicacion extends Application {
     public void stop() {
         log.info("Cerrando aplicacion y liberando conexiones...");
         GestorConexiones.cerrarPool();
+        GestorInactividad.detener();
         if (scheduler != null && !scheduler.isShutdown()) {
             scheduler.shutdown();
         }
@@ -108,5 +115,12 @@ public class Aplicacion extends Application {
     public static void iniciarScheduler(Runnable tarea, int intervaloSegundos) {
         scheduler = Executors.newSingleThreadScheduledExecutor();
         scheduler.scheduleAtFixedRate(tarea, intervaloSegundos, intervaloSegundos, TimeUnit.SECONDS);
+    }
+
+    public static void pararScheduler() {
+        if (scheduler != null && !scheduler.isShutdown()) {
+            scheduler.shutdown();
+            scheduler = null;
+        }
     }
 }
