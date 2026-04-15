@@ -28,9 +28,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class ControladorAdmin implements Initializable {
 
@@ -107,6 +104,14 @@ public class ControladorAdmin implements Initializable {
     @FXML
     private MFXButton btnEliminarEmpleado;
     private FilteredList<Empleado> empleadosFiltrados;
+    @FXML
+    private Label lblTotalRegistrados;
+    @FXML
+    private Label lblActivosHoy;
+    @FXML
+    private Label lblBloqueados;
+    @FXML
+    private Label lblRrhhActivos;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -243,8 +248,11 @@ public class ControladorAdmin implements Initializable {
 
         long activos = empleados.stream().filter(Empleado::isActivo).count();
         lblTotalEmpleados.setText(String.valueOf(activos));
-
         lblFichadosHoy.setText(String.valueOf(servicioFichaje.contarFichadosHoy()));
+        lblTotalRegistrados.setText(String.valueOf(servicioEmpleado.contarTotalRegistrados()));
+        lblActivosHoy.setText(String.valueOf(servicioEmpleado.contarActivosHoy()));
+        lblBloqueados.setText(String.valueOf(servicioEmpleado.contarBloqueados()));
+        lblRrhhActivos.setText(String.valueOf(servicioEmpleado.contarRrhhActivos()));
 
         boolean fichado = servicioFichaje.estaFichadoHoy();
         if (fichado) {

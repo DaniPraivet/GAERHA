@@ -37,4 +37,12 @@ public interface IRepositorioEmpleado {
     boolean existeUsername(String username);
 
     boolean existeDni(String dni);
+
+    int contarTotalRegistrados();
+
+    int contarActivosHoy();
+
+    int contarBloqueados();
+
+    int contarRrhhActivos();
 }

@@ -34,7 +34,12 @@ public class RepositorioEmpleado implements IRepositorioEmpleado {
     private static final String SQL_LOGIN_EXITOSO = "UPDATE empleados SET intentos_fallidos=0, ultimo_acceso=NOW() WHERE username=?";
     private static final String SQL_EXISTE_USERNAME = "SELECT COUNT(*) FROM empleados WHERE username=?";
     private static final String SQL_EXISTE_DNI = "SELECT COUNT(*) FROM empleados WHERE dni=?";
+    private static final String SQL_TOTAL_REGISTRADOS = "SELECT COUNT(*) FROM empleados";
+    private static final String SQL_ACTIVOS_HOY = "SELECT COUNT(*) FROM empleados WHERE DATE(ultimo_acceso) = CURRENT_DATE AND activo = TRUE";
+    private static final String SQL_BLOQUEADOS = "SELECT COUNT(*) FROM empleados WHERE bloqueado = TRUE";
+    private static final String SQL_RRHH_ACTIVOS = "SELECT COUNT(*) FROM empleados WHERE rol = 'RRHH' AND activo = TRUE";
     private final Rol rolConexion;
+
     public RepositorioEmpleado(Rol rolConexion) {
         this.rolConexion = rolConexion;
     }
@@ -352,5 +357,35 @@ public class RepositorioEmpleado implements IRepositorioEmpleado {
         } finally {
             GestorConexiones.liberarConexion(rolConexion, con);
         }
+    }
+
+    public int contarTotalRegistrados() {
+        return contarQuery(SQL_TOTAL_REGISTRADOS);
+    }
+
+    public int contarActivosHoy() {
+        return contarQuery(SQL_ACTIVOS_HOY);
+    }
+
+    public int contarBloqueados() {
+        return contarQuery(SQL_BLOQUEADOS);
+    }
+
+    public int contarRrhhActivos() {
+        return contarQuery(SQL_RRHH_ACTIVOS);
+    }
+
+    private int contarQuery(String sql) {
+        Connection con = null;
+        try {
+            con = GestorConexiones.getConexion(rolConexion);
+            ResultSet rs = con.createStatement().executeQuery(sql);
+            if (rs.next()) return rs.getInt(1);
+        } catch (SQLException e) {
+            log.error("Error en contarQuery: {}", e.getMessage());
+        } finally {
+            GestorConexiones.liberarConexion(rolConexion, con);
+        }
+        return 0;
     }
 }

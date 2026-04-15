@@ -120,4 +120,9 @@ public class ServicioEmpleado {
             return new ResultadoCRUD(false, msg);
         }
     }
+
+    public int contarTotalRegistrados() { return repo.contarTotalRegistrados(); }
+    public int contarActivosHoy()       { return repo.contarActivosHoy(); }
+    public int contarBloqueados()       { return repo.contarBloqueados(); }
+    public int contarRrhhActivos()      { return repo.contarRrhhActivos(); }
 }

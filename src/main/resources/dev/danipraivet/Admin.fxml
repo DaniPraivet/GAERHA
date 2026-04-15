@@ -13,7 +13,7 @@
         <HBox alignment="CENTER_LEFT" spacing="16"
               style="-fx-background-color: #001860;
                      -fx-padding: 14 28;
-                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 10, 0, 0, 4);">
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 16, 0, 0, 4);">
             <Label text="Clockio · Administrador"
                    style="-fx-text-fill: white; -fx-font-size: 17px; -fx-font-weight: bold;"/>
             <Region HBox.hgrow="ALWAYS"/>
@@ -34,11 +34,10 @@
                 <VBox spacing="24" style="-fx-padding: 32;">
                     <HBox spacing="20">
                         <VBox alignment="CENTER" spacing="8" HBox.hgrow="ALWAYS"
-                              style="-fx-background-color: white; -fx-background-radius: 0 16 16 0;
-                                     -fx-effect: dropshadow(gaussian, rgba(21,101,192,0.16), 16, 0, 0, 5);
-                                     -fx-padding: 30 24;
-                                     -fx-border-color: transparent transparent transparent #1565C0;
-                                     -fx-border-width: 0 0 0 5; -fx-border-radius: 0 16 16 0;">
+                              style="-fx-background-color: white; -fx-background-radius: 16;
+                     -fx-effect: dropshadow(gaussian, rgba(21,101,192,0.16), 16, 0, 0, 5);
+                     -fx-padding: 30 24;
+                     -fx-border-radius: 16;">
                             <Label fx:id="lblTotalEmpleados" text="0"
                                    style="-fx-font-size: 38px; -fx-font-weight: bold; -fx-text-fill: #1565C0;"/>
                             <Label text="Empleados activos"
@@ -46,30 +45,75 @@
                         </VBox>
 
                         <VBox alignment="CENTER" spacing="8" HBox.hgrow="ALWAYS"
-                              style="-fx-background-color: white; -fx-background-radius: 0 16 16 0;
-                                     -fx-effect: dropshadow(gaussian, rgba(27,94,32,0.16), 16, 0, 0, 5);
-                                     -fx-padding: 30 24;
-                                     -fx-border-color: transparent transparent transparent #2e7d32;
-                                     -fx-border-width: 0 0 0 5; -fx-border-radius: 0 16 16 0;">
+                              style="-fx-background-color: white; -fx-background-radius: 16;
+                     -fx-effect: dropshadow(gaussian, rgba(27,94,32,0.16), 16, 0, 0, 5);
+                     -fx-padding: 30 24;
+                     -fx-border-radius: 16;">
                             <Label fx:id="lblFichadosHoy" text="0"
                                    style="-fx-font-size: 38px; -fx-font-weight: bold; -fx-text-fill: #2e7d32;"/>
                             <Label text="Fichados hoy"
                                    style="-fx-text-fill: #90a4ae; -fx-font-size: 13px;"/>
                         </VBox>
+
                         <VBox alignment="CENTER" spacing="14" HBox.hgrow="ALWAYS"
-                              style="-fx-background-color: white; -fx-background-radius: 0 16 16 0;
-                                     -fx-effect: dropshadow(gaussian, rgba(63,81,181,0.14), 16, 0, 0, 5);
-                                     -fx-padding: 30 24;
-                                     -fx-border-color: transparent transparent transparent #001860;
-                                     -fx-border-width: 0 0 0 5; -fx-border-radius: 0 16 16 0;">
+                              style="-fx-background-color: white; -fx-background-radius: 16;
+                     -fx-effect: dropshadow(gaussian, rgba(63,81,181,0.14), 16, 0, 0, 5);
+                     -fx-padding: 30 24;
+                     -fx-border-radius: 16;">
                             <Label fx:id="lblEstadoAdmin" text=""
                                    style="-fx-font-size: 13px; -fx-text-fill: #90a4ae;"/>
                             <MFXButton fx:id="btnFicharAdmin"
                                        text="Entrada" onAction="#onFicharAdmin"
                                        prefWidth="200" prefHeight="50"
                                        style="-fx-background-color: #2e7d32; -fx-text-fill: white;
-                                              -fx-font-size: 15px; -fx-font-weight: bold;
-                                              -fx-background-radius: 12; -fx-cursor: hand;"/>
+                              -fx-font-size: 15px; -fx-font-weight: bold;
+                              -fx-background-radius: 12; -fx-cursor: hand;"/>
+                        </VBox>
+                    </HBox>
+
+                    <HBox spacing="20">
+                        <VBox alignment="CENTER" spacing="8" HBox.hgrow="ALWAYS"
+                              style="-fx-background-color: white; -fx-background-radius: 16;
+                     -fx-effect: dropshadow(gaussian, rgba(74,20,140,0.14), 16, 0, 0, 5);
+                     -fx-padding: 24 24;
+                     -fx-border-radius: 16;">
+                            <Label fx:id="lblTotalRegistrados" text="0"
+                                   style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #6a1b9a;"/>
+                            <Label text="Empleados registrados"
+                                   style="-fx-text-fill: #90a4ae; -fx-font-size: 13px;"/>
+                        </VBox>
+
+                        <VBox alignment="CENTER" spacing="8" HBox.hgrow="ALWAYS"
+                              style="-fx-background-color: white; -fx-background-radius: 16;
+                     -fx-effect: dropshadow(gaussian, rgba(230,81,0,0.14), 16, 0, 0, 5);
+                     -fx-padding: 24 24;
+                     -fx-border-radius: 16;">
+                            <Label fx:id="lblActivosHoy" text="0"
+                                   style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #e65100;"/>
+                            <Label text="Sesiones hoy"
+                                   style="-fx-text-fill: #90a4ae; -fx-font-size: 13px;"/>
+                        </VBox>
+
+                        <VBox alignment="CENTER" spacing="8" HBox.hgrow="ALWAYS"
+                              style="-fx-background-color: white; -fx-background-radius: 16;
+                     -fx-effect: dropshadow(gaussian, rgba(183,28,28,0.14), 16, 0, 0, 5);
+                     -fx-padding: 24 24;
+                     -fx-border-radius: 16;">
+                            <Label fx:id="lblBloqueados" text="0"
+                                   style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #b71c1c;"/>
+                            <Label text="Cuentas bloqueadas"
+                                   style="-fx-text-fill: #90a4ae; -fx-font-size: 13px;"/>
+                        </VBox>
+
+                        <VBox alignment="CENTER" spacing="8" HBox.hgrow="ALWAYS"
+                              style="-fx-background-color: white; -fx-background-radius: 16;
+                     -fx-effect: dropshadow(gaussian, rgba(0,96,100,0.14), 16, 0, 0, 5);
+                     -fx-padding: 24 24;
+                     -fx-border-radius: 16;">
+                            <Label fx:id="lblRrhhActivos" text="0"
+                                   style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #00695c;"/>
+                            <Label text="Personal RRHH"
+                                   style="-fx-text-fill: #90a4ae; -fx-font-size: 13px;"/>
                         </VBox>
                     </HBox>
                 </VBox>
