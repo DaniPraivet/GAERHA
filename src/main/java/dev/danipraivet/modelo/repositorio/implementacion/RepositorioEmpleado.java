@@ -26,7 +26,7 @@ public class RepositorioEmpleado implements IRepositorioEmpleado {
     private static final String SQL_TODOS_ACTIVOS = SQL_BASE + "WHERE e.activo = TRUE ORDER BY e.apellido1, e.nombre";
     private static final String SQL_TODOS = SQL_BASE + "ORDER BY e.activo DESC, e.apellido1";
     private static final String SQL_INSERTAR = "INSERT INTO empleados (cod_empleado, nombre, apellido1, apellido2, dni, " + "email, telefono, username, password_hash, rol, cod_departamento) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String SQL_ACTUALIZAR = "UPDATE empleados SET nombre=?, apellido1=?, apellido2=?, dni=?, " + "email=?, telefono=?, username=?, rol=?, cod_departamento=? , bloqueado=?" + "WHERE cod_empleado=?";
+    private static final String SQL_ACTUALIZAR = "UPDATE empleados SET nombre=?, apellido1=?, apellido2=?, dni=?, " + "email=?, telefono=?, username=?, rol=?, cod_departamento=?, bloqueado=?" + " WHERE cod_empleado=?";
     private static final String SQL_BAJA_LOGICA = "UPDATE empleados SET activo=FALSE, fecha_baja=NOW() WHERE cod_empleado=?";
     private static final String SQL_AUDITAR_BAJA = "INSERT INTO auditoria (cod_empleado, username, accion, detalle, tabla_afectada, registro_id) " + "VALUES (?, ?, 'BAJA_LOGICA', ?, 'empleados', ?)";
     private static final String SQL_ELIMINAR = "DELETE FROM empleados WHERE cod_empleado=?";
