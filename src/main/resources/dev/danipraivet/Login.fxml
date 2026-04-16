@@ -69,7 +69,7 @@
                               -fx-background-radius: 10;
                               -fx-cursor: hand;"/>
 
-            <Label text="v1.0.0 · Clockio"
+            <Label text="v1.0.0 · GAERHA"
                    style="-fx-text-fill: #bdbdbd; -fx-font-size: 11px;"/>
         </VBox>
     </center>

@@ -14,7 +14,7 @@
               style="-fx-background-color: #001860;
                      -fx-padding: 14 28;
                      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 16, 0, 0, 4);">
-            <Label text="Clockio · Administrador"
+            <Label text="GAERHA · Administrador"
                    style="-fx-text-fill: white; -fx-font-size: 17px; -fx-font-weight: bold;"/>
             <Region HBox.hgrow="ALWAYS"/>
             <Label fx:id="lblNombreAdmin"

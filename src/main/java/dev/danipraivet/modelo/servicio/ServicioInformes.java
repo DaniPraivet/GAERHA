@@ -134,7 +134,7 @@ public class ServicioInformes {
             document.add(resumen);
 
             // Pie de página
-            Paragraph pie = new Paragraph("Clockio - Sistema de Control de Asistencia   |   " + "Generado el " + LocalDate.now().format(FMT_FECHA)).setFontSize(8).setFontColor(ColorConstants.GRAY).setTextAlignment(TextAlignment.CENTER).setMarginTop(24);
+            Paragraph pie = new Paragraph("GAERHA - Sistema de Control de Asistencia   |   " + "Generado el " + LocalDate.now().format(FMT_FECHA)).setFontSize(8).setFontColor(ColorConstants.GRAY).setTextAlignment(TextAlignment.CENTER).setMarginTop(24);
             document.add(pie);
 
             document.close();
@@ -197,7 +197,7 @@ public class ServicioInformes {
             // Titulo
             Row rowTitulo = sheet.createRow(fila++);
             org.apache.poi.ss.usermodel.Cell celdaTitulo = rowTitulo.createCell(0);
-            celdaTitulo.setCellValue("INFORME DE ASISTENCIA - Clockio");
+            celdaTitulo.setCellValue("INFORME DE ASISTENCIA - GAERHA");
             celdaTitulo.setCellStyle(estiloTitulo);
             sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 5));
 
