@@ -201,6 +201,11 @@
                                    style="-fx-background-color: #e65100; -fx-text-fill: white;
                                           -fx-cursor: hand; -fx-background-radius: 8;
                                           -fx-font-weight: bold; -fx-padding: 10 16;"/>
+                        <MFXButton fx:id="btnRecuperar"
+                                   text="Recuperar empleado" onAction="#onRecuperar"
+                                   style="-fx-background-color: #1565c0; -fx-text-fill: white;
+                                          -fx-cursor: hand; -fx-background-radius: 8;
+                                          -fx-font-weight: bold; -fx-padding: 10 16;"/>
                         <MFXButton fx:id="btnEliminarEmpleado"
                                    text="Eliminar definitivamente" onAction="#onEliminarEmpleado"
                                    style="-fx-background-color: #b71c1c; -fx-text-fill: white;

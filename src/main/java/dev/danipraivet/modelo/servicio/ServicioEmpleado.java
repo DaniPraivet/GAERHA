@@ -90,6 +90,12 @@ public class ServicioEmpleado {
         return ok ? ResultadoCRUD.ok("Empleado dado de baja correctamente.") : ResultadoCRUD.error("Error al dar de baja al empleado.");
     }
 
+    // Reactivacion logica (solo Admin): reactiva un empleado que estaba de baja
+    public ResultadoCRUD recuperar(int codEmpleado) {
+        boolean ok = repo.recuperar(codEmpleado);
+        return ok ? ResultadoCRUD.ok("Empleado reactivado correctamente.") : ResultadoCRUD.error("Error al reactivar el empleado.");
+    }
+
     // Eliminacion fisica (solo Admin). Borra tambien todos sus fichajes en cascada.
     public ResultadoCRUD eliminar(int codEmpleado) {
         if (GestorSesion.getCodEmpleado() == codEmpleado)

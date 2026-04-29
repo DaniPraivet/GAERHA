@@ -25,6 +25,9 @@ public interface IRepositorioEmpleado {
     // Baja logica: desactiva el empleado sin borrar sus datos ni fichajes
     boolean darDeBaja(int codEmpleado);
 
+    // Reactivacion logica: reactiva un empleado que estaba de baja
+    boolean recuperar(int codEmpleado);
+
     // Eliminacion fisica (solo ADMIN, con confirmacion previa)
     boolean eliminar(int codEmpleado);
 

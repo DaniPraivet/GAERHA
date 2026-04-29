@@ -102,6 +102,8 @@ public class ControladorAdmin implements Initializable {
     @FXML
     private MFXButton btnDesbloquear;
     @FXML
+    private MFXButton btnRecuperar;
+    @FXML
     private MFXButton btnEliminarEmpleado;
     private FilteredList<Empleado> empleadosFiltrados;
     @FXML
@@ -204,6 +206,25 @@ public class ControladorAdmin implements Initializable {
             return;
         }
         ServicioEmpleado.ResultadoCRUD res = servicioEmpleado.desbloquear(seleccionado.getCodEmpleado());
+        GestorAlertas.info("Resultado", res.mensaje());
+        if (res.exito()) cargarEmpleados();
+    }
+
+    @FXML
+    public void onRecuperar() {
+        Empleado seleccionado = tablaEmpleadosAdmin.getSelectionModel().getSelectedItem();
+        if (seleccionado == null) {
+            GestorAlertas.advertencia("Sin seleccion", "Selecciona un empleado.");
+            return;
+        }
+        if (seleccionado.isActivo()) {
+            GestorAlertas.advertencia("Empleado activo", seleccionado.getNombreCompleto() + " ya está activo.");
+            return;
+        }
+        boolean confirmar = GestorAlertas.confirmar("Recuperar empleado", "¿Reactivar a " + seleccionado.getNombreCompleto() + "?\nSe restaurará su acceso al sistema.");
+        if (!confirmar) return;
+
+        ServicioEmpleado.ResultadoCRUD res = servicioEmpleado.recuperar(seleccionado.getCodEmpleado());
         GestorAlertas.info("Resultado", res.mensaje());
         if (res.exito()) cargarEmpleados();
     }

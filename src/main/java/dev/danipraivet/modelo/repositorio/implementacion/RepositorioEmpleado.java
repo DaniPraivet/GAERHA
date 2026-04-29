@@ -28,6 +28,7 @@ public class RepositorioEmpleado implements IRepositorioEmpleado {
     private static final String SQL_INSERTAR = "INSERT INTO empleados (cod_empleado, nombre, apellido1, apellido2, dni, " + "email, telefono, username, password_hash, rol, cod_departamento) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_ACTUALIZAR = "UPDATE empleados SET nombre=?, apellido1=?, apellido2=?, dni=?, " + "email=?, telefono=?, username=?, rol=?, cod_departamento=?, bloqueado=?" + " WHERE cod_empleado=?";
     private static final String SQL_BAJA_LOGICA = "UPDATE empleados SET activo=FALSE, fecha_baja=NOW() WHERE cod_empleado=?";
+    private static final String SQL_RECUPERAR = "UPDATE empleados SET activo=TRUE, fecha_baja=NULL WHERE cod_empleado=?";
     private static final String SQL_AUDITAR_BAJA = "INSERT INTO auditoria (cod_empleado, username, accion, detalle, tabla_afectada, registro_id) " + "VALUES (?, ?, 'BAJA_LOGICA', ?, 'empleados', ?)";
     private static final String SQL_ELIMINAR = "DELETE FROM empleados WHERE cod_empleado=?";
     private static final String SQL_INTENTO_FALLIDO = "UPDATE empleados SET intentos_fallidos = intentos_fallidos + 1, " + "bloqueado = (intentos_fallidos + 1 >= 5) WHERE username=?";
@@ -233,6 +234,11 @@ public class RepositorioEmpleado implements IRepositorioEmpleado {
     @Override
     public boolean eliminar(int codEmpleado) {
         return ejecutarUpdate(SQL_ELIMINAR, codEmpleado);
+    }
+
+    @Override
+    public boolean recuperar(int codEmpleado) {
+        return ejecutarUpdate(SQL_RECUPERAR, codEmpleado);
     }
 
     @Override
