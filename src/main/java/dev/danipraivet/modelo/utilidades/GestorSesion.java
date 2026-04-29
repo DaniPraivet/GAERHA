@@ -28,18 +28,33 @@ public final class GestorSesion {
     }
 
     public static int getCodEmpleado() {
-        verificarSesion();
-        return empleadoActual.getCodEmpleado();
+        try {
+            verificarSesion();
+            return empleadoActual.getCodEmpleado();
+        } catch (IllegalStateException e) {
+            System.out.println("No hay sesion activa. El usuario debe autenticarse primero.");
+            return 0;
+        }
     }
 
     public static Rol getRol() {
-        verificarSesion();
-        return empleadoActual.getRol();
+        try {
+            verificarSesion();
+            return empleadoActual.getRol();
+        } catch (IllegalStateException e) {
+            System.out.println("No hay sesion activa. El usuario debe autenticarse primero.");
+            return Rol.valueOf("Ninguno");
+        }
     }
 
     public static String getNombreCompleto() {
-        verificarSesion();
-        return empleadoActual.getNombreCompleto();
+        try {
+            verificarSesion();
+            return empleadoActual.getNombreCompleto();
+        } catch (IllegalStateException e) {
+            System.out.println("No hay sesion activa. El usuario debe autenticarse primero.");
+            return "";
+        }
     }
 
     public static boolean esEmpleado() {
