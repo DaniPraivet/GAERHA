@@ -1,0 +1,61 @@
+2026-04-22 07:15:31.676 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-22 07:15:31.687 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-22 07:15:31.919 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-22 07:15:32.983 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-22 07:15:33.475 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-22 07:15:50.276 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'mmartinez', rol: Recursos Humanos
+2026-04-22 07:15:50.277 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Recursos Humanos
+2026-04-22 07:15:53.122 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: RRHH
+2026-04-22 07:21:40.339 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-22 07:34:31.702 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-22 07:34:31.703 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-22 07:34:32.916 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-22 07:37:47.056 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-22 08:38:18.141 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-22 08:38:18.156 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 3 conexiones liberadas.
+2026-04-22 11:07:14.614 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-22 11:07:14.620 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-22 11:07:14.714 ERROR [d.d.modelo.datos.GestorConexiones] - Error al verificar la BD: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2026-04-22 11:07:14.715 ERROR [dev.danipraivet.vista.Aplicacion] - No se pudo conectar a la base de datos. Comprueba la configuracion.
+2026-04-22 11:07:18.696 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-22 11:07:18.697 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 0 conexiones liberadas.
+2026-04-22 11:07:53.812 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-22 11:07:53.817 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-22 11:07:54.033 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-22 11:07:54.843 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-22 11:07:55.171 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-22 11:08:11.155 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'alopez', rol: Empleado
+2026-04-22 11:08:11.155 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Empleado
+2026-04-22 11:08:11.344 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Empleado
+2026-04-22 11:12:50.691 INFO  [d.d.m.servicio.ServicioAutenticacion] - Logout - usuario: 'alopez'
+2026-04-22 11:12:50.945 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-22 11:13:04.005 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'mmartinez', rol: Recursos Humanos
+2026-04-22 11:13:04.005 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Recursos Humanos
+2026-04-22 11:13:05.983 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: RRHH
+2026-04-22 11:16:12.359 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-22 11:17:02.218 WARN  [d.d.m.servicio.ServicioAutenticacion] - Login fallido - contrasena incorrecta: 'mmartinez' (intentos: 1)
+2026-04-22 11:17:08.699 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'mmartinez', rol: Recursos Humanos
+2026-04-22 11:17:08.699 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Recursos Humanos
+2026-04-22 11:17:10.371 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: RRHH
+2026-04-22 11:19:32.161 INFO  [d.d.m.servicio.ServicioAutenticacion] - Logout - usuario: 'mmartinez'
+2026-04-22 11:19:32.571 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-22 11:19:45.503 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-22 11:19:45.504 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-22 11:19:46.597 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-22 11:20:02.033 INFO  [d.d.controlador.ControladorAdmin] - Busqueda de fichajes: 12 registros encontrados
+2026-04-22 11:23:04.460 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-22 14:21:29.166 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-22 14:21:29.174 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-22 14:21:29.286 ERROR [d.d.modelo.datos.GestorConexiones] - Error al verificar la BD: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2026-04-22 14:21:29.286 ERROR [dev.danipraivet.vista.Aplicacion] - No se pudo conectar a la base de datos. Comprueba la configuracion.
+2026-04-22 14:21:38.891 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-22 14:21:38.895 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 0 conexiones liberadas.
+2026-04-22 14:21:59.943 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-22 14:21:59.948 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-22 14:22:00.278 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-22 14:22:01.049 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-22 14:22:01.350 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente

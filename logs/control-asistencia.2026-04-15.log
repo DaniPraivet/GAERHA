@@ -1,0 +1,322 @@
+2026-04-15 07:25:27.637 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 07:25:27.654 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 07:25:27.743 ERROR [d.d.modelo.datos.GestorConexiones] - Error al verificar la BD: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+2026-04-15 07:25:27.743 ERROR [dev.danipraivet.vista.Aplicacion] - No se pudo conectar a la base de datos. Comprueba la configuracion.
+2026-04-15 07:25:30.991 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-15 07:25:30.993 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 0 conexiones liberadas.
+2026-04-15 07:26:00.390 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 07:26:00.398 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 07:26:00.626 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-15 07:26:01.799 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 07:26:02.108 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-15 07:26:10.831 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-15 07:26:10.831 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-15 07:26:12.287 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-15 07:26:40.954 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 07:26:40.961 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 07:26:41.117 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-15 07:26:42.162 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 07:26:42.428 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-15 07:26:59.077 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'mmartinez', rol: Recursos Humanos
+2026-04-15 07:26:59.077 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Recursos Humanos
+2026-04-15 07:27:01.366 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: RRHH
+2026-04-15 07:27:10.113 INFO  [d.d.m.r.i.RepositorioFichaje] - Fichaje registrado - empleado: 1002 - ENTRADA
+2026-04-15 07:27:10.113 INFO  [d.d.modelo.servicio.ServicioFichaje] - Fichaje - empleado 1002 - Entrada registrada correctamente
+2026-04-15 07:27:13.198 INFO  [d.d.m.r.i.RepositorioFichaje] - Fichaje registrado - empleado: 1001 - ENTRADA
+2026-04-15 07:27:13.198 INFO  [d.d.modelo.servicio.ServicioFichaje] - Fichaje - empleado 1001 - Entrada registrada correctamente
+2026-04-15 07:27:40.416 INFO  [d.d.m.servicio.ServicioAutenticacion] - Logout - usuario: 'mmartinez'
+2026-04-15 07:27:40.714 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 07:27:41.456 INFO  [d.d.m.servicio.ServicioAutenticacion] - Logout - usuario: 'cgarcia'
+2026-04-15 07:27:41.701 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 07:27:42.064 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-15 07:27:42.071 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 2 conexiones liberadas.
+2026-04-15 07:27:43.459 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-15 07:27:43.462 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 2 conexiones liberadas.
+2026-04-15 07:29:40.581 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 07:29:40.589 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 07:29:40.785 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-15 07:29:41.828 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 07:29:42.121 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-15 07:29:48.206 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-15 07:29:48.206 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-15 07:29:49.588 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-15 07:29:56.500 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-15 07:29:56.501 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 2 conexiones liberadas.
+2026-04-15 07:38:34.251 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 07:38:34.259 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 07:38:34.420 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-15 07:38:35.665 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 07:38:35.959 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-15 07:38:43.379 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-15 07:38:43.379 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-15 07:38:44.771 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-15 07:39:28.365 INFO  [d.d.m.servicio.ServicioAutenticacion] - Logout - usuario: 'cgarcia'
+2026-04-15 07:39:28.570 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 07:39:28.754 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-15 07:39:28.757 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 2 conexiones liberadas.
+2026-04-15 07:40:26.455 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 07:40:26.463 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 07:40:26.618 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-15 07:40:27.706 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 07:40:28.003 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-15 07:40:33.869 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-15 07:40:33.869 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-15 07:40:35.249 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-15 07:40:40.498 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-15 07:40:40.500 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 2 conexiones liberadas.
+2026-04-15 07:41:15.774 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 07:41:15.781 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 07:41:15.936 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-15 07:41:16.678 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 07:41:16.967 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-15 07:41:24.835 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-15 07:41:24.835 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-15 07:41:26.226 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-15 07:41:44.801 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 07:41:55.642 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-15 07:41:55.642 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-15 07:41:56.677 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-15 07:42:02.309 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-15 07:42:02.311 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 2 conexiones liberadas.
+2026-04-15 07:44:39.246 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 07:44:39.254 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 07:44:39.412 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-15 07:44:40.385 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 07:44:40.690 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-15 07:44:46.367 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-15 07:44:46.367 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-15 07:44:47.775 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-15 07:45:00.842 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-15 07:45:00.844 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 2 conexiones liberadas.
+2026-04-15 07:45:47.870 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 07:45:47.878 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 07:45:48.026 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-15 07:45:49.096 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 07:45:49.397 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-15 07:45:53.962 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-15 07:45:53.963 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-15 07:45:55.384 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-15 07:46:50.718 INFO  [d.d.m.servicio.ServicioAutenticacion] - Logout - usuario: 'cgarcia'
+2026-04-15 07:46:50.941 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 07:46:51.907 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-15 07:46:51.909 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 2 conexiones liberadas.
+2026-04-15 08:26:53.983 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 08:26:53.990 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 08:26:54.142 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-15 08:26:55.127 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 08:26:55.433 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-15 08:26:59.722 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-15 08:26:59.722 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-15 08:27:01.194 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-15 08:27:11.444 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-15 08:27:11.446 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 2 conexiones liberadas.
+2026-04-15 08:39:14.074 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 08:39:14.084 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 08:39:14.288 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-15 08:39:15.045 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 08:39:15.414 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-15 08:39:24.086 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 08:39:24.093 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 08:39:24.263 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-15 08:39:24.320 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 08:39:24.328 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 08:39:24.493 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-15 08:39:24.997 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 08:39:25.195 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 08:39:25.300 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-15 08:39:25.523 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-15 08:39:30.868 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'alopez', rol: Empleado
+2026-04-15 08:39:30.869 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Empleado
+2026-04-15 08:39:31.103 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Empleado
+2026-04-15 08:39:43.246 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-15 08:39:43.247 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-15 08:39:44.582 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-15 08:39:49.703 INFO  [d.d.m.r.i.RepositorioFichaje] - Fichaje registrado - empleado: 1004 - ENTRADA
+2026-04-15 08:39:49.703 INFO  [d.d.modelo.servicio.ServicioFichaje] - Fichaje - empleado 1004 - Entrada registrada correctamente
+2026-04-15 08:39:49.703 INFO  [d.d.controlador.ControladorEmpleado] - Fichaje realizado: Entrada registrada correctamente
+2026-04-15 08:40:29.505 WARN  [d.d.m.servicio.ServicioAutenticacion] - Login fallido - contrasena incorrecta: 'mmartinez' (intentos: 1)
+2026-04-15 08:40:31.081 WARN  [d.d.m.servicio.ServicioAutenticacion] - Login fallido - contrasena incorrecta: 'mmartinez' (intentos: 2)
+2026-04-15 08:40:32.736 WARN  [d.d.m.servicio.ServicioAutenticacion] - Login fallido - contrasena incorrecta: 'mmartinez' (intentos: 3)
+2026-04-15 08:40:34.155 WARN  [d.d.m.servicio.ServicioAutenticacion] - Login fallido - contrasena incorrecta: 'mmartinez' (intentos: 4)
+2026-04-15 08:40:35.478 WARN  [d.d.m.servicio.ServicioAutenticacion] - Login denegado - cuenta bloqueada: 'mmartinez'
+2026-04-15 08:40:41.136 INFO  [d.d.m.servicio.ServicioAutenticacion] - Logout - usuario: 'cgarcia'
+2026-04-15 08:40:41.433 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 08:40:48.004 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-15 08:40:48.004 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-15 08:40:48.988 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-15 08:41:11.486 INFO  [d.d.m.r.i.RepositorioEmpleado] - Empleado actualizado: 1002
+2026-04-15 08:41:38.769 INFO  [d.d.m.r.i.RepositorioEmpleado] - Empleado actualizado: 1002
+2026-04-15 08:41:42.461 INFO  [d.d.m.r.i.RepositorioEmpleado] - Empleado actualizado: 1004
+2026-04-15 08:41:44.832 INFO  [d.d.m.r.i.RepositorioEmpleado] - Empleado actualizado: 1002
+2026-04-15 08:41:50.306 WARN  [d.d.m.servicio.ServicioAutenticacion] - Login denegado - cuenta bloqueada: 'mmartinez'
+2026-04-15 08:41:57.395 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-15 08:41:57.397 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 1 conexiones liberadas.
+2026-04-15 08:41:59.181 INFO  [d.d.m.servicio.ServicioAutenticacion] - Logout - usuario: 'alopez'
+2026-04-15 08:41:59.415 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 08:42:01.641 INFO  [d.d.m.r.i.RepositorioEmpleado] - Empleado actualizado: 1002
+2026-04-15 08:42:04.931 INFO  [d.d.m.r.i.RepositorioEmpleado] - Empleado actualizado: 1002
+2026-04-15 08:42:07.132 INFO  [d.d.m.r.i.RepositorioEmpleado] - Empleado actualizado: 1002
+2026-04-15 08:42:29.310 INFO  [d.d.m.r.i.RepositorioEmpleado] - Empleado actualizado: 1002
+2026-04-15 08:42:31.480 INFO  [d.d.m.r.i.RepositorioEmpleado] - Empleado actualizado: 1002
+2026-04-15 08:42:38.186 INFO  [d.d.controlador.ControladorAdmin] - Busqueda de fichajes: 16 registros encontrados
+2026-04-15 08:42:46.723 INFO  [d.d.m.r.i.RepositorioFichaje] - Fichaje actualizado ID: 10
+2026-04-15 08:42:47.978 INFO  [d.d.controlador.ControladorAdmin] - Busqueda de fichajes: 16 registros encontrados
+2026-04-15 08:43:06.410 INFO  [d.d.m.r.i.RepositorioEmpleado] - Empleado actualizado: 1002
+2026-04-15 08:46:56.061 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-15 08:46:56.064 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 2 conexiones liberadas.
+2026-04-15 08:46:59.260 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-15 08:46:59.263 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 1 conexiones liberadas.
+2026-04-15 09:11:00.903 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 09:11:00.910 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 09:11:01.102 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-15 09:11:02.084 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 09:11:02.673 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-15 09:11:10.428 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-15 09:11:10.429 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-15 09:11:11.837 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-15 09:11:14.807 ERROR [d.d.m.r.i.RepositorioEmpleado] - Error actualizando empleado: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'cod_empleado=1002' at line 1
+2026-04-15 09:17:01.502 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 09:19:11.142 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 09:19:11.149 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 09:19:11.296 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-15 09:19:12.239 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 09:19:12.544 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-15 09:19:20.952 WARN  [d.d.m.servicio.ServicioAutenticacion] - Login fallido - contrasena incorrecta: 'cgarcia' (intentos: 1)
+2026-04-15 09:19:28.086 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-15 09:19:28.086 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-15 09:19:29.396 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-15 09:19:33.415 INFO  [d.d.m.r.i.RepositorioEmpleado] - Empleado actualizado: 1002
+2026-04-15 09:19:55.062 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-15 09:19:55.066 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 2 conexiones liberadas.
+2026-04-15 11:48:42.544 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 11:48:42.550 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 11:48:42.712 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-15 11:48:43.730 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 11:48:44.035 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-15 11:49:07.558 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-15 11:49:07.559 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-15 11:49:08.916 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-15 11:49:11.347 INFO  [d.d.controlador.ControladorAdmin] - Busqueda de fichajes: 16 registros encontrados
+2026-04-15 11:49:17.645 INFO  [d.d.m.servicio.ServicioAutenticacion] - Logout - usuario: 'cgarcia'
+2026-04-15 11:49:17.858 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 11:49:25.380 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'mmartinez', rol: Recursos Humanos
+2026-04-15 11:49:25.380 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Recursos Humanos
+2026-04-15 11:49:27.252 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: RRHH
+2026-04-15 11:51:07.324 INFO  [d.d.modelo.servicio.ServicioInformes] - Excel generado correctamente: C:\Users\Rovimatica\Downloads\informe_asistencia_2026-04-15.xlsx
+2026-04-15 11:51:35.149 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-15 11:51:35.154 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 3 conexiones liberadas.
+2026-04-15 11:56:21.102 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 11:56:21.109 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 11:56:21.269 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-15 11:56:22.173 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 11:56:22.468 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-15 11:57:00.597 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-15 11:57:00.598 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-15 11:57:02.030 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-15 11:57:06.271 INFO  [d.d.controlador.ControladorAdmin] - Busqueda de fichajes: 16 registros encontrados
+2026-04-15 11:57:15.788 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-15 11:57:15.792 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 2 conexiones liberadas.
+2026-04-15 12:19:40.717 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 12:19:40.725 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 12:19:40.891 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-15 12:19:41.637 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 12:19:41.994 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-15 12:20:52.673 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'alopez', rol: Empleado
+2026-04-15 12:20:52.674 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Empleado
+2026-04-15 12:20:52.886 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Empleado
+2026-04-15 12:22:28.975 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 12:22:28.982 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 12:22:29.138 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-15 12:22:30.119 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 12:22:30.413 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-15 12:22:47.552 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'mmartinez', rol: Recursos Humanos
+2026-04-15 12:22:47.552 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Recursos Humanos
+2026-04-15 12:22:49.752 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: RRHH
+2026-04-15 12:23:37.611 INFO  [d.d.m.r.i.RepositorioFichaje] - Fichaje registrado - empleado: 1002 - SALIDA
+2026-04-15 12:23:37.611 INFO  [d.d.modelo.servicio.ServicioFichaje] - Fichaje - empleado 1002 - Salida registrada correctamente
+2026-04-15 12:23:43.625 ERROR [d.d.m.r.i.RepositorioFichaje] - Error registrando fichaje para empleado 1002: Duplicate entry '1002-2026-04-15' for key 'dias.UK_fichaje_dia'
+2026-04-15 12:23:43.625 INFO  [d.d.modelo.servicio.ServicioFichaje] - Fichaje - empleado 1002 - Error al registrar el fichaje
+2026-04-15 12:23:55.690 INFO  [d.d.m.servicio.ServicioAutenticacion] - Logout - usuario: 'mmartinez'
+2026-04-15 12:23:55.943 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 12:24:00.590 INFO  [d.d.m.r.i.RepositorioFichaje] - Fichaje registrado - empleado: 1004 - SALIDA
+2026-04-15 12:24:00.591 INFO  [d.d.modelo.servicio.ServicioFichaje] - Fichaje - empleado 1004 - Salida registrada correctamente
+2026-04-15 12:24:00.591 INFO  [d.d.controlador.ControladorEmpleado] - Fichaje realizado: Salida registrada correctamente
+2026-04-15 12:24:04.718 ERROR [d.d.m.r.i.RepositorioFichaje] - Error registrando fichaje para empleado 1004: Duplicate entry '1004-2026-04-15' for key 'dias.UK_fichaje_dia'
+2026-04-15 12:24:04.718 INFO  [d.d.modelo.servicio.ServicioFichaje] - Fichaje - empleado 1004 - Error al registrar el fichaje
+2026-04-15 12:24:04.718 INFO  [d.d.controlador.ControladorEmpleado] - Fichaje realizado: Error al registrar el fichaje
+2026-04-15 12:24:18.826 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-15 12:24:18.826 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-15 12:24:19.792 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-15 12:24:24.393 INFO  [d.d.controlador.ControladorAdmin] - Busqueda de fichajes: 16 registros encontrados
+2026-04-15 12:24:41.866 WARN  [d.d.m.r.i.RepositorioFichaje] - Fichaje eliminado ID: 13
+2026-04-15 12:24:45.837 INFO  [d.d.controlador.ControladorAdmin] - Busqueda de fichajes: 15 registros encontrados
+2026-04-15 12:24:52.555 WARN  [d.d.m.r.i.RepositorioFichaje] - Fichaje eliminado ID: 12
+2026-04-15 12:24:53.572 INFO  [d.d.controlador.ControladorAdmin] - Busqueda de fichajes: 14 registros encontrados
+2026-04-15 12:24:57.053 WARN  [d.d.m.r.i.RepositorioFichaje] - Fichaje eliminado ID: 11
+2026-04-15 12:24:57.717 INFO  [d.d.controlador.ControladorAdmin] - Busqueda de fichajes: 13 registros encontrados
+2026-04-15 12:25:05.602 WARN  [d.d.m.r.i.RepositorioFichaje] - Fichaje eliminado ID: 10
+2026-04-15 12:25:06.564 INFO  [d.d.controlador.ControladorAdmin] - Busqueda de fichajes: 12 registros encontrados
+2026-04-15 12:25:12.812 INFO  [d.d.m.servicio.ServicioAutenticacion] - Logout - usuario: 'alopez'
+2026-04-15 12:25:13.042 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 12:25:19.607 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'mmartinez', rol: Recursos Humanos
+2026-04-15 12:25:19.607 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Recursos Humanos
+2026-04-15 12:25:21.580 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: RRHH
+2026-04-15 12:28:05.009 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 12:30:53.726 INFO  [d.d.m.servicio.ServicioAutenticacion] - Logout - usuario: 'mmartinez'
+2026-04-15 12:30:53.969 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 12:30:54.452 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-15 12:30:54.456 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 2 conexiones liberadas.
+2026-04-15 12:30:56.707 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-15 12:30:56.712 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 3 conexiones liberadas.
+2026-04-15 14:19:49.392 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-15 14:19:49.400 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-15 14:19:49.557 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-15 14:19:50.447 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 14:19:50.748 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-15 14:19:58.262 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'alopez', rol: Empleado
+2026-04-15 14:19:58.262 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Empleado
+2026-04-15 14:19:58.437 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Empleado
+2026-04-15 14:20:09.028 INFO  [d.d.m.servicio.ServicioAutenticacion] - Logout - usuario: 'alopez'
+2026-04-15 14:20:09.265 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 14:20:18.101 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-15 14:20:18.101 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-15 14:20:19.231 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-15 14:20:22.272 INFO  [d.d.controlador.ControladorAdmin] - Busqueda de fichajes: 12 registros encontrados
+2026-04-15 14:20:34.183 INFO  [d.d.controlador.ControladorAdmin] - Busqueda de fichajes: 4 registros encontrados
+2026-04-15 14:20:39.210 INFO  [d.d.m.servicio.ServicioAutenticacion] - Logout - usuario: 'cgarcia'
+2026-04-15 14:20:39.407 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 14:20:45.628 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'jrodriguez', rol: Empleado
+2026-04-15 14:20:45.628 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Empleado
+2026-04-15 14:20:45.661 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Empleado
+2026-04-15 14:21:23.269 INFO  [d.d.m.servicio.ServicioAutenticacion] - Logout - usuario: 'jrodriguez'
+2026-04-15 14:21:23.492 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 14:21:34.305 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-15 14:21:34.305 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-15 14:21:35.269 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-15 14:21:37.232 INFO  [d.d.controlador.ControladorAdmin] - Busqueda de fichajes: 12 registros encontrados
+2026-04-15 14:21:40.520 INFO  [d.d.controlador.ControladorAdmin] - Busqueda de fichajes: 4 registros encontrados
+2026-04-15 14:21:46.225 INFO  [d.d.controlador.ControladorAdmin] - Busqueda de fichajes: 4 registros encontrados
+2026-04-15 14:21:46.618 INFO  [d.d.controlador.ControladorAdmin] - Busqueda de fichajes: 4 registros encontrados
+2026-04-15 14:21:46.792 INFO  [d.d.controlador.ControladorAdmin] - Busqueda de fichajes: 4 registros encontrados
+2026-04-15 14:21:52.301 INFO  [d.d.m.servicio.ServicioAutenticacion] - Logout - usuario: 'cgarcia'
+2026-04-15 14:21:52.531 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 14:21:59.764 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'mmartinez', rol: Recursos Humanos
+2026-04-15 14:21:59.765 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Recursos Humanos
+2026-04-15 14:22:01.540 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: RRHH
+2026-04-15 14:22:21.279 INFO  [d.d.modelo.servicio.ServicioInformes] - PDF generado correctamente: C:\Users\Rovimatica\Downloads\informe_asistencia_2026-04-15.pdf
+2026-04-15 14:25:17.870 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 14:32:33.893 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-15 14:32:33.893 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-15 14:32:34.864 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-15 14:32:43.045 INFO  [d.d.controlador.ControladorAdmin] - Busqueda de fichajes: 12 registros encontrados
+2026-04-15 14:33:06.072 INFO  [d.d.m.servicio.ServicioAutenticacion] - Logout - usuario: 'cgarcia'
+2026-04-15 14:33:06.287 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-15 14:35:53.130 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'mmartinez', rol: Recursos Humanos
+2026-04-15 14:35:53.130 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Recursos Humanos
+2026-04-15 14:35:54.734 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: RRHH
+2026-04-15 14:35:57.585 ERROR [d.d.m.r.i.RepositorioFichaje] - Error registrando fichaje para empleado 1002: Duplicate entry '1002-2026-04-15' for key 'dias.UK_fichaje_dia'
+2026-04-15 14:35:57.585 INFO  [d.d.modelo.servicio.ServicioFichaje] - Fichaje - empleado 1002 - Error al registrar el fichaje
+2026-04-15 14:36:03.905 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-15 14:36:03.917 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 3 conexiones liberadas.

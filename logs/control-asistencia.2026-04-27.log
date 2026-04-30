@@ -1,0 +1,120 @@
+2026-04-27 12:02:00.215 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-04-27 12:02:00.226 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-04-27 12:02:00.472 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-04-27 12:02:01.320 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-27 12:02:01.698 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-04-27 12:02:07.933 DEBUG [d.d.modelo.datos.GestorConexiones] - Creando nueva conexion para rol [Empleado]
+2026-04-27 12:02:07.993 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Empleado] - disponibles: 1
+2026-04-27 12:02:08.305 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Empleado] - disponibles: 0
+2026-04-27 12:02:08.317 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Empleado] - disponibles: 1
+2026-04-27 12:02:08.318 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'alopez', rol: Empleado
+2026-04-27 12:02:08.319 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Empleado
+2026-04-27 12:02:08.519 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Empleado
+2026-04-27 12:02:08.526 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Empleado] - disponibles: 0
+2026-04-27 12:02:08.531 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Empleado] - disponibles: 1
+2026-04-27 12:02:08.533 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Empleado] - disponibles: 0
+2026-04-27 12:02:08.549 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Empleado] - disponibles: 1
+2026-04-27 12:07:12.880 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-27 12:13:37.324 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Empleado] - disponibles: 0
+2026-04-27 12:13:37.328 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Empleado] - disponibles: 1
+2026-04-27 12:13:37.625 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Empleado] - disponibles: 0
+2026-04-27 12:13:37.634 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Empleado] - disponibles: 1
+2026-04-27 12:13:37.634 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'mmartinez', rol: Recursos Humanos
+2026-04-27 12:13:37.635 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Recursos Humanos
+2026-04-27 12:13:38.876 DEBUG [d.d.modelo.datos.GestorConexiones] - Creando nueva conexion para rol [Recursos Humanos]
+2026-04-27 12:13:38.898 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-04-27 12:13:39.424 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: RRHH
+2026-04-27 12:13:39.429 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-04-27 12:13:39.432 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-04-27 12:13:39.439 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-04-27 12:13:39.444 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-04-27 12:13:39.447 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-04-27 12:13:39.450 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-04-27 12:13:39.452 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-04-27 12:13:39.454 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-04-27 12:13:43.233 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-04-27 12:13:43.251 INFO  [d.d.m.r.i.RepositorioFichaje] - Fichaje registrado - empleado: 1002 - ENTRADA
+2026-04-27 12:13:43.252 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-04-27 12:13:43.252 INFO  [d.d.modelo.servicio.ServicioFichaje] - Fichaje - empleado 1002 - Entrada registrada correctamente
+2026-04-27 12:13:43.253 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-04-27 12:13:43.254 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-04-27 12:22:30.708 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-27 12:31:16.684 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Empleado] - disponibles: 0
+2026-04-27 12:31:16.688 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Empleado] - disponibles: 1
+2026-04-27 12:31:16.980 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Empleado] - disponibles: 0
+2026-04-27 12:31:16.990 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Empleado] - disponibles: 1
+2026-04-27 12:31:16.990 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'mmartinez', rol: Recursos Humanos
+2026-04-27 12:31:16.990 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Recursos Humanos
+2026-04-27 12:31:18.109 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-04-27 12:31:18.112 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-04-27 12:31:18.560 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: RRHH
+2026-04-27 12:31:18.564 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-04-27 12:31:18.566 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-04-27 12:31:18.567 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-04-27 12:31:18.570 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-04-27 12:31:18.571 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-04-27 12:31:18.574 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-04-27 12:31:18.575 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-04-27 12:31:18.578 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-04-27 12:31:18.579 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-04-27 12:31:18.582 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-04-27 12:37:02.745 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-04-27 13:20:23.478 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Empleado] - disponibles: 0
+2026-04-27 13:20:23.481 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Empleado] - disponibles: 1
+2026-04-27 13:20:23.809 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Empleado] - disponibles: 0
+2026-04-27 13:20:23.830 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Empleado] - disponibles: 1
+2026-04-27 13:20:23.830 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'cgarcia', rol: Administrador
+2026-04-27 13:20:23.831 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Administrador
+2026-04-27 13:20:24.841 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Admin
+2026-04-27 13:20:24.843 DEBUG [d.d.modelo.datos.GestorConexiones] - Creando nueva conexion para rol [Administrador]
+2026-04-27 13:20:24.865 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:20:24.868 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:20:24.869 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:20:24.870 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:20:24.871 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:20:24.872 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:20:24.876 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:20:24.877 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:20:24.879 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:20:24.880 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:20:24.881 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:20:24.882 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:20:24.883 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:21:24.408 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:21:24.420 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:21:24.424 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:21:24.431 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:21:24.440 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:21:24.445 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:21:24.449 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:21:24.454 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:21:24.456 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:21:24.460 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:21:24.463 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:21:24.466 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:22:24.423 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:22:24.442 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:22:24.453 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:22:24.463 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:22:24.476 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:22:24.488 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:22:24.495 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:22:24.502 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:22:24.507 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:22:24.514 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:22:24.518 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:22:24.522 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:23:24.412 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:23:24.423 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:23:24.432 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:23:24.441 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:23:24.453 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:23:24.464 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:23:24.471 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:23:24.478 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:23:24.482 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:23:24.492 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:23:24.497 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Administrador] - disponibles: 0
+2026-04-27 13:23:24.504 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Administrador] - disponibles: 1
+2026-04-27 13:24:20.303 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-04-27 13:24:20.322 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 3 conexiones liberadas.
