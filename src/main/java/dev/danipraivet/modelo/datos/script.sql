@@ -33,8 +33,8 @@ CREATE TABLE empleados (
   ultimo_acceso TIMESTAMP NULL,
   cod_departamento INT UNSIGNED NULL,
   CONSTRAINT FK_empleados_departamento
-    FOREIGN KEY (cod_departamento) REFERENCES departamentos(cod_departamento)
-    ON DELETE SET NULL
+      FOREIGN KEY (cod_departamento) REFERENCES departamentos(cod_departamento)
+          ON DELETE SET NULL
 );
 
 CREATE TABLE dias (
@@ -54,8 +54,8 @@ CREATE TABLE dias (
   modificado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   CONSTRAINT UK_fichaje_dia UNIQUE (cod_empleado, fecha),
   CONSTRAINT FK_dias_empleado
-    FOREIGN KEY (cod_empleado) REFERENCES empleados(cod_empleado)
-    ON DELETE CASCADE
+      FOREIGN KEY (cod_empleado) REFERENCES empleados(cod_empleado)
+          ON DELETE CASCADE
 );
 
 CREATE TABLE auditoria (
@@ -69,8 +69,8 @@ CREATE TABLE auditoria (
   ip VARCHAR(45) NULL,
   fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT FK_auditoria_empleado
-    FOREIGN KEY (cod_empleado) REFERENCES empleados(cod_empleado)
-    ON DELETE SET NULL
+      FOREIGN KEY (cod_empleado) REFERENCES empleados(cod_empleado)
+          ON DELETE SET NULL
 );
 
 CREATE TABLE festivos (
@@ -91,64 +91,64 @@ CREATE INDEX idx_empleados_username ON empleados (username);
 
 CREATE VIEW v_fichajes_completos AS
 SELECT
-  d.id,
-  d.fecha,
-  e.cod_empleado,
-  CONCAT(e.nombre, ' ', e.apellido1,
-    IF(e.apellido2 IS NOT NULL, CONCAT(' ', e.apellido2), '')) AS nombre_completo,
-  e.dni,
-  e.rol,
-  dep.nombre AS departamento,
-  d.entrada_hora,
-  d.salida_hora,
-  d.turno_entrada,
-  d.turno_salida,
-  d.horas_trabajadas,
-  d.horas_extras,
-  d.festivo,
-  d.justificado,
-  d.observaciones
+    d.id,
+    d.fecha,
+    e.cod_empleado,
+    CONCAT(e.nombre, ' ', e.apellido1,
+           IF(e.apellido2 IS NOT NULL, CONCAT(' ', e.apellido2), '')) AS nombre_completo,
+    e.dni,
+    e.rol,
+    dep.nombre AS departamento,
+    d.entrada_hora,
+    d.salida_hora,
+    d.turno_entrada,
+    d.turno_salida,
+    d.horas_trabajadas,
+    d.horas_extras,
+    d.festivo,
+    d.justificado,
+    d.observaciones
 FROM dias d
-JOIN empleados e ON d.cod_empleado = e.cod_empleado
-LEFT JOIN departamentos dep ON e.cod_departamento = dep.cod_departamento;
+         JOIN empleados e ON d.cod_empleado = e.cod_empleado
+         LEFT JOIN departamentos dep ON e.cod_departamento = dep.cod_departamento;
 
 CREATE VIEW v_resumen_mensual AS
 SELECT
-  e.cod_empleado,
-  CONCAT(e.nombre, ' ', e.apellido1) AS nombre_completo,
-  YEAR(d.fecha) AS anio,
-  MONTH(d.fecha) AS mes,
-  COUNT(d.id) AS dias_trabajados,
-  SUM(d.horas_trabajadas) AS total_horas,
-  SUM(d.horas_extras) AS total_extras,
-  SUM(IF(d.festivo = TRUE, 1, 0)) AS festivos_trabajados
-FROM dias d
-JOIN empleados e ON d.cod_empleado = e.cod_empleado
-WHERE d.salida_hora IS NOT NULL
-GROUP BY e.cod_empleado, YEAR(d.fecha), MONTH(d.fecha);
+    e.cod_empleado,
+    CONCAT(e.nombre, ' ', e.apellido1) AS nombre_completo,
+        YEAR(d.fecha) AS anio,
+        MONTH(d.fecha) AS mes,
+        COUNT(d.id) AS dias_trabajados,
+        SUM(d.horas_trabajadas) AS total_horas,
+        SUM(d.horas_extras) AS total_extras,
+        SUM(IF(d.festivo = TRUE, 1, 0)) AS festivos_trabajados
+        FROM dias d
+        JOIN empleados e ON d.cod_empleado = e.cod_empleado
+        WHERE d.salida_hora IS NOT NULL
+        GROUP BY e.cod_empleado, YEAR(d.fecha), MONTH(d.fecha);
 
 CREATE VIEW v_estado_actual_empleados AS
 SELECT
-  e.cod_empleado,
-  CONCAT(e.nombre, ' ', e.apellido1) AS nombre_completo,
-  e.rol,
-  e.ultimo_acceso,
-  IF(d.entrada_hora IS NOT NULL AND d.salida_hora IS NULL,
-    'FICHADO', 'NO FICHADO') AS estado_hoy,
-  d.entrada_hora AS entrada_hoy
+    e.cod_empleado,
+    CONCAT(e.nombre, ' ', e.apellido1) AS nombre_completo,
+    e.rol,
+    e.ultimo_acceso,
+    IF(d.entrada_hora IS NOT NULL AND d.salida_hora IS NULL,
+       'FICHADO', 'NO FICHADO') AS estado_hoy,
+    d.entrada_hora AS entrada_hoy
 FROM empleados e
-LEFT JOIN dias d
-  ON d.cod_empleado = e.cod_empleado
-  AND d.fecha = CURRENT_DATE
+         LEFT JOIN dias d
+                   ON d.cod_empleado = e.cod_empleado
+                       AND d.fecha = CURRENT_DATE
 WHERE e.activo = TRUE;
 
 
 DELIMITER //
 
 CREATE PROCEDURE registrar_fichaje(
-  IN p_cod_empleado INT,
-  OUT p_mensaje VARCHAR(100),
-  OUT p_tipo VARCHAR(10)
+    IN p_cod_empleado INT,
+    OUT p_mensaje VARCHAR(100),
+    OUT p_tipo VARCHAR(10)
 )
 BEGIN
   DECLARE v_id_abierto INT;
@@ -156,22 +156,22 @@ BEGIN
 
   SET time_zone = '+01:00';
 
-  SELECT id, entrada_hora
-  INTO v_id_abierto, v_entrada_hora
-  FROM dias
-  WHERE cod_empleado = p_cod_empleado
-    AND fecha = CURRENT_DATE
-    AND salida_hora IS NULL
-  LIMIT 1;
+SELECT id, entrada_hora
+INTO v_id_abierto, v_entrada_hora
+FROM dias
+WHERE cod_empleado = p_cod_empleado
+  AND fecha = CURRENT_DATE
+  AND salida_hora IS NULL
+    LIMIT 1;
 
-  IF v_id_abierto IS NOT NULL THEN
-    UPDATE dias
-    SET salida_hora = TIME(NOW()),
-      turno_salida = CASE
-        WHEN HOUR(NOW()) BETWEEN 6 AND 13 THEN 'Mañana'
-        WHEN HOUR(NOW()) BETWEEN 14 AND 21 THEN 'Tarde'
-        ELSE 'Noche'
-      END,
+IF v_id_abierto IS NOT NULL THEN
+UPDATE dias
+SET salida_hora = TIME(NOW()),
+    turno_salida = CASE
+    WHEN HOUR(NOW()) BETWEEN 6 AND 13 THEN 'Mañana'
+    WHEN HOUR(NOW()) BETWEEN 14 AND 21 THEN 'Tarde'
+    ELSE 'Noche'
+END,
       horas_trabajadas = ROUND(TIMESTAMPDIFF(MINUTE, v_entrada_hora, TIME(NOW())) / 60, 2),
       horas_extras = GREATEST(
         ROUND(TIMESTAMPDIFF(MINUTE, v_entrada_hora, TIME(NOW())) / 60, 2) - 8,
@@ -181,7 +181,7 @@ BEGIN
 
     SET p_mensaje = 'Salida registrada correctamente';
     SET p_tipo = 'SALIDA';
-  ELSE
+ELSE
     INSERT INTO dias (fecha, cod_empleado, entrada_hora, turno_entrada, festivo)
     VALUES (
       CURRENT_DATE,
@@ -197,16 +197,16 @@ BEGIN
 
     SET p_mensaje = 'Entrada registrada correctamente';
     SET p_tipo = 'ENTRADA';
-  END IF;
+END IF;
 END //
 
 CREATE PROCEDURE obtener_resumen_empleado(
-  IN p_cod_empleado INT,
-  IN p_fecha_inicio DATE,
-  IN p_fecha_fin DATE
+    IN p_cod_empleado INT,
+    IN p_fecha_inicio DATE,
+    IN p_fecha_fin DATE
 )
 BEGIN
-  SELECT
+SELECT
     fecha,
     entrada_hora,
     salida_hora,
@@ -217,72 +217,72 @@ BEGIN
     festivo,
     justificado,
     observaciones
-  FROM dias
-  WHERE cod_empleado = p_cod_empleado
-    AND fecha BETWEEN p_fecha_inicio AND p_fecha_fin
-  ORDER BY fecha ASC;
+FROM dias
+WHERE cod_empleado = p_cod_empleado
+  AND fecha BETWEEN p_fecha_inicio AND p_fecha_fin
+ORDER BY fecha ASC;
 END //
 
 CREATE PROCEDURE registrar_intento_fallido(
-  IN p_username VARCHAR(50)
+    IN p_username VARCHAR(50)
 )
 BEGIN
   DECLARE v_intentos TINYINT;
   DECLARE v_max_intentos TINYINT DEFAULT 5;
 
-  UPDATE empleados
-  SET intentos_fallidos = intentos_fallidos + 1
-  WHERE username = p_username;
+UPDATE empleados
+SET intentos_fallidos = intentos_fallidos + 1
+WHERE username = p_username;
 
-  SELECT intentos_fallidos
-  INTO v_intentos
-  FROM empleados
-  WHERE username = p_username;
+SELECT intentos_fallidos
+INTO v_intentos
+FROM empleados
+WHERE username = p_username;
 
-  IF v_intentos >= v_max_intentos THEN
-    UPDATE empleados
-    SET bloqueado = TRUE
-    WHERE username = p_username;
-  END IF;
+IF v_intentos >= v_max_intentos THEN
+UPDATE empleados
+SET bloqueado = TRUE
+WHERE username = p_username;
+END IF;
 END //
 
 CREATE PROCEDURE login_exitoso(
-  IN p_username VARCHAR(50)
+    IN p_username VARCHAR(50)
 )
 BEGIN
-  UPDATE empleados
-  SET intentos_fallidos = 0,
+UPDATE empleados
+SET intentos_fallidos = 0,
     ultimo_acceso = NOW()
-  WHERE username = p_username;
+WHERE username = p_username;
 END //
 
 CREATE PROCEDURE estadisticas_dashboard()
 BEGIN
-  SELECT COUNT(*) AS total_empleados
-  FROM empleados
-  WHERE activo = TRUE;
+SELECT COUNT(*) AS total_empleados
+FROM empleados
+WHERE activo = TRUE;
 
-  SELECT COUNT(*) AS fichados_hoy
-  FROM dias
-  WHERE fecha = CURRENT_DATE
-    AND salida_hora IS NULL
-    AND entrada_hora IS NOT NULL;
+SELECT COUNT(*) AS fichados_hoy
+FROM dias
+WHERE fecha = CURRENT_DATE
+  AND salida_hora IS NULL
+  AND entrada_hora IS NOT NULL;
 
-  SELECT ROUND(SUM(horas_trabajadas), 2) AS horas_mes
-  FROM dias
-  WHERE MONTH(fecha) = MONTH(CURRENT_DATE)
-    AND YEAR(fecha) = YEAR(CURRENT_DATE);
+SELECT ROUND(SUM(horas_trabajadas), 2) AS horas_mes
+FROM dias
+WHERE MONTH(fecha) = MONTH(CURRENT_DATE)
+  AND YEAR(fecha) = YEAR(CURRENT_DATE);
 
-  SELECT
+SELECT
     CONCAT(e.nombre, ' ', e.apellido1) AS empleado,
     ROUND(SUM(d.horas_trabajadas), 2) AS horas
-  FROM dias d
-  JOIN empleados e ON d.cod_empleado = e.cod_empleado
-  WHERE MONTH(d.fecha) = MONTH(CURRENT_DATE)
-    AND YEAR(d.fecha) = YEAR(CURRENT_DATE)
-  GROUP BY e.cod_empleado
-  ORDER BY horas DESC
-  LIMIT 5;
+FROM dias d
+         JOIN empleados e ON d.cod_empleado = e.cod_empleado
+WHERE MONTH(d.fecha) = MONTH(CURRENT_DATE)
+  AND YEAR(d.fecha) = YEAR(CURRENT_DATE)
+GROUP BY e.cod_empleado
+ORDER BY horas DESC
+    LIMIT 5;
 END //
 
 DELIMITER ;
@@ -290,42 +290,70 @@ DELIMITER ;
 
 DELIMITER //
 
-CREATE TRIGGER trg_dias_after_insert
-  AFTER INSERT ON dias
-  FOR EACH ROW
+CREATE TRIGGER trg_dias_before_update
+    BEFORE UPDATE ON dias
+    FOR EACH ROW
 BEGIN
-  INSERT INTO auditoria (accion, tabla_afectada, registro_id, detalle)
-  VALUES (
-    'INSERT', 'dias', NEW.id,
-    CONCAT('Nuevo fichaje - Empleado: ', NEW.cod_empleado,
-      ' | Entrada: ', COALESCE(NEW.entrada_hora, 'NULL'))
-  );
+    DECLARE v_minutos INT;
+
+  IF NEW.entrada_hora IS NOT NULL AND NEW.salida_hora IS NOT NULL THEN
+    SET v_minutos = TIMESTAMPDIFF(MINUTE, NEW.entrada_hora, NEW.salida_hora);
+
+    IF v_minutos < 0 THEN
+      SET v_minutos = v_minutos + 1440;
+END IF;
+
+SET NEW.horas_trabajadas = ROUND(v_minutos / 60, 2);
+    SET NEW.horas_extras     = GREATEST(ROUND(v_minutos / 60, 2) - 8, 0);
+
+    SET NEW.turno_salida = CASE
+      WHEN HOUR(NEW.salida_hora) BETWEEN 6  AND 13 THEN 'Mañana'
+      WHEN HOUR(NEW.salida_hora) BETWEEN 14 AND 21 THEN 'Tarde'
+      ELSE 'Noche'
+END;
+END IF;
 END //
 
 CREATE TRIGGER trg_dias_after_update
-  AFTER UPDATE ON dias
-  FOR EACH ROW
+    AFTER UPDATE ON dias
+    FOR EACH ROW
 BEGIN
-  INSERT INTO auditoria (accion, tabla_afectada, registro_id, detalle)
-  VALUES (
-    'UPDATE', 'dias', NEW.id,
-    CONCAT('Fichaje actualizado - Empleado: ', NEW.cod_empleado,
-      ' | Salida: ', COALESCE(NEW.salida_hora, 'NULL'),
-      ' | Horas: ', NEW.horas_trabajadas)
-  );
+    INSERT INTO auditoria (accion, tabla_afectada, registro_id, detalle)
+    VALUES (
+               'UPDATE', 'dias', NEW.id,
+               CONCAT(
+                       'Fichaje actualizado - Empleado: ', NEW.cod_empleado,
+                       ' | Entrada: ', COALESCE(NEW.entrada_hora, 'NULL'),
+                       ' | Salida: ',  COALESCE(NEW.salida_hora,  'NULL'),
+                       ' | Horas: ',   NEW.horas_trabajadas,
+                       ' | Extras: ',  NEW.horas_extras
+               )
+           );
+END //
+
+CREATE TRIGGER trg_dias_after_insert
+    AFTER INSERT ON dias
+    FOR EACH ROW
+BEGIN
+    INSERT INTO auditoria (accion, tabla_afectada, registro_id, detalle)
+    VALUES (
+               'INSERT', 'dias', NEW.id,
+               CONCAT('Nuevo fichaje - Empleado: ', NEW.cod_empleado,
+                      ' | Entrada: ', COALESCE(NEW.entrada_hora, 'NULL'))
+           );
 END //
 
 CREATE TRIGGER trg_empleados_after_delete
-  AFTER DELETE ON empleados
-  FOR EACH ROW
+    AFTER DELETE ON empleados
+    FOR EACH ROW
 BEGIN
-  INSERT INTO auditoria (accion, tabla_afectada, detalle)
-  VALUES (
-    'DELETE', 'empleados',
-    CONCAT('Empleado eliminado: ', OLD.cod_empleado,
-      ' - ', OLD.nombre, ' ', OLD.apellido1,
-      ' (DNI: ', OLD.dni, ')')
-  );
+    INSERT INTO auditoria (accion, tabla_afectada, detalle)
+    VALUES (
+               'DELETE', 'empleados',
+               CONCAT('Empleado eliminado: ', OLD.cod_empleado,
+                      ' - ', OLD.nombre, ' ', OLD.apellido1,
+                      ' (DNI: ', OLD.dni, ')')
+           );
 END //
 
 DELIMITER ;
@@ -344,7 +372,7 @@ GRANT SELECT ON control_asistencia.empleados TO 'empleado'@'%';
 GRANT SELECT, INSERT ON control_asistencia.dias TO 'empleado'@'%';
 GRANT INSERT ON control_asistencia.auditoria TO 'empleado'@'%';
 GRANT UPDATE (intentos_fallidos, bloqueado, ultimo_acceso)
-  ON control_asistencia.empleados TO 'empleado'@'%';
+      ON control_asistencia.empleados TO 'empleado'@'%';
 GRANT EXECUTE ON PROCEDURE control_asistencia.registrar_fichaje TO 'empleado'@'%';
 GRANT EXECUTE ON PROCEDURE control_asistencia.registrar_intento_fallido TO 'empleado'@'%';
 GRANT EXECUTE ON PROCEDURE control_asistencia.login_exitoso TO 'empleado'@'%';
@@ -367,60 +395,181 @@ FLUSH PRIVILEGES;
 
 
 INSERT INTO departamentos (nombre, descripcion) VALUES
-  ('Tecnología', 'Departamento de desarrollo e infraestructura'),
-  ('Recursos Humanos', 'Gestión de personal y nóminas'),
-  ('Administración', 'Contabilidad y gestión administrativa'),
-  ('Ventas', 'Equipo comercial y atención al cliente');
+                                                    ('Tecnología',        'Desarrollo e infraestructura'),
+                                                    ('Recursos Humanos',  'Gestión de personal y nóminas'),
+                                                    ('Administración',    'Contabilidad y gestión administrativa'),
+                                                    ('Ventas',            'Equipo comercial y atención al cliente'),
+                                                    ('Logística',         'Almacén, distribución y transporte');
 
 INSERT INTO festivos (fecha, descripcion, ambito) VALUES
-  ('2025-01-01', 'Año Nuevo', 'Nacional'),
-  ('2025-01-06', 'Reyes Magos', 'Nacional'),
-  ('2025-04-17', 'Jueves Santo', 'Nacional'),
-  ('2025-04-18', 'Viernes Santo', 'Nacional'),
-  ('2025-05-01', 'Día del Trabajo', 'Nacional'),
-  ('2025-08-15', 'Asunción de la Virgen', 'Nacional'),
-  ('2025-10-12', 'Día de la Hispanidad', 'Nacional'),
-  ('2025-11-01', 'Todos los Santos', 'Nacional'),
-  ('2025-12-06', 'Día de la Constitución', 'Nacional'),
-  ('2025-12-08', 'Inmaculada Concepción', 'Nacional'),
-  ('2025-12-25', 'Navidad', 'Nacional');
+                                                      ('2025-01-01', 'Año Nuevo',               'Nacional'),
+                                                      ('2025-01-06', 'Reyes Magos',             'Nacional'),
+                                                      ('2025-04-17', 'Jueves Santo',            'Nacional'),
+                                                      ('2025-04-18', 'Viernes Santo',           'Nacional'),
+                                                      ('2025-05-01', 'Día del Trabajo',         'Nacional'),
+                                                      ('2025-08-15', 'Asunción de la Virgen',   'Nacional'),
+                                                      ('2025-10-12', 'Día de la Hispanidad',    'Nacional'),
+                                                      ('2025-11-01', 'Todos los Santos',        'Nacional'),
+                                                      ('2025-12-06', 'Día de la Constitución',  'Nacional'),
+                                                      ('2025-12-08', 'Inmaculada Concepción',   'Nacional'),
+                                                      ('2025-12-25', 'Navidad',                 'Nacional'),
+                                                      ('2026-01-01', 'Año Nuevo',               'Nacional'),
+                                                      ('2026-01-06', 'Reyes Magos',             'Nacional'),
+                                                      ('2026-04-03', 'Viernes Santo',           'Nacional'),
+                                                      ('2026-05-01', 'Día del Trabajo',         'Nacional');
 
 INSERT INTO empleados
-  (cod_empleado, nombre, apellido1, apellido2, dni, email, telefono,
-   username, password_hash, rol, cod_departamento)
+(cod_empleado, nombre, apellido1, apellido2, dni, email, telefono,
+ username, password_hash, rol, cod_departamento)
 VALUES
-  (1001, 'Carlos', 'García', 'López', '12345678A', 'carlos.garcia@empresa.com', '600111222',
-   'cgarcia', '$2a$12$mtI9iKV/0zpiMkiX6Z03g.EKx4it3/FPNne/Jp5Q7ZJg6.wFDuFXq', 'ADMIN', 3),
-  (1002, 'María', 'Martínez', 'Sánchez', '23456789B', 'maria.martinez@empresa.com', '600333444',
-   'mmartinez', '$2a$12$5dR0L7.dCkwbMyyYa7fpSeWieWr7Lz4aQctAl2R9p/s/4AiJpz3Fi', 'RRHH', 2),
-  (1003, 'Juan', 'Rodríguez', 'Pérez', '34567890C', 'juan.rodriguez@empresa.com', '600555666',
-   'jrodriguez', '$2a$12$fcRwy0i8wNuuYjC9yAF6YuNAUjLUYwz8sGsMFfW14pDRumZPeel6K', 'EMPLEADO', 1),
-  (1004, 'Ana', 'López', 'Gómez', '45678901D', 'ana.lopez@empresa.com', '600777888',
-   'alopez', '$2a$12$m8E7AXw4hEPNexQiRcqLF.GGWDaxeXSVNpPNC0MvjD09iM5aPNp.K', 'EMPLEADO', 1),
-  (1005, 'Pedro', 'Fernández', NULL, '56789012E', 'pedro.fernandez@empresa.com', '600999000',
-   'pfernandez', '$2a$12$uUyWeJ93Cwrb0dI6pUrcUuVo6MntaKyALV3VDcBXq12Ds73vf1u.m', 'EMPLEADO', 4);
+    (1001, 'Carlos',    'García',     'López',    '54567408T', 'carlos.garcia@empresa.com',    '600111222',
+     'cgarcia',     '$2a$12$mtI9iKV/0zpiMkiX6Z03g.EKx4it3/FPNne/Jp5Q7ZJg6.wFDuFXq', 'ADMIN',    3),
+    (1002, 'María',     'Martínez',   'Sánchez',  '92805128J', 'maria.martinez@empresa.com',   '600333444',
+     'mmartinez',   '$2a$12$5dR0L7.dCkwbMyyYa7fpSeWieWr7Lz4aQctAl2R9p/s/4AiJpz3Fi', 'RRHH',     2),
+    (1009, 'Laura',     'Navarro',    'Gil',      '67210355P', 'laura.navarro@empresa.com',    '600222111',
+     'lnavarro',    '$2a$12$5dR0L7.dCkwbMyyYa7fpSeWieWr7Lz4aQctAl2R9p/s/4AiJpz3Fi', 'RRHH',     2),
+    (1003, 'Juan',      'Rodríguez',  'Pérez',    '80646874L', 'juan.rodriguez@empresa.com',   '600555666',
+     'jrodriguez',  '$2a$12$fcRwy0i8wNuuYjC9yAF6YuNAUjLUYwz8sGsMFfW14pDRumZPeel6K', 'EMPLEADO', 1),
+    (1004, 'Ana',       'López',      'Gómez',    '83212736R', 'ana.lopez@empresa.com',        '600777888',
+     'alopez',      '$2a$12$m8E7AXw4hEPNexQiRcqLF.GGWDaxeXSVNpPNC0MvjD09iM5aPNp.K', 'EMPLEADO', 1),
+    (1006, 'Lucía',     'Jiménez',    'Torres',   '01495825C', 'lucia.jimenez@empresa.com',    '600222333',
+     'ljimenez',    '$2a$12$fcRwy0i8wNuuYjC9yAF6YuNAUjLUYwz8sGsMFfW14pDRumZPeel6K', 'EMPLEADO', 1),
+    (1005, 'Pedro',     'Fernández',  NULL,       '24401204K', 'pedro.fernandez@empresa.com',  '600999000',
+     'pfernandez',  '$2a$12$uUyWeJ93Cwrb0dI6pUrcUuVo6MntaKyALV3VDcBXq12Ds73vf1u.m', 'EMPLEADO', 4),
+    (1007, 'Sofía',     'Moreno',     'Castro',   '75064932Q', 'sofia.moreno@empresa.com',     '600444555',
+     'smoreno',     '$2a$12$uUyWeJ93Cwrb0dI6pUrcUuVo6MntaKyALV3VDcBXq12Ds73vf1u.m', 'EMPLEADO', 4),
+    (1008, 'Miguel',    'Díaz',       'Rubio',    '12150941H', 'miguel.diaz@empresa.com',      '600666777',
+     'mdiaz',       '$2a$12$fcRwy0i8wNuuYjC9yAF6YuNAUjLUYwz8sGsMFfW14pDRumZPeel6K', 'EMPLEADO', 5),
+    (1010, 'Raúl',      'Serrano',    NULL,       '61276144G', 'raul.serrano@empresa.com',     '600888999',
+     'rserrano',    '$2a$12$fcRwy0i8wNuuYjC9yAF6YuNAUjLUYwz8sGsMFfW14pDRumZPeel6K', 'EMPLEADO', 5),
+    (1011, 'Elena',     'Vega',       'Molina',   '93553725Y', 'elena.vega@empresa.com',       '600100200',
+     'evega',       '$2a$12$fcRwy0i8wNuuYjC9yAF6YuNAUjLUYwz8sGsMFfW14pDRumZPeel6K', 'EMPLEADO', 1);
 
-INSERT INTO dias
-  (fecha, cod_empleado, entrada_hora, salida_hora,
-   turno_entrada, turno_salida, horas_trabajadas, horas_extras)
-VALUES
-  (DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY), 1003, '08:00:00', '16:30:00', 'Mañana', 'Tarde', 8.50, 0.50),
-  (DATE_SUB(CURRENT_DATE, INTERVAL 3 DAY), 1003, '08:15:00', '16:00:00', 'Mañana', 'Tarde', 7.75, 0.00),
-  (DATE_SUB(CURRENT_DATE, INTERVAL 2 DAY), 1003, '07:50:00', '17:00:00', 'Mañana', 'Tarde', 9.17, 1.17),
-  (DATE_SUB(CURRENT_DATE, INTERVAL 1 DAY), 1003, '08:00:00', '16:00:00', 'Mañana', 'Tarde', 8.00, 0.00),
-  (DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY), 1004, '09:00:00', '17:30:00', 'Mañana', 'Tarde', 8.50, 0.50),
-  (DATE_SUB(CURRENT_DATE, INTERVAL 3 DAY), 1004, '09:00:00', '18:00:00', 'Mañana', 'Tarde', 9.00, 1.00),
-  (DATE_SUB(CURRENT_DATE, INTERVAL 2 DAY), 1004, '09:05:00', '17:00:00', 'Mañana', 'Tarde', 7.92, 0.00),
-  (DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY), 1005, '14:00:00', '22:00:00', 'Tarde', 'Noche', 8.00, 0.00),
-  (DATE_SUB(CURRENT_DATE, INTERVAL 3 DAY), 1005, '14:00:00', '23:00:00', 'Tarde', 'Noche', 9.00, 1.00);
+UPDATE empleados SET activo = FALSE, fecha_baja = NOW() WHERE cod_empleado = 1011;
+
+INSERT INTO dias (fecha, cod_empleado, entrada_hora, salida_hora, turno_entrada, turno_salida, horas_trabajadas, horas_extras, festivo, justificado, observaciones) VALUES
+
+(DATE_SUB(CURRENT_DATE, INTERVAL 14 DAY), 1001, '08:00:00', '16:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 13 DAY), 1001, '08:00:00', '17:30:00', 'Mañana', 'Tarde',  9.50, 1.50, FALSE, FALSE, 'Cierre mensual'),
+(DATE_SUB(CURRENT_DATE, INTERVAL 12 DAY), 1001, '08:00:00', '16:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 11 DAY), 1001, '08:00:00', '16:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 10 DAY), 1001, '08:00:00', '16:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  7 DAY), 1001, '08:00:00', '16:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  6 DAY), 1001, '08:00:00', '17:30:00', 'Mañana', 'Tarde',  9.50, 1.50, FALSE, FALSE, 'Reunión dirección'),
+(DATE_SUB(CURRENT_DATE, INTERVAL  5 DAY), 1001, '08:00:00', '16:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  4 DAY), 1001, '08:00:00', '16:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  3 DAY), 1001, '08:00:00', '16:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+
+(DATE_SUB(CURRENT_DATE, INTERVAL 14 DAY), 1002, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 13 DAY), 1002, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 12 DAY), 1002, '09:00:00', '18:00:00', 'Mañana', 'Tarde',  9.00, 1.00, FALSE, FALSE, 'Proceso selección'),
+(DATE_SUB(CURRENT_DATE, INTERVAL 11 DAY), 1002, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 10 DAY), 1002, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  7 DAY), 1002, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  5 DAY), 1002, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  4 DAY), 1002, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  3 DAY), 1002, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  2 DAY), 1002, '09:00:00', '17:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+
+(DATE_SUB(CURRENT_DATE, INTERVAL 14 DAY), 1003, '08:00:00', '16:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 13 DAY), 1003, '08:15:00', '17:00:00', 'Mañana', 'Tarde',  8.75, 0.75, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 12 DAY), 1003, '08:00:00', '16:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 11 DAY), 1003, '07:50:00', '17:00:00', 'Mañana', 'Tarde',  9.17, 1.17, FALSE, FALSE, 'Deploy producción'),
+(DATE_SUB(CURRENT_DATE, INTERVAL 10 DAY), 1003, '08:00:00', '16:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  7 DAY), 1003, '08:00:00', '16:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  5 DAY), 1003, '08:00:00', '16:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  4 DAY), 1003, '08:00:00', '16:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  3 DAY), 1003, '08:00:00', '16:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  2 DAY), 1003, '08:00:00', '17:30:00', 'Mañana', 'Tarde',  9.50, 1.50, FALSE, FALSE, 'Hotfix urgente'),
+
+(DATE_SUB(CURRENT_DATE, INTERVAL 14 DAY), 1004, '09:00:00', '17:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 13 DAY), 1004, '09:00:00', '18:00:00', 'Mañana', 'Tarde',  9.00, 1.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 12 DAY), 1004, '09:05:00', '17:00:00', 'Mañana', 'Tarde',  7.92, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 11 DAY), 1004, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 10 DAY), 1004, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  7 DAY), 1004, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  6 DAY), 1004, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, TRUE,  'Médico por la mañana'),
+(DATE_SUB(CURRENT_DATE, INTERVAL  4 DAY), 1004, '09:00:00', '17:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  3 DAY), 1004, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  2 DAY), 1004, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+
+(DATE_SUB(CURRENT_DATE, INTERVAL 14 DAY), 1005, '14:00:00', '22:00:00', 'Tarde',  'Noche',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 13 DAY), 1005, '14:00:00', '23:00:00', 'Tarde',  'Noche',  9.00, 1.00, FALSE, FALSE, 'Feria comercial'),
+(DATE_SUB(CURRENT_DATE, INTERVAL 12 DAY), 1005, '14:00:00', '22:30:00', 'Tarde',  'Noche',  8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 11 DAY), 1005, '14:00:00', '22:00:00', 'Tarde',  'Noche',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 10 DAY), 1005, '14:00:00', '22:00:00', 'Tarde',  'Noche',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  7 DAY), 1005, '14:00:00', '22:00:00', 'Tarde',  'Noche',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  5 DAY), 1005, '14:00:00', '23:30:00', 'Tarde',  'Noche',  9.50, 1.50, FALSE, FALSE, 'Evento cliente'),
+(DATE_SUB(CURRENT_DATE, INTERVAL  4 DAY), 1005, '14:00:00', '22:00:00', 'Tarde',  'Noche',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  3 DAY), 1005, '14:00:00', '22:00:00', 'Tarde',  'Noche',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  2 DAY), 1005, '14:00:00', '22:30:00', 'Tarde',  'Noche',  8.50, 0.50, FALSE, FALSE, NULL),
+
+(DATE_SUB(CURRENT_DATE, INTERVAL 14 DAY), 1006, '08:30:00', '16:30:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 13 DAY), 1006, '08:30:00', '17:30:00', 'Mañana', 'Tarde',  9.00, 1.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 12 DAY), 1006, '08:30:00', '16:30:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 11 DAY), 1006, '08:30:00', '16:30:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 10 DAY), 1006, '08:30:00', '16:30:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  7 DAY), 1006, '08:30:00', '16:30:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  5 DAY), 1006, '08:30:00', '16:30:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  4 DAY), 1006, '08:30:00', '18:00:00', 'Mañana', 'Tarde',  9.50, 1.50, FALSE, FALSE, 'Code review sprint'),
+(DATE_SUB(CURRENT_DATE, INTERVAL  3 DAY), 1006, '08:30:00', '16:30:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  2 DAY), 1006, '08:30:00', '16:30:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+
+(DATE_SUB(CURRENT_DATE, INTERVAL 14 DAY), 1007, '10:00:00', '18:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 13 DAY), 1007, '10:00:00', '19:00:00', 'Mañana', 'Tarde',  9.00, 1.00, FALSE, FALSE, 'Reunión cliente clave'),
+(DATE_SUB(CURRENT_DATE, INTERVAL 12 DAY), 1007, '10:00:00', '18:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 11 DAY), 1007, '10:00:00', '18:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 10 DAY), 1007, '10:00:00', '18:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  7 DAY), 1007, '10:00:00', '18:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  5 DAY), 1007, '10:00:00', '18:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  4 DAY), 1007, '10:00:00', '18:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  3 DAY), 1007, '10:00:00', '18:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  2 DAY), 1007, '10:00:00', '18:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+
+(DATE_SUB(CURRENT_DATE, INTERVAL 14 DAY), 1008, '06:00:00', '14:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 13 DAY), 1008, '06:00:00', '14:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 12 DAY), 1008, '06:00:00', '14:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 11 DAY), 1008, '06:00:00', '15:00:00', 'Mañana', 'Tarde',  9.00, 1.00, FALSE, FALSE, 'Inventario trimestral'),
+(DATE_SUB(CURRENT_DATE, INTERVAL 10 DAY), 1008, '06:00:00', '14:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  7 DAY), 1008, '06:00:00', '14:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  5 DAY), 1008, '06:00:00', '14:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  4 DAY), 1008, '06:00:00', '14:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  3 DAY), 1008, '06:00:00', '14:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  2 DAY), 1008, '06:00:00', '14:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+
+(DATE_SUB(CURRENT_DATE, INTERVAL 14 DAY), 1009, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 13 DAY), 1009, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 12 DAY), 1009, '09:00:00', '17:30:00', 'Mañana', 'Tarde',  8.50, 0.50, FALSE, FALSE, 'Entrevistas candidatos'),
+(DATE_SUB(CURRENT_DATE, INTERVAL 11 DAY), 1009, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 10 DAY), 1009, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  7 DAY), 1009, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  5 DAY), 1009, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  4 DAY), 1009, '09:00:00', '18:00:00', 'Mañana', 'Tarde',  9.00, 1.00, FALSE, FALSE, 'Nóminas mes'),
+(DATE_SUB(CURRENT_DATE, INTERVAL  3 DAY), 1009, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  2 DAY), 1009, '09:00:00', '17:00:00', 'Mañana', 'Tarde',  8.00, 0.00, FALSE, FALSE, NULL),
+
+(DATE_SUB(CURRENT_DATE, INTERVAL 14 DAY), 1010, '22:00:00', '06:00:00', 'Noche',  'Mañana', 8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 13 DAY), 1010, '22:00:00', '06:00:00', 'Noche',  'Mañana', 8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 12 DAY), 1010, '22:00:00', '07:00:00', 'Noche',  'Mañana', 9.00, 1.00, FALSE, FALSE, 'Descarga urgente'),
+(DATE_SUB(CURRENT_DATE, INTERVAL 11 DAY), 1010, '22:00:00', '06:00:00', 'Noche',  'Mañana', 8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL 10 DAY), 1010, '22:00:00', '06:00:00', 'Noche',  'Mañana', 8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  7 DAY), 1010, '22:00:00', '06:00:00', 'Noche',  'Mañana', 8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  5 DAY), 1010, '22:00:00', '06:30:00', 'Noche',  'Mañana', 8.50, 0.50, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  4 DAY), 1010, '22:00:00', '06:00:00', 'Noche',  'Mañana', 8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  3 DAY), 1010, '22:00:00', '06:00:00', 'Noche',  'Mañana', 8.00, 0.00, FALSE, FALSE, NULL),
+(DATE_SUB(CURRENT_DATE, INTERVAL  2 DAY), 1010, '22:00:00', '06:00:00', 'Noche',  'Mañana', 8.00, 0.00, FALSE, FALSE, NULL);
 
 
 SELECT 'Base de datos creada correctamente' AS estado;
 
-SELECT CONCAT('Departamentos: ', COUNT(*)) AS info FROM departamentos
+SELECT CONCAT('Departamentos:  ', COUNT(*)) AS info FROM departamentos
 UNION ALL
-SELECT CONCAT('Empleados:     ', COUNT(*)) FROM empleados
+SELECT CONCAT('Empleados:      ', COUNT(*)) FROM empleados
 UNION ALL
-SELECT CONCAT('Festivos:      ', COUNT(*)) FROM festivos
+SELECT CONCAT('  - Activos:    ', COUNT(*)) FROM empleados WHERE activo = TRUE
 UNION ALL
-SELECT CONCAT('Fichajes demo: ', COUNT(*)) FROM dias;
+SELECT CONCAT('  - De baja:    ', COUNT(*)) FROM empleados WHERE activo = FALSE
+UNION ALL
+SELECT CONCAT('Festivos:       ', COUNT(*)) FROM festivos
+UNION ALL
+SELECT CONCAT('Fichajes demo:  ', COUNT(*)) FROM dias;

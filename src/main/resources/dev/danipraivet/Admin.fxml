@@ -210,7 +210,7 @@
                                    text="Eliminar definitivamente" onAction="#onEliminarEmpleado"
                                    style="-fx-background-color: #b71c1c; -fx-text-fill: white;
                                           -fx-cursor: hand; -fx-background-radius: 8;
-                                          -fx-padding: 10 16;"/>
+                                          -fx-padding: 10 16; -fx-font-weight: bold;"/>
                     </HBox>
                     <TableView fx:id="tablaEmpleadosAdmin" VBox.vgrow="ALWAYS" prefHeight="490" maxWidth="Infinity">
                         <columns>
