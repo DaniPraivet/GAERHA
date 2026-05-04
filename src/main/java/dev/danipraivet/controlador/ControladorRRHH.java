@@ -409,7 +409,7 @@ public class ControladorRRHH implements Initializable {
             e.setDni(txtFormDni.getText().trim().toUpperCase());
             e.setEmail(txtFormEmail.getText().trim());
             e.setTelefono(txtFormTelefono.getText().trim());
-            e.setDepartamento(cmbFormDpto.getValue() != null ? cmbFormDpto.getValue() : new Departamento("",""));
+            e.setDepartamento(cmbFormDpto.getValue());
             e.setUsername(txtFormUsername.getText().trim().toLowerCase());
             e.setRol(cmbFormRol.getValue() != null ? cmbFormRol.getValue() : Rol.EMPLEADO);
             return e;

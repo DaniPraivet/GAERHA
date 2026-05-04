@@ -152,7 +152,7 @@ public class RepositorioEmpleado implements IRepositorioEmpleado {
             ps.setString(6, e.getTelefono());
             ps.setString(7, e.getUsername());
             ps.setString(8, e.getRol().name());
-            if (e.getDepartamento() != null) {
+            if (e.getDepartamento() != null && e.getDepartamento().getCodDepartamento() > 0) {
                 ps.setInt(9, e.getDepartamento().getCodDepartamento());
             } else {
                 ps.setNull(9, Types.INTEGER);

@@ -152,7 +152,7 @@
                                        HBox.hgrow="ALWAYS" maxWidth="Infinity"
                                        style="-fx-background-color: #b71c1c; -fx-text-fill: white;
                                               -fx-cursor: hand; -fx-background-radius: 8;
-                                              -fx-padding: 10;"/>
+                                              -fx-padding: 10; -fx-font-weight: bold;"/>
                         </HBox>
                     </VBox>
                 </HBox>
