@@ -30,3 +30,52 @@ The last packet sent successfully to the server was 0 milliseconds ago. The driv
 2026-05-05 00:12:53.381 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
 2026-05-05 00:13:05.000 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
 2026-05-05 00:13:05.002 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 2 conexiones liberadas.
+2026-05-05 08:01:21.221 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-05-05 08:01:21.229 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-05-05 08:01:21.461 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-05-05 08:01:22.260 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-05-05 08:01:22.612 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-05-05 08:01:31.436 DEBUG [d.d.modelo.datos.GestorConexiones] - Creando nueva conexion para rol [Empleado]
+2026-05-05 08:01:31.506 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Empleado] - disponibles: 1
+2026-05-05 08:01:31.818 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Empleado] - disponibles: 0
+2026-05-05 08:01:31.832 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Empleado] - disponibles: 1
+2026-05-05 08:01:31.833 WARN  [d.d.m.servicio.ServicioAutenticacion] - Login fallido - contrasena incorrecta: 'mmartinez' (intentos: 1)
+2026-05-05 08:01:36.174 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Empleado] - disponibles: 0
+2026-05-05 08:01:36.180 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Empleado] - disponibles: 1
+2026-05-05 08:01:36.470 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Empleado] - disponibles: 0
+2026-05-05 08:01:36.481 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Empleado] - disponibles: 1
+2026-05-05 08:01:36.481 INFO  [d.d.m.servicio.ServicioAutenticacion] - Login exitoso - usuario: 'mmartinez', rol: Recursos Humanos
+2026-05-05 08:01:36.481 INFO  [d.d.controlador.ControladorLogin] - Redirigiendo a vista para rol: Recursos Humanos
+2026-05-05 08:01:37.980 DEBUG [d.d.modelo.datos.GestorConexiones] - Creando nueva conexion para rol [Recursos Humanos]
+2026-05-05 08:01:38.020 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-05-05 08:01:38.761 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: RRHH
+2026-05-05 08:01:38.768 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-05-05 08:01:38.773 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-05-05 08:01:38.775 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-05-05 08:01:38.786 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-05-05 08:01:38.793 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-05-05 08:01:38.797 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-05-05 08:01:38.798 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-05-05 08:01:38.800 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-05-05 08:01:58.008 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-05-05 08:01:58.038 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-05-05 08:01:58.873 INFO  [d.d.modelo.servicio.ServicioInformes] - Excel generado correctamente: C:\Users\Rovimatica\Downloads\informe_asistencia_2026-05-05.xlsx
+2026-05-05 08:02:18.380 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-05-05 08:02:18.393 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-05-05 08:02:18.878 INFO  [d.d.modelo.servicio.ServicioInformes] - PDF generado correctamente: C:\Users\Rovimatica\Downloads\informe_asistencia_2026-05-05.pdf
+2026-05-05 08:02:45.971 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-05-05 08:02:45.975 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-05-05 08:02:46.029 INFO  [d.d.modelo.servicio.ServicioInformes] - PDF generado correctamente: C:\Users\Rovimatica\AppData\Roaming\Microsoft\Windows\Network Shortcuts\informe_asistencia_2026-05-05.pdf
+2026-05-05 08:02:54.338 DEBUG [d.d.modelo.datos.GestorConexiones] - Reutilizando conexion del pool [Recursos Humanos] - disponibles: 0
+2026-05-05 08:02:54.340 DEBUG [d.d.modelo.datos.GestorConexiones] - Conexion devuelta al pool [Recursos Humanos] - disponibles: 1
+2026-05-05 08:02:54.389 INFO  [d.d.modelo.servicio.ServicioInformes] - PDF generado correctamente: C:\Users\Rovimatica\Downloads\informe_asistencia_2026-05-05.pdf
+2026-05-05 08:11:17.672 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-05-05 08:11:24.941 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-05-05 08:11:24.949 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 2 conexiones liberadas.
+2026-05-05 10:41:04.385 INFO  [d.d.modelo.datos.ConfiguracionBD] - Configuracion BD cargada desde 'db.properties': 127.0.0.1:3306/control_asistencia
+2026-05-05 10:41:04.394 INFO  [d.d.modelo.datos.GestorConexiones] - Driver MySQL registrado correctamente
+2026-05-05 10:41:04.535 INFO  [d.d.modelo.datos.GestorConexiones] - Conexion a la BD verificada
+2026-05-05 10:41:05.753 INFO  [dev.danipraivet.vista.Aplicacion] - Navegando a vista: Login
+2026-05-05 10:41:06.162 INFO  [dev.danipraivet.vista.Aplicacion] - Aplicacion iniciada correctamente
+2026-05-05 10:41:10.591 INFO  [dev.danipraivet.vista.Aplicacion] - Cerrando aplicacion y liberando conexiones...
+2026-05-05 10:41:10.592 INFO  [d.d.modelo.datos.GestorConexiones] - Pool cerrado. 0 conexiones liberadas.

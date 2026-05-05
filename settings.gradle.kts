@@ -1,1 +1,1 @@
-rootProject.name = "Clockio"
+rootProject.name = "GAERHA"

@@ -16,10 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("PU-02 - ValidadorFormularios")
 class ValidadorFormulariosTest {
 
-    // ---------------------------------------------------------------
-    // DNI
-    // ---------------------------------------------------------------
-
     @Nested
     @DisplayName("Validación de DNI")
     class DniTest {
@@ -81,9 +77,6 @@ class ValidadorFormulariosTest {
         }
     }
 
-    // ---------------------------------------------------------------
-    // Email
-    // ---------------------------------------------------------------
 
     @Nested
     @DisplayName("Validación de email")
@@ -120,9 +113,6 @@ class ValidadorFormulariosTest {
         }
     }
 
-    // ---------------------------------------------------------------
-    // Teléfono
-    // ---------------------------------------------------------------
 
     @Nested
     @DisplayName("Validación de teléfono")
@@ -155,9 +145,6 @@ class ValidadorFormulariosTest {
         }
     }
 
-    // ---------------------------------------------------------------
-    // Username
-    // ---------------------------------------------------------------
 
     @Nested
     @DisplayName("Validación de username")
@@ -184,9 +171,6 @@ class ValidadorFormulariosTest {
         }
     }
 
-    // ---------------------------------------------------------------
-    // Contraseña segura
-    // ---------------------------------------------------------------
 
     @Nested
     @DisplayName("Validación de contraseña segura")

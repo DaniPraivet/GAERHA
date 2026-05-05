@@ -10,6 +10,9 @@ version = "1.0.0"
 java {
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
 }
 
 repositories {
@@ -50,11 +53,34 @@ tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }
 
+tasks.withType<Test> {
+    testLogging {
+        events("passed", "skipped", "failed")
+
+        showExceptions = true
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+    }
+}
+
 tasks.jar {
     manifest {
         attributes["Main-Class"] = "dev.danipraivet.Main"
     }
-    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+
+    from(sourceSets.main.get().output)
+
+    dependsOn(configurations.runtimeClasspath)
+    from({
+        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map {
+            zipTree(it).matching {
+                exclude("META-INF/*.SF")
+                exclude("META-INF/*.DSA")
+                exclude("META-INF/*.RSA")
+                exclude("META-INF/MANIFEST.MF")
+            }
+        }
+    })
+
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
