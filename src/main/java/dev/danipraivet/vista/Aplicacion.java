@@ -80,6 +80,7 @@ public class Aplicacion extends Application {
         escenarioPrincipal.setMinHeight(600);
         escenarioPrincipal.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/dev/danipraivet/logo/logo_negro_app.png"))));
 
+        // Aplicar tema de MaterialFX a JavaFX
         UserAgentBuilder.builder().themes(JavaFXThemes.MODENA).themes(MaterialFXStylesheets.forAssemble(true)).setDeploy(true).setResolveAssets(true).build().setGlobal();
 
         if (!GestorConexiones.testConexion()) {

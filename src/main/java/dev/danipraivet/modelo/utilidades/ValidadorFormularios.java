@@ -4,10 +4,16 @@ import java.util.regex.Pattern;
 
 // Validaciones de formulario centralizadas. Evita duplicar logica en los controladores.
 public final class ValidadorFormularios {
-
+    // 8 números y 1 letra entre A y H, J y N, P y T o V-Z (Todas las letras menos la I,O,U y Ñ)
     private static final Pattern PATRON_DNI = Pattern.compile("^[0-9]{8}[A-HJ-NP-TV-Z]$");
+    // \w permite letras números y guiones bajos
+    // .+- permite puntos y signos
+    // [a-z] solo letras
+    // {2,} como mínimo 2 caracteres
     private static final Pattern PATRON_EMAIL = Pattern.compile("^[\\w.+-]+@[\\w-]+\\.[a-z]{2,}$", Pattern.CASE_INSENSITIVE);
+    // Obliga al primer caracter ser 6 o 7, los otros 8 pueden ser cualquier número
     private static final Pattern PATRON_TELEFONO = Pattern.compile("^[67][0-9]{8}$");
+    // Obliga al primer caracter ser solo letra, y lo demás cualquier letra, número, punto y guión desde los 3 a los 29 caracteres después de la letra inicial
     private static final Pattern PATRON_USERNAME = Pattern.compile("^[a-zA-Z][a-zA-Z0-9._-]{3,29}$");
 
     // Tabla de letras del DNI espanol (posicion = numero % 23)
@@ -16,7 +22,6 @@ public final class ValidadorFormularios {
     private ValidadorFormularios() {
     }
 
-    // Comprueba formato y letra de control del DNI espanol
     public static boolean dniValido(String dni) {
         if (dni == null || !PATRON_DNI.matcher(dni.toUpperCase()).matches()) return false;
         int numero = Integer.parseInt(dni.substring(0, 8));
@@ -36,7 +41,7 @@ public final class ValidadorFormularios {
         return username != null && PATRON_USERNAME.matcher(username).matches();
     }
 
-    // Valida que la contrasena tenga mayuscula, minuscula, digito y caracter especial (min. 8 chars)
+    // Valida que la contrasena tenga mayuscula, minuscula, digito y caracter especial (min 8 chars)
     public static boolean contrasenaSegura(String contrasena) {
         if (contrasena == null || contrasena.length() < 8) return false;
         boolean tieneMayuscula = contrasena.chars().anyMatch(Character::isUpperCase);
@@ -50,7 +55,7 @@ public final class ValidadorFormularios {
         return valor != null && !valor.isBlank();
     }
 
-    // Devuelve mensaje de error para un DNI invalido, o null si es correcto
+    // Devuelve mensaje de error para un DNI invalido o null si es correcto
     public static String mensajeDni(String dni) {
         if (!noVacio(dni)) return "El DNI no puede estar vacio.";
         if (!PATRON_DNI.matcher(dni.toUpperCase()).matches()) return "Formato invalido. Ejemplo: 12345678A";
@@ -58,7 +63,7 @@ public final class ValidadorFormularios {
         return null;
     }
 
-    // Devuelve mensaje de error para una contrasena insegura, o null si es correcta
+    // Devuelve mensaje de error para una contrasena insegura o null si es correcta
     public static String mensajeContrasena(String contrasena) {
         if (!noVacio(contrasena)) return "La contrasena no puede estar vacia.";
         if (contrasena.length() < 8) return "Minimo 8 caracteres.";

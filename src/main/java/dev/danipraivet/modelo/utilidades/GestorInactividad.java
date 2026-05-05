@@ -11,6 +11,8 @@ import javafx.scene.input.InputEvent;
 import javafx.util.Duration;
 
 public class GestorInactividad {
+    // TIEMPO_TOTAL - TIEMPO_AVISO = Tiempo en el que sale la alerta antes de que finalice el tiempo
+    // 180 - 150 = 30 segundos antes de que te eche la sesión
     private static final int TIEMPO_TOTAL = 180;
     private static final int TIEMPO_AVISO = 150;
 
@@ -30,8 +32,10 @@ public class GestorInactividad {
     }
 
     private static void programar() {
+        // Detener cualquier temporizador que haya activo
         detener();
 
+        // Configurar la cuenta atrás
         timeline = new Timeline(
                 new KeyFrame(Duration.seconds(TIEMPO_AVISO), e -> mostrarAviso()),
                 new KeyFrame(Duration.seconds(TIEMPO_TOTAL), e -> cerrarSesion())

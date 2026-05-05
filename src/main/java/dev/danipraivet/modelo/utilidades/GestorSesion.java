@@ -69,7 +69,6 @@ public final class GestorSesion {
         return haySesionActiva() && empleadoActual.getRol() == Rol.ADMIN;
     }
 
-    // RRHH y ADMIN tienen permisos de gestion de empleados
     public static boolean tienePermisoGestion() {
         return esRRHH() || esAdmin();
     }
