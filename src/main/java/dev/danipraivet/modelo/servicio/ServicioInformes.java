@@ -29,7 +29,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
- * MODELO — Generación de informes de asistencia en PDF y Excel.
+ * MODELO - Generación de informes de asistencia en PDF y Excel.
  * <p>
  * El controlador abre el FileChooser, obtiene el File destino
  * y llama a estos métodos. La lógica de presentación del informe

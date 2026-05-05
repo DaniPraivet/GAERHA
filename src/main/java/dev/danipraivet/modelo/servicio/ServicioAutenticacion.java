@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
-// Logica de autenticacion: busca el empleado, verifica contrasena y gestiona la sesion.
 public class ServicioAutenticacion {
 
     private static final Logger log = LoggerFactory.getLogger(ServicioAutenticacion.class);
@@ -67,7 +66,7 @@ public class ServicioAutenticacion {
         GestorSesion.cerrarSesion();
     }
 
-    // Devuelve el mensaje de error legible para la vista segun el resultado del login
+    // Devuelve el mensaje de error legible para la vista según el resultado del login
     public String getMensajeError(ResultadoLogin resultado) {
         return switch (resultado) {
             case CREDENCIALES_INCORRECTAS -> "Usuario o contrasena incorrectos.";

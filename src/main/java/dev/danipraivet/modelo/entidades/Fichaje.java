@@ -8,19 +8,19 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
 
-// Entidad que representa un registro de fichaje diario. Mapeada a la tabla 'dias' de MySQL.
+// Entidad que representa un registro de fichaje diario
 public class Fichaje {
 
     private int id;
     private LocalDate fecha;
     private int codEmpleado;
 
-    private Empleado empleado;         // Solo presente si se hace JOIN con empleados
+    private Empleado empleado;
 
-    private LocalTime entradaHora;      // Nullable hasta que fiche
-    private LocalTime salidaHora;       // Nullable hasta que salga
-    private Turno turnoEntrada;     // Nullable
-    private Turno turnoSalida;      // Nullable
+    private LocalTime entradaHora;
+    private LocalTime salidaHora;
+    private Turno turnoEntrada;
+    private Turno turnoSalida;
 
     private BigDecimal horasTrabajadas;
     private BigDecimal horasExtras;
@@ -45,17 +45,14 @@ public class Fichaje {
         this.turnoEntrada = turnoEntrada;
     }
 
-    // Indica si el empleado ya ha registrado su salida
     public boolean estaCompleto() {
         return salidaHora != null;
     }
 
-    // Indica si hay una entrada abierta sin salida (empleado dentro)
     public boolean estaFichado() {
         return entradaHora != null && salidaHora == null;
     }
 
-    // Devuelve las horas trabajadas como "Xh Ym" para mostrar en la interfaz
     public String getHorasFormateadas() {
         if (horasTrabajadas == null || horasTrabajadas.compareTo(BigDecimal.ZERO) == 0) {
             return "";
@@ -65,7 +62,6 @@ public class Fichaje {
         return horas + "h " + String.format("%02d", minutos) + "m";
     }
 
-    // Estado resumido: "Trabajando", "Completado" o "Ausente"
     public String getEstado() {
         if (entradaHora == null) return "Ausente";
         if (salidaHora == null) return "Trabajando";

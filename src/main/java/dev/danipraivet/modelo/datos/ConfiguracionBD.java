@@ -8,10 +8,9 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Configuracion centralizada de la base de datos.
+ * Configuracion de la base de datos.
  * Los parametros se cargan desde el fichero externo {@code db.properties},
- * ubicado en el classpath ({@code src/main/resources/db.properties}).
- * Esto permite cambiar el entorno (local, pruebas, produccion) sin recompilar.
+ * en la ruta ({@code src/main/resources/db.properties}).
  */
 public final class ConfiguracionBD {
 
@@ -31,7 +30,7 @@ public final class ConfiguracionBD {
     private static final Logger log = LoggerFactory.getLogger(ConfiguracionBD.class);
     private static final String FICHERO_CONFIG = "db.properties";
 
-    // Carga las propiedades al arrancar la clase (bloque estatico).
+    // Carga las propiedades al arrancar la clase
     static {
         Properties props = cargarPropiedades();
 
@@ -65,7 +64,7 @@ public final class ConfiguracionBD {
     }
 
     /**
-     * Lee el fichero db.properties desde el classpath.
+     * Lee el fichero db.properties desde la ruta.
      * Si no se encuentra, registra una advertencia y devuelve propiedades vacias
      * para que los valores por defecto definidos en cada getProperty() entren en juego.
      */

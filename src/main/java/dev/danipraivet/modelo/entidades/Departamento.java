@@ -3,7 +3,7 @@ package dev.danipraivet.modelo.entidades;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-// Entidad que representa un departamento. Mapeada a la tabla 'departamentos' de MySQL.
+// Entidad que representa un departamento
 public class Departamento {
 
     private int codDepartamento;
@@ -21,7 +21,6 @@ public class Departamento {
         this.activo = true;
     }
 
-    // Constructor completo usado al leer desde JDBC
     public Departamento(int codDepartamento, String nombre, String descripcion, boolean activo, LocalDateTime fechaCreacion) {
         this.codDepartamento = codDepartamento;
         this.nombre = nombre;
@@ -85,5 +84,5 @@ public class Departamento {
     @Override
     public String toString() {
         return nombre;
-    } // Util para ComboBox en JavaFX
+    }
 }

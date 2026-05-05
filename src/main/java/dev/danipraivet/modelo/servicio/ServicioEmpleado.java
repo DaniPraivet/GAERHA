@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Optional;
 
-// Logica de negocio para la gestion de empleados. Usado desde ControladorRRHH y ControladorAdmin.
+// Logica de negocio para la gestión de empleados
 public class ServicioEmpleado {
 
     private static final Logger log = LoggerFactory.getLogger(ServicioEmpleado.class);
@@ -81,7 +81,7 @@ public class ServicioEmpleado {
         return ok ? ResultadoCRUD.ok("Contrasena actualizada correctamente.") : ResultadoCRUD.error("Error al actualizar la contrasena.");
     }
 
-    // Baja logica: desactiva el empleado sin borrar su historial de fichajes
+    // Desactiva el empleado sin borrar su historial de fichajes
     public ResultadoCRUD darDeBaja(int codEmpleado) {
         if (GestorSesion.getCodEmpleado() == codEmpleado)
             return ResultadoCRUD.error("No puedes darte de baja a ti mismo.");
@@ -90,7 +90,7 @@ public class ServicioEmpleado {
         return ok ? ResultadoCRUD.ok("Empleado dado de baja correctamente.") : ResultadoCRUD.error("Error al dar de baja al empleado.");
     }
 
-    // Reactivacion logica (solo Admin): reactiva un empleado que estaba de baja
+    // Reactiva un empleado que estaba de baja
     public ResultadoCRUD recuperar(int codEmpleado) {
         boolean ok = repo.recuperar(codEmpleado);
         return ok ? ResultadoCRUD.ok("Empleado reactivado correctamente.") : ResultadoCRUD.error("Error al reactivar el empleado.");
@@ -127,8 +127,16 @@ public class ServicioEmpleado {
         }
     }
 
-    public int contarTotalRegistrados() { return repo.contarTotalRegistrados(); }
-    public int contarActivosHoy()       { return repo.contarActivosHoy(); }
-    public int contarBloqueados()       { return repo.contarBloqueados(); }
-    public int contarRrhhActivos()      { return repo.contarRrhhActivos(); }
+    public int contarTotalRegistrados() {
+        return repo.contarTotalRegistrados();
+    }
+    public int contarActivosHoy() {
+        return repo.contarActivosHoy();
+    }
+    public int contarBloqueados() {
+        return repo.contarBloqueados();
+    }
+    public int contarRrhhActivos() {
+        return repo.contarRrhhActivos();
+    }
 }

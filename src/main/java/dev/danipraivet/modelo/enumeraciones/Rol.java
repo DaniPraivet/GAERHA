@@ -1,6 +1,6 @@
 package dev.danipraivet.modelo.enumeraciones;
 
-// Roles del sistema. Coincide con el ENUM de la columna 'rol' en MySQL.
+// Roles del sistema
 public enum Rol {
 
     EMPLEADO("Empleado"), RRHH("Recursos Humanos"), ADMIN("Administrador");
@@ -11,7 +11,7 @@ public enum Rol {
         this.etiqueta = etiqueta;
     }
 
-    // Convierte el String de MySQL al enum. Devuelve EMPLEADO si el valor es nulo o desconocido.
+    // Convierte el String de MySQL al enum, devuelve EMPLEADO si el valor es nulo o desconocido
     public static Rol fromString(String valor) {
         if (valor == null) return EMPLEADO;
         return switch (valor.toUpperCase()) {

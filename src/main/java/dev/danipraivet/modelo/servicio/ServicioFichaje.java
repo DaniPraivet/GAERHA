@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-// Logica de negocio para los fichajes. Usa el rol de la sesion para conectar con los permisos correctos.
+// Usa el rol de la sesion para conectar con los permisos correctos
 public class ServicioFichaje {
 
     private static final Logger log = LoggerFactory.getLogger(ServicioFichaje.class);
@@ -50,7 +50,7 @@ public class ServicioFichaje {
         return repo.buscarFichajeHoy(codEmpleado);
     }
 
-    // Historial del empleado en sesion para el mes actual
+    // Historial del empleado en sesión para el mes actual
     public List<Fichaje> getMesActual() {
         LocalDate hoy = LocalDate.now();
         return repo.buscarPorEmpleadoYRango(GestorSesion.getCodEmpleado(), hoy.withDayOfMonth(1), hoy);

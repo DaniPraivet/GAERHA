@@ -12,8 +12,7 @@ import java.util.Deque;
 import java.util.EnumMap;
 import java.util.Map;
 
-// Pool de conexiones a MySQL organizado por rol. Patron Singleton + Pool por rol.
-// Uso: try (Connection con = GestorConexiones.getConexion(Rol.EMPLEADO)) { ... }
+// Pool de conexiones a MySQL organizado por rol
 public class GestorConexiones {
 
     private static final Logger log = LoggerFactory.getLogger(GestorConexiones.class);
@@ -21,7 +20,7 @@ public class GestorConexiones {
     // Mapa de rol a cola de conexiones disponibles
     private static final Map<Rol, Deque<Connection>> pools = new EnumMap<>(Rol.class);
 
-    // Credenciales por rol (usuario MySQL)
+    // Credenciales por rol
     private static final Map<Rol, String[]> CREDENCIALES = new EnumMap<>(Rol.class);
 
     static {
@@ -44,7 +43,7 @@ public class GestorConexiones {
     private GestorConexiones() {
     }
 
-    // Devuelve una conexion del pool. Si esta vacia, crea una nueva.
+    // Devuelve una conexion del pool, si esta vacia, crea una nueva
     public static synchronized Connection getConexion(Rol rol) throws SQLException {
         Deque<Connection> pool = pools.get(rol);
 
@@ -64,7 +63,7 @@ public class GestorConexiones {
         return crearConexion(rol);
     }
 
-    // Devuelve una conexion al pool para reutilizarla.
+    // Devuelve una conexion al pool para reutilizarla
     public static synchronized void liberarConexion(Rol rol, Connection con) {
         if (con == null) return;
         try {
@@ -83,7 +82,7 @@ public class GestorConexiones {
         }
     }
 
-    // Verifica si la BD es accesible al arrancar la app.
+    // Verificar si la BD es accesible al arrancar la app
     public static boolean testConexion() {
         try (Connection con = crearConexion(Rol.EMPLEADO)) {
             boolean ok = con != null && con.isValid(5);
@@ -95,7 +94,7 @@ public class GestorConexiones {
         }
     }
 
-    // Cierra todas las conexiones de todos los pools. Llamar en App.stop().
+    // Cierra todas las conexiones de todos los pools, llamar en App.stop().
     public static synchronized void cerrarPool() {
         int total = 0;
         for (Map.Entry<Rol, Deque<Connection>> entry : pools.entrySet()) {

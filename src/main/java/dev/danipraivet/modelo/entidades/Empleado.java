@@ -48,7 +48,6 @@ public class Empleado {
         this.activo = true;
     }
 
-    // Devuelve el nombre completo formateado: "Nombre Apellido1 [Apellido2]"
     public String getNombreCompleto() {
         StringBuilder sb = new StringBuilder(nombre).append(" ").append(apellido1);
         if (apellido2 != null && !apellido2.isBlank()) {
@@ -57,14 +56,12 @@ public class Empleado {
         return sb.toString();
     }
 
-    // Devuelve las iniciales del nombre y primer apellido (ej. "CG" para Carlos Garcia)
     public String getIniciales() {
         String i1 = nombre != null && !nombre.isEmpty() ? String.valueOf(nombre.charAt(0)) : "";
         String i2 = apellido1 != null && !apellido1.isEmpty() ? String.valueOf(apellido1.charAt(0)) : "";
         return (i1 + i2).toUpperCase();
     }
 
-    // Comprueba si la cuenta esta operativa (activa y no bloqueada)
     public boolean estaOperativo() {
         return activo && !bloqueado;
     }

@@ -1,6 +1,6 @@
 package dev.danipraivet.modelo.enumeraciones;
 
-// Turnos laborales. Coincide con el ENUM de las columnas 'turno_entrada' / 'turno_salida' en MySQL.
+// Turnos laborales
 public enum Turno {
 
     MANANA("Mañana", 6, 13), TARDE("Tarde", 14, 21), NOCHE("Noche", 22, 5);
@@ -15,7 +15,7 @@ public enum Turno {
         this.horaFin = horaFin;
     }
 
-    // Detecta el turno segun la hora actual del sistema
+    // Detecta el turno según la hora actual
     public static Turno detectar() {
         int hora = java.time.LocalTime.now().getHour();
         if (hora >= 6 && hora <= 13) return MANANA;

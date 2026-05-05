@@ -41,7 +41,7 @@ public final class ValidadorFormularios {
         return username != null && PATRON_USERNAME.matcher(username).matches();
     }
 
-    // Valida que la contrasena tenga mayuscula, minuscula, digito y caracter especial (min 8 chars)
+    // Valida que la contrasena tenga mayuscula, minuscula, digito y caracter especial (min. 8 chars)
     public static boolean contrasenaSegura(String contrasena) {
         if (contrasena == null || contrasena.length() < 8) return false;
         boolean tieneMayuscula = contrasena.chars().anyMatch(Character::isUpperCase);
@@ -55,7 +55,7 @@ public final class ValidadorFormularios {
         return valor != null && !valor.isBlank();
     }
 
-    // Devuelve mensaje de error para un DNI invalido o null si es correcto
+    // Devuelve mensaje de error para un DNI invalido, o null si es correcto
     public static String mensajeDni(String dni) {
         if (!noVacio(dni)) return "El DNI no puede estar vacio.";
         if (!PATRON_DNI.matcher(dni.toUpperCase()).matches()) return "Formato invalido. Ejemplo: 12345678A";
@@ -63,7 +63,7 @@ public final class ValidadorFormularios {
         return null;
     }
 
-    // Devuelve mensaje de error para una contrasena insegura o null si es correcta
+    // Devuelve mensaje de error para una contrasena insegura, o null si es correcta
     public static String mensajeContrasena(String contrasena) {
         if (!noVacio(contrasena)) return "La contrasena no puede estar vacia.";
         if (contrasena.length() < 8) return "Minimo 8 caracteres.";

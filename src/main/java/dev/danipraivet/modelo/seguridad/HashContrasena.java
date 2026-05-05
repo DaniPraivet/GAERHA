@@ -2,8 +2,6 @@ package dev.danipraivet.modelo.seguridad;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-// Wrapper sobre BCrypt para hashear y verificar contrasenas.
-// BCrypt incluye salt aleatorio y factor de coste configurable.
 public final class HashContrasena {
 
     private static final int COSTE = 12;
