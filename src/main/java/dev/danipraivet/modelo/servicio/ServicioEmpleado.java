@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Logica de negocio para la gestión de empleados
+ * Gestión de empleados
  * @author Daniel Rodríguez Pérez
  */
 public class ServicioEmpleado {
@@ -28,19 +28,40 @@ public class ServicioEmpleado {
         this.repo = new RepositorioEmpleado(rol);
     }
 
+    /**
+     * Obtiene la lista de empleados activos (no dados de baja).
+     *
+     * @return lista de empleados activos
+     */
     public List<Empleado> listarActivos() {
         return repo.listarTodos();
     }
 
+    /**
+     * Obtiene la lista de todos los empleados, incluyendo los que están de baja
+     *
+     * @return lista completa de empleados
+     */
     public List<Empleado> listarTodos() {
         return repo.listarTodosIncluyendoBajas();
     }
 
+    /**
+     * Busca un empleado por su código.
+     *
+     * @param cod código del empleado
+     * @return un Optional con el empleado si existe
+     */
     public Optional<Empleado> buscarPorCodigo(int cod) {
         return repo.buscarPorCodigo(cod);
     }
 
-    // Valida los datos y crea un nuevo empleado. Hashea la contrasena antes de persistir.
+    /**
+     * Valida los datos y crea un nuevo empleado, hashea la contrasena antes de persistir.
+     * @param empleado objeto con los datos a crear
+     * @param contrasenaPlana contraseña para el empleado
+     * @return un enum con diferentes tipos de resultados
+     */
     public ResultadoCRUD crear(Empleado empleado, String contrasenaPlana) {
         String errDni = ValidadorFormularios.mensajeDni(empleado.getDni());
         if (errDni != null) return ResultadoCRUD.error("DNI invalido: " + errDni);

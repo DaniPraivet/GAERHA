@@ -1,9 +1,11 @@
 package dev.danipraivet.modelo.enumeraciones;
 
+import lombok.Getter;
 /**
  * Turnos laborales
  * @author Daniel Rodríguez Pérez
  */
+@Getter
 public enum Turno {
 
     MANANA("Mañana", 6, 13), TARDE("Tarde", 14, 21), NOCHE("Noche", 22, 5);
@@ -42,18 +44,6 @@ public enum Turno {
             case "Noche" -> NOCHE;
             default -> null;
         };
-    }
-
-    public String getEtiqueta() {
-        return etiqueta;
-    }
-
-    public int getHoraInicio() {
-        return horaInicio;
-    }
-
-    public int getHoraFin() {
-        return horaFin;
     }
 
     @Override

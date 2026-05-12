@@ -62,14 +62,30 @@ public class Fichaje {
         this.turnoEntrada = turnoEntrada;
     }
 
+    /**
+     * Indica si el fichaje ya tiene registrada la salida
+     *
+     * @return {@code true} si la hora de salida no es {@code null}
+     */
     public boolean estaCompleto() {
         return salidaHora != null;
     }
 
+    /**
+     * Indica si el empleado ha fichado la entrada pero todavía no la salida
+     *
+     * @return {@code true} si hay entrada y no hay salida
+     */
     public boolean estaFichado() {
         return entradaHora != null && salidaHora == null;
     }
 
+    /**
+     * Formatea las horas trabajadas como cadena legible
+     * Si no hay horas trabajadas devuelve cadena vacía.
+     *
+     * @return cadena de texto formateada
+     */
     public String getHorasFormateadas() {
         if (horasTrabajadas == null || horasTrabajadas.compareTo(BigDecimal.ZERO) == 0) {
             return "";
@@ -79,6 +95,10 @@ public class Fichaje {
         return horas + "h " + String.format("%02d", minutos) + "m";
     }
 
+    /**
+     * Devuelve el estado actual del fichaje
+     * @return cadena del estado
+     */
     public String getEstado() {
         if (entradaHora == null) return "Ausente";
         if (salidaHora == null) return "Trabajando";

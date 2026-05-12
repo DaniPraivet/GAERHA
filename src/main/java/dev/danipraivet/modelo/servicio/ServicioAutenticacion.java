@@ -11,6 +11,12 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
+/**
+ * Gestiona el inicio de sesión, validación de credenciales,
+ * bloqueo tras intentos fallidos y cierre de sesión.
+ *
+ * @author Daniel Rodríguez Pérez
+ */
 public class ServicioAutenticacion {
 
     private static final Logger log = LoggerFactory.getLogger(ServicioAutenticacion.class);
