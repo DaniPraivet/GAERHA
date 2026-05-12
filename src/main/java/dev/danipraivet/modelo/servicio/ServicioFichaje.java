@@ -12,7 +12,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-// Usa el rol de la sesion para conectar con los permisos correctos
+/**
+ * Usa el rol de la sesion para conectar con los permisos correctos
+ * @author Daniel Rodríguez Pérez
+ */
 public class ServicioFichaje {
 
     private static final Logger log = LoggerFactory.getLogger(ServicioFichaje.class);
@@ -24,7 +27,10 @@ public class ServicioFichaje {
         this.repo = new RepositorioFichaje(rol);
     }
 
-    // Registra la entrada o salida del empleado en sesion. Devuelve el mensaje del stored procedure.
+    /**
+     * Registra la entrada o salida del empleado en sesión. Devuelve el mensaje del stored procedure
+     * @return devuelve una cadena del texto con el mensaje
+     */
     public String fichar() {
         int cod = GestorSesion.getCodEmpleado();
         String mensaje = repo.registrarFichaje(cod);
@@ -32,7 +38,11 @@ public class ServicioFichaje {
         return mensaje;
     }
 
-    // Registra el fichaje de un empleado especifico (uso de Admin/RRHH)
+    /**
+     * Registra el fichaje de un empleado específico (uso de Admin/RRHH)
+     * @param codEmpleado valor numérico identificador del empleado
+     * @return una cadena de texto con el resultado
+     */
     public String ficharPor(int codEmpleado) {
         return repo.registrarFichaje(codEmpleado);
     }

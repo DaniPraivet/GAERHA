@@ -29,6 +29,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Backend de la vista de administrador
+ * @author Daniel Rodríguez Pérez
+ */
 public class ControladorAdmin implements Initializable {
 
     private static final Logger log = LoggerFactory.getLogger(ControladorAdmin.class);
@@ -115,6 +119,17 @@ public class ControladorAdmin implements Initializable {
     @FXML
     private Label lblRrhhActivos;
 
+    /**
+     * Al inicializar el componente se configure
+     *
+     * @param url
+     * La ubicación utilizada para resolver las rutas relativas del objeto raíz, o
+     * {@code null} si se desconoce la ubicación
+     *
+     * @param rb
+     * Los recursos utilizados para localizar el objeto raíz, o {@code null} si
+     * el objeto raiz no se ha localizado
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarTablaFichajes();
@@ -123,6 +138,9 @@ public class ControladorAdmin implements Initializable {
         Aplicacion.iniciarScheduler(() -> Platform.runLater(this::actualizarDashboard), 60);
     }
 
+    /**
+     * Proceso de fichaje
+     */
     @FXML
     public void onFicharAdmin() {
         String mensaje = servicioFichaje.fichar();
@@ -130,6 +148,10 @@ public class ControladorAdmin implements Initializable {
         GestorAlertas.info("Fichaje", mensaje);
     }
 
+    /**
+     * Búsqueda de fichajes desde una fecha a otra
+     * y un filtro de empleados
+     */
     @FXML
     public void onBuscarFichajes() {
         LocalDate desde = dpFichajeDesde.getValue() != null ? dpFichajeDesde.getValue() : LocalDate.now().withDayOfMonth(1);
@@ -149,6 +171,9 @@ public class ControladorAdmin implements Initializable {
         log.info("Busqueda de fichajes: {} registros encontrados", resultado.size());
     }
 
+    /**
+     * Guardar un fichaje con todos sus campos
+     */
     @FXML
     public void onGuardarFichaje() {
         Fichaje seleccionado = tablaFichajes.getSelectionModel().getSelectedItem();
@@ -179,6 +204,9 @@ public class ControladorAdmin implements Initializable {
         }
     }
 
+    /**
+     * Eliminar fichaje con mensaje de confirmación
+     */
     @FXML
     public void onEliminarFichaje() {
         Fichaje seleccionado = tablaFichajes.getSelectionModel().getSelectedItem();
@@ -198,6 +226,9 @@ public class ControladorAdmin implements Initializable {
         }
     }
 
+    /**
+     * Desbloquear a un usuario
+     */
     @FXML
     public void onDesbloquear() {
         Empleado seleccionado = tablaEmpleadosAdmin.getSelectionModel().getSelectedItem();
@@ -210,6 +241,9 @@ public class ControladorAdmin implements Initializable {
         if (res.exito()) cargarEmpleados();
     }
 
+    /**
+     * Cambiar el estado de baja a activo en un empleado
+     */
     @FXML
     public void onRecuperar() {
         Empleado seleccionado = tablaEmpleadosAdmin.getSelectionModel().getSelectedItem();
@@ -229,6 +263,9 @@ public class ControladorAdmin implements Initializable {
         if (res.exito()) cargarEmpleados();
     }
 
+    /**
+     * Eliminar empleado de manera permanente
+     */
     @FXML
     public void onEliminarEmpleado() {
         Empleado seleccionado = tablaEmpleadosAdmin.getSelectionModel().getSelectedItem();
@@ -244,12 +281,18 @@ public class ControladorAdmin implements Initializable {
         if (res.exito()) cargarEmpleados();
     }
 
+    /**
+     * Cerrar sesión
+     */
     @FXML
     public void onLogout() {
         servicioAuth.logout();
         Aplicacion.navegarA("Login");
     }
 
+    /**
+     * Obtener todos los datos necesarios para el inicio
+     */
     private void cargarDatos() {
         cargarEmpleados();
         actualizarDashboard();
@@ -257,6 +300,9 @@ public class ControladorAdmin implements Initializable {
         dpFichajeHasta.setValue(LocalDate.now());
     }
 
+    /**
+     * Cargar los todos los empleados estén o no de baja
+     */
     private void cargarEmpleados() {
         List<Empleado> lista = servicioEmpleado.listarTodos();
         empleados.setAll(lista);
@@ -264,6 +310,10 @@ public class ControladorAdmin implements Initializable {
         cmbFiltroEmpleado.setItems(FXCollections.observableArrayList(lista));
     }
 
+    /**
+     * Actualizar todos los componentes de la vista principal de admin,
+     * incluyendo fichaje y dashboard (panel de control)
+     */
     private void actualizarDashboard() {
         lblNombreAdmin.setText("Admin: " + GestorSesion.getNombreCompleto());
 
@@ -287,6 +337,9 @@ public class ControladorAdmin implements Initializable {
         }
     }
 
+    /**
+     * Configurar campos y políticas de la tabla fichajes
+     */
     private void configurarTablaFichajes() {
         colFicFecha.setCellValueFactory(cd -> new SimpleStringProperty(cd.getValue().getFecha() != null ? cd.getValue().getFecha().format(FMT_FECHA) : ""));
         colFicEmpleado.setCellValueFactory(cd -> new SimpleStringProperty(String.valueOf(cd.getValue().getCodEmpleado())));
@@ -300,9 +353,13 @@ public class ControladorAdmin implements Initializable {
         });
         tablaFichajes.setItems(fichajes);
         tablaFichajes.setPlaceholder(new Label("Usa los filtros y pulsa Buscar."));
-        tablaFichajes.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+        tablaFichajes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
     }
 
+    /**
+     * Cargar un fichaje automáticamente en los cambios de edición
+     * @param f fichaje seleccionado en la tabla fichajes
+     */
     private void cargarFichajeEnPanel(Fichaje f) {
         txtEditEntrada.setText(f.getEntradaHora() != null ? f.getEntradaHora().format(FMT_HORA) : "");
         txtEditSalida.setText(f.getSalidaHora() != null ? f.getSalidaHora().format(FMT_HORA) : "");
@@ -311,6 +368,9 @@ public class ControladorAdmin implements Initializable {
         txtEditObservaciones.setText(f.getObservaciones() != null ? f.getObservaciones() : "");
     }
 
+    /**
+     * Configurar campos y políticas en la tabla empleados
+     */
     private void configurarTablaEmpleados() {
         colEmpNombre.setCellValueFactory(cd -> new SimpleStringProperty(cd.getValue().getNombreCompleto()));
         colEmpDni.setCellValueFactory(cd -> new SimpleStringProperty(cd.getValue().getDni()));
@@ -330,6 +390,6 @@ public class ControladorAdmin implements Initializable {
         });
         tablaEmpleadosAdmin.setItems(empleados);
         tablaEmpleadosAdmin.setPlaceholder(new Label("No hay empleados."));
-        tablaEmpleadosAdmin.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+        tablaEmpleadosAdmin.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
     }
 }

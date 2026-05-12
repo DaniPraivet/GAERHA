@@ -15,9 +15,17 @@ public class ServicioAutenticacion {
 
     private static final Logger log = LoggerFactory.getLogger(ServicioAutenticacion.class);
 
-    // El login usa el rol con minimos privilegios para consultar la BD
+    /**
+     * El login usa el rol con mínimos privilegios para consultar la BD
+     */
     private final IRepositorioEmpleado repo = new RepositorioEmpleado(Rol.EMPLEADO);
 
+    /**
+     * Iniciar sesión
+     * @param username nombre de usuario del empleado
+     * @param contrasena contraseña del usuario
+     * @return un objeto que almacena el resultado del intento
+     */
     public ResultadoLogin login(String username, String contrasena) {
         if (username == null || username.isBlank() || contrasena == null || contrasena.isBlank()) {
             return ResultadoLogin.CREDENCIALES_INCORRECTAS;
@@ -59,6 +67,9 @@ public class ServicioAutenticacion {
         }
     }
 
+    /**
+     * Cerrar sesión
+     */
     public void logout() {
         if (GestorSesion.haySesionActiva()) {
             log.info("Logout - usuario: '{}'", GestorSesion.getEmpleado().getUsername());
@@ -66,7 +77,11 @@ public class ServicioAutenticacion {
         GestorSesion.cerrarSesion();
     }
 
-    // Devuelve el mensaje de error legible para la vista según el resultado del login
+    /**
+     * Devuelve el mensaje de error legible para la vista según el resultado del login
+     * @param resultado tipo de resultado a analizar
+     * @return una cadena de texto describiendo el tipo de resultado
+     */
     public String getMensajeError(ResultadoLogin resultado) {
         return switch (resultado) {
             case CREDENCIALES_INCORRECTAS -> "Usuario o contrasena incorrectos.";
@@ -77,7 +92,9 @@ public class ServicioAutenticacion {
         };
     }
 
-    // Posibles resultados del intento de login
+    /**
+     * Posibles resultados del intento de login
+     */
     public enum ResultadoLogin {
         EXITO, CREDENCIALES_INCORRECTAS, CUENTA_BLOQUEADA, CUENTA_INACTIVA, ERROR_SISTEMA
     }

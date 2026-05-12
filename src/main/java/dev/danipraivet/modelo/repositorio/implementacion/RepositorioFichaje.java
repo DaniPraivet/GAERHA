@@ -15,7 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-// Implementacion JDBC del repositorio de fichajes.
+/**
+ * Implementación JDBC del repositorio de fichajes
+ * @author Daniel Rodríguez Pérez
+ */
 public class RepositorioFichaje implements IRepositorioFichaje {
 
     private static final Logger log = LoggerFactory.getLogger(RepositorioFichaje.class);
@@ -27,7 +30,9 @@ public class RepositorioFichaje implements IRepositorioFichaje {
     private static final String SQL_ACTUALIZAR = "UPDATE dias SET entrada_hora=?, salida_hora=?, turno_entrada=?, turno_salida=?, " + "horas_trabajadas=?, horas_extras=?, festivo=?, justificado=?, observaciones=? " + "WHERE id=?";
     private static final String SQL_ELIMINAR = "DELETE FROM dias WHERE id=?";
     private static final String SQL_ESTA_FICHADO = "SELECT COUNT(*) FROM dias WHERE cod_empleado=? AND fecha=CURRENT_DATE AND salida_hora IS NULL";
-    // Stored procedure de MySQL para registrar fichaje
+    /**
+     * Procedimiento almacenado para registrar fichaje
+     */
     private static final String SQL_REGISTRAR_FICHAJE = "CALL registrar_fichaje(?, @p_mensaje, @p_tipo)";
     private static final String SQL_GET_OUT_PARAMS = "SELECT @p_mensaje AS mensaje, @p_tipo AS tipo";
     private static final String SQL_FICHADOS_HOY = "SELECT COUNT(*) FROM dias WHERE fecha = CURRENT_DATE AND entrada_hora IS NOT NULL AND salida_hora IS NULL";
@@ -36,18 +41,23 @@ public class RepositorioFichaje implements IRepositorioFichaje {
         this.rolConexion = rolConexion;
     }
 
+    /**
+     * Registra entrada o salida llamando al stored procedure de MySQL
+     * @param codEmpleado valor numérico identificador del empleado
+     * @return mensaje de depuración del fichaje
+     */
     @Override
     public String registrarFichaje(int codEmpleado) {
         Connection con = null;
         try {
             con = GestorConexiones.getConexion(rolConexion);
 
-            // Llamar al stored procedure con parametros OUT de MySQL
+            // Llamar al procedimiento almacenado con parámetros OUT de MySQL
             PreparedStatement ps = con.prepareStatement(SQL_REGISTRAR_FICHAJE);
             ps.setInt(1, codEmpleado);
             ps.execute();
 
-            // Recuperar los parametros OUT mediante variables de sesion
+            // Recuperar los parámetros OUT mediante variables de sesión
             ResultSet rs = con.createStatement().executeQuery(SQL_GET_OUT_PARAMS);
             if (rs.next()) {
                 String mensaje = rs.getString("mensaje");
@@ -63,6 +73,11 @@ public class RepositorioFichaje implements IRepositorioFichaje {
         return "Error al registrar el fichaje";
     }
 
+    /**
+     * Busca si un empleado ha fichado hoy
+     * @param codEmpleado valor numérico identificador del empleado
+     * @return puede devolver de manera opcional un fichaje
+     */
     @Override
     public Optional<Fichaje> buscarFichajeHoy(int codEmpleado) {
         Connection con = null;
@@ -80,6 +95,13 @@ public class RepositorioFichaje implements IRepositorioFichaje {
         return Optional.empty();
     }
 
+    /**
+     * Busca fichajes entre fechas de un empleado específico
+     * @param codEmpleado valor numérico identificador del empleado
+     * @param desde fecha inicio
+     * @param hasta fecha fin
+     * @return
+     */
     @Override
     public List<Fichaje> buscarPorEmpleadoYRango(int codEmpleado, LocalDate desde, LocalDate hasta) {
         List<Fichaje> lista = new ArrayList<>();
@@ -100,6 +122,11 @@ public class RepositorioFichaje implements IRepositorioFichaje {
         return lista;
     }
 
+    /**
+     * Buscar todos los fichajes que estén desde x fecha
+     * @param fecha punto de partida
+     * @return lista con los fichajes
+     */
     @Override
     public List<Fichaje> buscarPorFecha(LocalDate fecha) {
         List<Fichaje> lista = new ArrayList<>();
@@ -118,6 +145,12 @@ public class RepositorioFichaje implements IRepositorioFichaje {
         return lista;
     }
 
+    /**
+     * Lista, fichajes con datos del empleado incluidos
+     * @param desde fecha de inicio
+     * @param hasta fecha de fin
+     * @return
+     */
     @Override
     public List<Fichaje> listarTodosConEmpleado(LocalDate desde, LocalDate hasta) {
         List<Fichaje> lista = new ArrayList<>();
@@ -137,6 +170,11 @@ public class RepositorioFichaje implements IRepositorioFichaje {
         return lista;
     }
 
+    /**
+     * Actualiza los datos de un fichaje
+     * @param f el fichaje a editar
+     * @return sí se ha realizado la operación correctamente o no
+     */
     @Override
     public boolean actualizar(Fichaje f) {
         Connection con = null;
@@ -164,6 +202,11 @@ public class RepositorioFichaje implements IRepositorioFichaje {
         }
     }
 
+    /**
+     * Elimina un fichaje del sistema permanentemente
+     * @param id identificador numérico del fichaje a eliminar
+     * @return sí se ha realizado la operación correctamente o no
+     */
     @Override
     public boolean eliminar(int id) {
         Connection con = null;
@@ -182,6 +225,11 @@ public class RepositorioFichaje implements IRepositorioFichaje {
         }
     }
 
+    /**
+     * Comprueba si el empleado tiene un fichaje abierto hoy (sin salida registrada)
+     * @param codEmpleado valor numérico identificador del empleado
+     * @return
+     */
     @Override
     public boolean estaFichadoHoy(int codEmpleado) {
         Connection con = null;
@@ -199,6 +247,12 @@ public class RepositorioFichaje implements IRepositorioFichaje {
         }
     }
 
+    /**
+     * Relacionar tablas en la base de datos con objetos de Java
+     * @param rs resultados de una consulta a la base de datos
+     * @return el objeto de fichaje correctamente mapeado
+     * @throws SQLException en caso de obtener cualquier error durante la lectura del resultado de la consulta
+     */
     private Fichaje mapear(ResultSet rs) throws SQLException {
         Fichaje f = new Fichaje();
         f.setId(rs.getInt("id"));
@@ -235,7 +289,10 @@ public class RepositorioFichaje implements IRepositorioFichaje {
         return f;
     }
 
-
+    /**
+     * Contar todos los empleados que hayan fichado hoy
+     * @return un número que indica el resultado del conteo
+     */
     public int contarFichadosHoy() {
         Connection con = null;
         try {

@@ -12,7 +12,10 @@ import java.util.Deque;
 import java.util.EnumMap;
 import java.util.Map;
 
-// Pool de conexiones a MySQL organizado por rol
+/**
+ * Pool de conexiones a MySQL organizado por rol
+ * @author Daniel Rodríguez Pérez
+ */
 public class GestorConexiones {
 
     private static final Logger log = LoggerFactory.getLogger(GestorConexiones.class);
@@ -43,7 +46,12 @@ public class GestorConexiones {
     private GestorConexiones() {
     }
 
-    // Devuelve una conexion del pool, si esta vacia, crea una nueva
+    /**
+     * Devuelve una conexion del pool, si esta vacia, crea una nueva
+     * @param rol qué tipo de rol tiene el usuario
+     * @return una conexión con la base de datos que se almacena en una pool
+     * @throws SQLException lanza una excepción si no se ha podido establecer conexión con el servidor
+     */
     public static synchronized Connection getConexion(Rol rol) throws SQLException {
         Deque<Connection> pool = pools.get(rol);
 
@@ -63,7 +71,11 @@ public class GestorConexiones {
         return crearConexion(rol);
     }
 
-    // Devuelve una conexion al pool para reutilizarla
+    /**
+     * Devuelve una conexion al pool para reutilizarla
+     * @param rol rol del empleado para debug
+     * @param con conexión a liberar
+     */
     public static synchronized void liberarConexion(Rol rol, Connection con) {
         if (con == null) return;
         try {
@@ -82,7 +94,10 @@ public class GestorConexiones {
         }
     }
 
-    // Verificar si la BD es accesible al arrancar la app
+    /**
+     * Verificar si la BD es accesible al arrancar la app
+     * @return si se ha podido establecer conexión con la base de datos o no
+     */
     public static boolean testConexion() {
         try (Connection con = crearConexion(Rol.EMPLEADO)) {
             boolean ok = con != null && con.isValid(5);
@@ -94,7 +109,9 @@ public class GestorConexiones {
         }
     }
 
-    // Cierra todas las conexiones de todos los pools, llamar en App.stop().
+    /**
+     * Cierra todas las conexiones de todos los pools, se debe llamar en App.stop()
+     */
     public static synchronized void cerrarPool() {
         int total = 0;
         for (Map.Entry<Rol, Deque<Connection>> entry : pools.entrySet()) {
@@ -111,6 +128,12 @@ public class GestorConexiones {
         log.info("Pool cerrado. {} conexiones liberadas.", total);
     }
 
+    /**
+     * Generar una conexión
+     * @param rol rol del empleado que va a usar esta conexión
+     * @return retorna la conexión generada
+     * @throws SQLException por si no se ha podido establecer una conexión con la base de datos
+     */
     private static Connection crearConexion(Rol rol) throws SQLException {
         String[] creds = CREDENCIALES.get(rol);
         if (creds == null) throw new SQLException("Rol no reconocido: " + rol);

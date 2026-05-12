@@ -1,6 +1,8 @@
 package dev.danipraivet.modelo.entidades;
 
 import dev.danipraivet.modelo.enumeraciones.Turno;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -8,7 +10,12 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
 
-// Entidad que representa un registro de fichaje diario
+/**
+ * Entidad que representa un registro de fichaje diario
+ * @author Daniel Rodríguez Pérez
+ */
+@Getter
+@Setter
 public class Fichaje {
 
     private int id;
@@ -32,11 +39,21 @@ public class Fichaje {
     private LocalDateTime creadoEn;
     private LocalDateTime modificadoEn;
 
+    /**
+     * Constructor principal
+     */
     public Fichaje() {
         this.horasTrabajadas = BigDecimal.ZERO;
         this.horasExtras = BigDecimal.ZERO;
     }
 
+    /**
+     * Constructor secundario
+     * @param codEmpleado código numérico para el empleado
+     * @param fecha dia, mes y año del fichaje
+     * @param entradaHora hora de entrada del fichaje
+     * @param turnoEntrada hora de salida del fichaje
+     */
     public Fichaje(int codEmpleado, LocalDate fecha, LocalTime entradaHora, Turno turnoEntrada) {
         this();
         this.codEmpleado = codEmpleado;
@@ -66,126 +83,6 @@ public class Fichaje {
         if (entradaHora == null) return "Ausente";
         if (salidaHora == null) return "Trabajando";
         return "Completado";
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public LocalDate getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
-    }
-
-    public int getCodEmpleado() {
-        return codEmpleado;
-    }
-
-    public void setCodEmpleado(int codEmpleado) {
-        this.codEmpleado = codEmpleado;
-    }
-
-    public Empleado getEmpleado() {
-        return empleado;
-    }
-
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
-    }
-
-    public LocalTime getEntradaHora() {
-        return entradaHora;
-    }
-
-    public void setEntradaHora(LocalTime entradaHora) {
-        this.entradaHora = entradaHora;
-    }
-
-    public LocalTime getSalidaHora() {
-        return salidaHora;
-    }
-
-    public void setSalidaHora(LocalTime salidaHora) {
-        this.salidaHora = salidaHora;
-    }
-
-    public Turno getTurnoEntrada() {
-        return turnoEntrada;
-    }
-
-    public void setTurnoEntrada(Turno turnoEntrada) {
-        this.turnoEntrada = turnoEntrada;
-    }
-
-    public Turno getTurnoSalida() {
-        return turnoSalida;
-    }
-
-    public void setTurnoSalida(Turno turnoSalida) {
-        this.turnoSalida = turnoSalida;
-    }
-
-    public BigDecimal getHorasTrabajadas() {
-        return horasTrabajadas;
-    }
-
-    public void setHorasTrabajadas(BigDecimal h) {
-        this.horasTrabajadas = h;
-    }
-
-    public BigDecimal getHorasExtras() {
-        return horasExtras;
-    }
-
-    public void setHorasExtras(BigDecimal h) {
-        this.horasExtras = h;
-    }
-
-    public boolean isFestivo() {
-        return festivo;
-    }
-
-    public void setFestivo(boolean festivo) {
-        this.festivo = festivo;
-    }
-
-    public boolean isJustificado() {
-        return justificado;
-    }
-
-    public void setJustificado(boolean justificado) {
-        this.justificado = justificado;
-    }
-
-    public String getObservaciones() {
-        return observaciones;
-    }
-
-    public void setObservaciones(String obs) {
-        this.observaciones = obs;
-    }
-
-    public LocalDateTime getCreadoEn() {
-        return creadoEn;
-    }
-
-    public void setCreadoEn(LocalDateTime t) {
-        this.creadoEn = t;
-    }
-
-    public LocalDateTime getModificadoEn() {
-        return modificadoEn;
-    }
-
-    public void setModificadoEn(LocalDateTime t) {
-        this.modificadoEn = t;
     }
 
     @Override

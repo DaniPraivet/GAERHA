@@ -18,6 +18,10 @@ import org.slf4j.LoggerFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Backend de la vista de inicio sesión
+ * @author Daniel Rodríguez Pérez
+ */
 public class ControladorLogin implements Initializable {
 
     private static final Logger log = LoggerFactory.getLogger(ControladorLogin.class);
@@ -31,6 +35,17 @@ public class ControladorLogin implements Initializable {
     @FXML
     private Label lblError;
 
+    /**
+     * Al inicializar el componente se configure
+     *
+     * @param url
+     * La ubicación utilizada para resolver las rutas relativas del objeto raíz, o
+     * {@code null} si se desconoce la ubicación
+     *
+     * @param rb
+     * Los recursos utilizados para localizar el objeto raíz, o {@code null} si
+     * el objeto raiz no se ha localizado
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         lblError.setVisible(false);
@@ -50,6 +65,9 @@ public class ControladorLogin implements Initializable {
         Platform.runLater(() -> txtUsername.requestFocus());
     }
 
+    /**
+     * Sistema de autenticación en inicio de sesión
+     */
     @FXML
     public void onLogin() {
         String username = txtUsername.getText().trim();
@@ -75,6 +93,9 @@ public class ControladorLogin implements Initializable {
         }
     }
 
+    /**
+     * Navega a las vistas dependiendo del rol del usuario
+     */
     private void navegarSegunRol() {
         Rol rol = GestorSesion.getRol();
         log.info("Redirigiendo a vista para rol: {}", rol);
@@ -85,11 +106,18 @@ public class ControladorLogin implements Initializable {
         }
     }
 
+    /**
+     * Mostrar etiqueta de error predefinida con un mensaje
+     * @param mensaje contenido que aparecerá en el error
+     */
     private void mostrarError(String mensaje) {
         lblError.setText(mensaje);
         lblError.setVisible(true);
     }
 
+    /**
+     * Hacer no visible la etiqueta de error
+     */
     private void limpiarError() {
         lblError.setVisible(false);
     }

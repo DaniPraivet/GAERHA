@@ -11,6 +11,7 @@ import java.util.Properties;
  * Configuracion de la base de datos.
  * Los parametros se cargan desde el fichero externo {@code db.properties},
  * en la ruta ({@code src/main/resources/db.properties}).
+ * @author Daniel Rodríguez Pérez
  */
 public final class ConfiguracionBD {
 
@@ -29,6 +30,7 @@ public final class ConfiguracionBD {
     public static final int TIMEOUT_SEGUNDOS;
     private static final Logger log = LoggerFactory.getLogger(ConfiguracionBD.class);
     private static final String FICHERO_CONFIG = "db.properties";
+
 
     // Carga las propiedades al arrancar la clase
     static {
@@ -64,9 +66,9 @@ public final class ConfiguracionBD {
     }
 
     /**
-     * Lee el fichero db.properties desde la ruta.
+     * Lee el fichero db.properties desde la ruta
      * Si no se encuentra, registra una advertencia y devuelve propiedades vacias
-     * para que los valores por defecto definidos en cada getProperty() entren en juego.
+     * para que los valores por defecto definidos en cada getProperty() entren en juego
      */
     private static Properties cargarPropiedades() {
         Properties props = new Properties();

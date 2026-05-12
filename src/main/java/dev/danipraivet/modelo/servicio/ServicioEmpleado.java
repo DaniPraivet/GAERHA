@@ -13,7 +13,10 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Optional;
 
-// Logica de negocio para la gestión de empleados
+/**
+ * Logica de negocio para la gestión de empleados
+ * @author Daniel Rodríguez Pérez
+ */
 public class ServicioEmpleado {
 
     private static final Logger log = LoggerFactory.getLogger(ServicioEmpleado.class);

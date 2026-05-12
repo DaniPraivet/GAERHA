@@ -13,12 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-// Implementacion JDBC del repositorio de empleados.
-// Cada metodo obtiene conexion del pool, ejecuta con PreparedStatement y la libera al terminar.
+/**
+ * Implementación JDBC del repositorio de empleados.
+ * Cada función obtiene uno conexión del pool, ejecuta con PreparedStatement y la libera al terminar.
+ * @author Daniel Rodríguez Pérez
+ */
 public class RepositorioEmpleado implements IRepositorioEmpleado {
 
     private static final Logger log = LoggerFactory.getLogger(RepositorioEmpleado.class);
-    // SELECT base con JOIN a departamentos
+    /**
+     * SELECT base con JOIN a departamentos
+     */
     private static final String SQL_BASE = "SELECT e.cod_empleado, e.nombre, e.apellido1, e.apellido2, e.dni, " + "       e.email, e.telefono, e.username, e.password_hash, e.rol, " + "       e.activo, e.intentos_fallidos, e.bloqueado, " + "       e.fecha_alta, e.fecha_baja, e.ultimo_acceso, " + "       d.cod_departamento, d.nombre AS dep_nombre " + "FROM empleados e " + "LEFT JOIN departamentos d ON e.cod_departamento = d.cod_departamento ";
     private static final String SQL_POR_CODIGO = SQL_BASE + "WHERE e.cod_empleado = ?";
     private static final String SQL_POR_USERNAME = SQL_BASE + "WHERE e.username = ?";
@@ -45,6 +50,11 @@ public class RepositorioEmpleado implements IRepositorioEmpleado {
         this.rolConexion = rolConexion;
     }
 
+    /**
+     * Se busca un empleado y devuelve el resultado
+     * @param codEmpleado valor numérico identificador del empleado
+     * @return el empleado encontrado puede no devolver nada
+     */
     @Override
     public Optional<Empleado> buscarPorCodigo(int codEmpleado) {
         Connection con = null;
@@ -62,6 +72,11 @@ public class RepositorioEmpleado implements IRepositorioEmpleado {
         return Optional.empty();
     }
 
+    /**
+     * Se busca un empleado por nombre de usuario
+     * @param username nombre de usuario del empleado
+     * @return el empleado encontrado puede no devolver nada
+     */
     @Override
     public Optional<Empleado> buscarPorUsername(String username) {
         Connection con = null;
@@ -79,6 +94,11 @@ public class RepositorioEmpleado implements IRepositorioEmpleado {
         return Optional.empty();
     }
 
+    /**
+     * Busca un empleado por DNI
+     * @param dni el identificador principal del usuario
+     * @return el empleado, pero puede no devolver nada
+     */
     @Override
     public Optional<Empleado> buscarPorDni(String dni) {
         Connection con = null;
@@ -96,16 +116,29 @@ public class RepositorioEmpleado implements IRepositorioEmpleado {
         return Optional.empty();
     }
 
+    /**
+     *Lista a todos los empleados activos
+     * @return lista con los empleados que cumplan el requisito
+     */
     @Override
     public List<Empleado> listarTodos() {
         return ejecutarListado(SQL_TODOS_ACTIVOS);
     }
 
+    /**
+     * Lista a todos los empleados
+     * @return lista con los empleados que cumplan el requisito
+     */
     @Override
     public List<Empleado> listarTodosIncluyendoBajas() {
         return ejecutarListado(SQL_TODOS);
     }
 
+    /**
+     * Inserta un empleado
+     * @param e empleado a ingresar
+     * @return sí se ha realizado la operación correctamente o no
+     */
     @Override
     public boolean insertar(Empleado e) {
         Connection con = null;
@@ -138,6 +171,11 @@ public class RepositorioEmpleado implements IRepositorioEmpleado {
         }
     }
 
+    /**
+     * Sobreescribe los datos de un empleado
+     * @param e empleado a actualizar
+     * @return si se ha completado correctamente la operación o no
+     */
     @Override
     public boolean actualizar(Empleado e) {
         Connection con = null;
@@ -171,9 +209,9 @@ public class RepositorioEmpleado implements IRepositorioEmpleado {
     }
 
     /**
-     * Baja logica de un empleado con transaccion explicita.
+     * Baja lógica de un empleado con transacción explicita.
      * Las dos operaciones se ejecutan
-     * de forma atomica, si alguna falla, se deshace todo con rollback.
+     * de forma atómica, si alguna falla, se deshace todo con rollback.
      */
     @Override
     public boolean darDeBaja(int codEmpleado) {
@@ -182,7 +220,7 @@ public class RepositorioEmpleado implements IRepositorioEmpleado {
             con = GestorConexiones.getConexion(rolConexion);
             con.setAutoCommit(false);
 
-            // 1 desactivar al empleado
+            // desactivar al empleado
             PreparedStatement psBaja = con.prepareStatement(SQL_BAJA_LOGICA);
             psBaja.setInt(1, codEmpleado);
             int filasAfectadas = psBaja.executeUpdate();
@@ -193,7 +231,7 @@ public class RepositorioEmpleado implements IRepositorioEmpleado {
                 return false;
             }
 
-            // 2 registrar la baja en la tabla de auditoria
+            // registrar la baja en la tabla de auditoria
             String detalle = String.format("Baja logica del empleado cod=%d registrada por el sistema", codEmpleado);
             String usuarioSesion = dev.danipraivet.modelo.utilidades.GestorSesion.haySesionActiva() ? dev.danipraivet.modelo.utilidades.GestorSesion.getEmpleado().getUsername() : "sistema";
 
@@ -283,7 +321,9 @@ public class RepositorioEmpleado implements IRepositorioEmpleado {
         return existeCampo(SQL_EXISTE_DNI, dni.toUpperCase());
     }
 
-    // Mapea una fila del ResultSet a un objeto Empleado
+    /**
+     * Mapea una fila del ResultSet a un objeto Empleado
+      */
     private Empleado mapear(ResultSet rs) throws SQLException {
         Empleado e = new Empleado();
         e.setCodEmpleado(rs.getInt("cod_empleado"));
@@ -309,7 +349,7 @@ public class RepositorioEmpleado implements IRepositorioEmpleado {
         Timestamp ultimoAcceso = rs.getTimestamp("ultimo_acceso");
         if (ultimoAcceso != null) e.setUltimoAcceso(ultimoAcceso.toLocalDateTime());
 
-        // Departamento puede ser null si el LEFT JOIN no encontro coincidencia
+        // Departamento puede ser null si el LEFT JOIN no encontró coincidencia
         int codDep = rs.getInt("cod_departamento");
         if (!rs.wasNull()) {
             Departamento dep = new Departamento();

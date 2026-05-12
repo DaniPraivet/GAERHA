@@ -24,6 +24,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static javafx.scene.control.TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS;
+
+/**
+ * Backend de la vista de administrador
+ * @author Daniel Rodríguez Pérez
+ */
 public class ControladorEmpleado implements Initializable {
 
     private static final Logger log = LoggerFactory.getLogger(ControladorEmpleado.class);
@@ -58,12 +64,26 @@ public class ControladorEmpleado implements Initializable {
     @FXML
     private Label lblTotalHorasMes;
 
+    /**
+     * Al inicializar el componente se configure
+     *
+     * @param url
+     * La ubicación utilizada para resolver las rutas relativas del objeto raíz, o
+     * {@code null} si se desconoce la ubicación
+     *
+     * @param rb
+     * Los recursos utilizados para localizar el objeto raíz, o {@code null} si
+     * el objeto raiz no se ha localizado
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
         Platform.runLater(this::actualizarVista);
     }
 
+    /**
+     * Proceso de fichaje
+     */
     @FXML
     public void onFichar() {
         String mensaje = servicioFichaje.fichar();
@@ -72,13 +92,18 @@ public class ControladorEmpleado implements Initializable {
         mostrarAlertaFichaje(mensaje);
     }
 
+    /**
+     * Cerrar sesión
+     */
     @FXML
     public void onLogout() {
         servicioAuth.logout();
         Aplicacion.navegarA("Login");
     }
 
-    // Refresca todos los componentes de la vista con el estado actual del empleado
+    /**
+     * Refresca todos los componentes de la vista con el estado actual del empleado
+     */
     private void actualizarVista() {
         lblBienvenida.setText("Bienvenid@, " + GestorSesion.getNombreCompleto());
         lblFechaHora.setText(LocalDate.now().format(FMT_FECHA));
@@ -88,6 +113,10 @@ public class ControladorEmpleado implements Initializable {
         cargarHistorial();
     }
 
+    /**
+     * Botón de fichaje dinámico que detecta si el usuario ha fichado hoy
+     * @param fichado si el empleado ha fichado hoy o no
+     */
     private void actualizarBotonFichaje(boolean fichado) {
         if (fichado) {
             btnFichar.setText("Salida");
@@ -107,6 +136,9 @@ public class ControladorEmpleado implements Initializable {
         }
     }
 
+    /**
+     * Asignar datos a la etiqueta de horas realizadas este mes
+     */
     private void cargarHistorial() {
         List<Fichaje> lista = servicioFichaje.getMesActual();
         fichajes.setAll(lista);
@@ -114,6 +146,9 @@ public class ControladorEmpleado implements Initializable {
         lblTotalHorasMes.setText(String.format("Total mes: %.1f h", totalHoras));
     }
 
+    /**
+     * Configurar tabla historial
+     */
     private void configurarTabla() {
         colFecha.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("fecha"));
         colFecha.setCellFactory(col -> new TableCell<>() {
@@ -141,8 +176,13 @@ public class ControladorEmpleado implements Initializable {
         });
         tablaHistorial.setItems(fichajes);
         tablaHistorial.setPlaceholder(new Label("No hay fichajes este mes."));
+        tablaHistorial.setColumnResizePolicy(CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
     }
 
+    /**
+     * Generar mensajes de alertas informativa
+     * @param mensaje mensaje que estará en la alerta
+     */
     private void mostrarAlertaFichaje(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Fichaje");

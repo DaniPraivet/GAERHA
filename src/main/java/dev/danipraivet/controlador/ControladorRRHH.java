@@ -35,6 +35,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import static javafx.scene.control.TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS;
+
 public class ControladorRRHH implements Initializable {
 
     private static final Logger log = LoggerFactory.getLogger(ControladorRRHH.class);
@@ -129,13 +131,24 @@ public class ControladorRRHH implements Initializable {
     private FilteredList<Empleado> empleadosFiltrados;
     private boolean modoEdicion = false;
 
+    /**
+     * Al inicializar el componente se configure
+     *
+     * @param url
+     * La ubicación utilizada para resolver las rutas relativas del objeto raíz, o
+     * {@code null} si se desconoce la ubicación
+     *
+     * @param rb
+     * Los recursos utilizados para localizar el objeto raíz, o {@code null} si
+     * el objeto raiz no se ha localizado
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarTablaEmpleados();
         configurarFormulario();
         configurarInformes();
         actualizarBotonesAccion();
-
+        // Añadir un listener para cuando se realice una búsqueda, compare los caracteres en minúsculas
         txtBuscar.textProperty().addListener((obs, old, texto) -> tablaEmpleados.setItems(empleados.filtered(e -> {
             if (texto == null || texto.isBlank()) return true;
             String f = texto.toLowerCase();
@@ -146,6 +159,9 @@ public class ControladorRRHH implements Initializable {
         Platform.runLater(this::cargarDatos);
     }
 
+    /**
+     * Recarga los componentes de la vista inicio
+     */
     private void actualizarVista() {
         lblBienvenidaRRHH.setText("Bienvenido, " + GestorSesion.getNombreCompleto());
         lblFechaHora.setText(LocalDate.now().format(FMT_FECHA));
@@ -155,6 +171,9 @@ public class ControladorRRHH implements Initializable {
         cargarHistorial();
     }
 
+    /**
+     * Obtiene y recarga el historial de un empleado
+     */
     private void cargarHistorial() {
         List<Fichaje> lista = servicioFichaje.getMesActual();
         fichajes.setAll(lista);
@@ -162,6 +181,9 @@ public class ControladorRRHH implements Initializable {
         lblTotalHorasMes.setText(String.format("Total mes: %.1f h", totalHoras));
     }
 
+    /**
+     * Configuración de la tabla historial mensual
+     */
     private void configurarTabla() {
         colFecha.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("fecha"));
         colFecha.setCellFactory(col -> new TableCell<>() {
@@ -189,8 +211,12 @@ public class ControladorRRHH implements Initializable {
         });
         tablaHistorial.setItems(fichajes);
         tablaHistorial.setPlaceholder(new Label("No hay fichajes este mes."));
+        tablaHistorial.setColumnResizePolicy(CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
     }
 
+    /**
+     * Realiza fichaje y muestra una alerta sobre lo sucedido
+     */
     @FXML
     public void onFicharRRHH() {
         String mensaje = servicioFichaje.fichar();
@@ -198,6 +224,9 @@ public class ControladorRRHH implements Initializable {
         GestorAlertas.info("Fichaje", mensaje);
     }
 
+    /**
+     * Al querer agregar un nuevo empleado al sistema
+     */
     @FXML
     public void onNuevo() {
         limpiarFormulario();
@@ -207,6 +236,9 @@ public class ControladorRRHH implements Initializable {
         lblFormMensaje.setVisible(false);
     }
 
+    /**
+     * Al guardar datos de la tabla empleados
+     */
     @FXML
     public void onGuardar() {
         Empleado e = recogerFormulario();
@@ -227,6 +259,9 @@ public class ControladorRRHH implements Initializable {
         }
     }
 
+    /**
+     * Realización de baja temporal
+     */
     @FXML
     public void onDarDeBaja() {
         Empleado seleccionado = tablaEmpleados.getSelectionModel().getSelectedItem();
@@ -242,6 +277,9 @@ public class ControladorRRHH implements Initializable {
         if (resultado.exito()) cargarDatos();
     }
 
+    /**
+     * Pregunta al usuario con un selector de ficheros y genera el informe
+     */
     @FXML
     public void onGenerarPdf() {
         Empleado empleado = cmbEmpleadoInforme.getValue();
@@ -250,6 +288,7 @@ public class ControladorRRHH implements Initializable {
 
         FileChooser selector = new FileChooser();
         selector.setTitle("Guardar PDF");
+        selector.setInitialDirectory(new File(System.getProperty("user.home")));
         selector.setInitialFileName("informe_asistencia_" + LocalDate.now() + ".pdf");
         selector.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
         File destino = selector.showSaveDialog(Aplicacion.getEscenarioPrincipal());
@@ -262,6 +301,9 @@ public class ControladorRRHH implements Initializable {
         else GestorAlertas.error("Error", "No se pudo generar el PDF");
     }
 
+    /**
+     * Preguntar al usuario con un selector de ficheros y genera el informe
+     */
     @FXML
     public void onGenerarExcel() {
         Empleado empleado = cmbEmpleadoInforme.getValue();
@@ -270,6 +312,7 @@ public class ControladorRRHH implements Initializable {
 
         FileChooser selector = new FileChooser();
         selector.setTitle("Guardar Excel");
+        selector.setInitialDirectory(new File(System.getProperty("user.home")));
         selector.setInitialFileName("informe_asistencia_" + LocalDate.now() + ".xlsx");
         File destino = selector.showSaveDialog(Aplicacion.getEscenarioPrincipal());
         if (destino == null) return;
@@ -280,12 +323,18 @@ public class ControladorRRHH implements Initializable {
         else GestorAlertas.error("Error", "No se pudo generar el Excel");
     }
 
+    /**
+     * Cierra sesión y navega a la vista login
+     */
     @FXML
     public void onLogout() {
         servicioAuth.logout();
         Aplicacion.navegarA("Login");
     }
 
+    /**
+     * Carga los datos del empleado para el informe
+     */
     private void cargarDatos() {
         List<Empleado> lista = servicioEmpleado.listarActivos();
         empleados.setAll(lista);
@@ -293,6 +342,9 @@ public class ControladorRRHH implements Initializable {
         actualizarEstadoFichaje();
     }
 
+    /**
+     * Recarga la interfaz inicial
+     */
     private void actualizarEstadoFichaje() {
         lblBienvenidaRRHH.setText("Bienvenido, " + GestorSesion.getNombreCompleto());
         boolean fichado = servicioFichaje.estaFichadoHoy();
@@ -308,6 +360,10 @@ public class ControladorRRHH implements Initializable {
         }
     }
 
+    /**
+     * Dependiendo si está fichado o no la apariencia del botón y la etiqueta cambiará
+     * @param fichado si el empleado ha fichado hoy o no
+     */
     private void actualizarBotonFichaje(boolean fichado) {
         if (fichado) {
             btnFicharRRHH.setText("Salida");
@@ -327,6 +383,9 @@ public class ControladorRRHH implements Initializable {
         }
     }
 
+    /**
+     * Configuración inicial de la tabla de empleados
+     */
     private void configurarTablaEmpleados() {
         colCod.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("codEmpleado"));
         colNombre.setCellValueFactory(cd -> new SimpleStringProperty(cd.getValue().getNombreCompleto()));
@@ -352,9 +411,12 @@ public class ControladorRRHH implements Initializable {
 
         tablaEmpleados.setItems(empleados);
         tablaEmpleados.setPlaceholder(new Label("No hay empleados registrados."));
-        tablaEmpleados.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+        tablaEmpleados.setColumnResizePolicy(CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
     }
 
+    /**
+     * Configuración del panel lateral para editar/agregar nuevos empleados
+     */
     private void configurarFormulario() {
         cmbFormRol.setItems(FXCollections.observableArrayList(Rol.values()));
         List<Empleado> empleadoConDepartamentos = servicioEmpleado.listarTodos();
@@ -372,11 +434,18 @@ public class ControladorRRHH implements Initializable {
         habilitarFormulario(false);
     }
 
+    /**
+     * Configuración de los valores iniciales de los selectores de fechas
+     */
     private void configurarInformes() {
         dpDesde.setValue(LocalDate.now().withDayOfMonth(1));
         dpHasta.setValue(LocalDate.now());
     }
 
+    /**
+     * Cargar automáticamente los datos del empleado en el formulario
+     * @param e el empleado donde se cargarán sus datos
+     */
     private void cargarEnFormulario(Empleado e) {
         modoEdicion = true;
         txtFormCod.setText(String.valueOf(e.getCodEmpleado()));
@@ -395,6 +464,10 @@ public class ControladorRRHH implements Initializable {
         habilitarFormulario(true);
     }
 
+    /**
+     * Reiniciar formulario al realizar una acción de guardado o borrado
+     * @return empleado editado
+     */
     private Empleado recogerFormulario() {
         if (txtFormCod.getText().isBlank() || txtFormNombre.getText().isBlank() || txtFormApellido1.getText().isBlank() || txtFormDni.getText().isBlank() || txtFormUsername.getText().isBlank()) {
             mostrarMensajeFormulario("Rellena todos los campos obligatorios.", false);
@@ -419,6 +492,9 @@ public class ControladorRRHH implements Initializable {
         }
     }
 
+    /**
+     * Limpiar el formulario de edición de empleado
+     */
     private void limpiarFormulario() {
         txtFormCod.clear();
         txtFormNombre.clear();
@@ -434,6 +510,10 @@ public class ControladorRRHH implements Initializable {
         tablaEmpleados.getSelectionModel().clearSelection();
     }
 
+    /**
+     * Activar el formulario
+     * @param habilitar si el usuario va a usar el formulario o no
+     */
     private void habilitarFormulario(boolean habilitar) {
         txtFormNombre.setDisable(!habilitar);
         txtFormApellido1.setDisable(!habilitar);
@@ -449,10 +529,18 @@ public class ControladorRRHH implements Initializable {
         btnBaja.setDisable(!habilitar);
     }
 
+    /**
+     * Actualizar el botón de baja por si no se estuviera editando ningún empleado
+     */
     private void actualizarBotonesAccion() {
         btnBaja.setDisable(true);
     }
 
+    /**
+     * Mostrar mensaje generérico a la hora de realizar operaciones en el formulario
+     * @param msg contenido de la alerta
+     * @param exito tipo de la alerta, si éxito o error
+     */
     private void mostrarMensajeFormulario(String msg, boolean exito) {
         lblFormMensaje.setText(msg);
         lblFormMensaje.setStyle(exito ? "-fx-text-fill: #2e7d32;" : "-fx-text-fill: #c62828;");

@@ -1,9 +1,17 @@
 package dev.danipraivet.modelo.entidades;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-// Entidad que representa un departamento
+/**
+ * Entidad que representa un departamento
+ * @author Daniel Rodríguez Pérez
+ */
+@Setter
+@Getter
 public class Departamento {
 
     private int codDepartamento;
@@ -11,61 +19,36 @@ public class Departamento {
     private String descripcion;
     private boolean activo;
     private LocalDateTime fechaCreacion;
-
+    /**
+     * Constructor vacío requerido por algunas operaciones de mapeo
+     */
     public Departamento() {
     }
-
+    /**
+     * Crea un departamento activo con el nombre y la descripción indicados.
+     *
+     * @param nombre nombre del departamento
+     * @param descripcion descripción breve de sus funciones
+     */
     public Departamento(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.activo = true;
     }
-
+    /**
+     * Constructor completo.
+     *
+     * @param codDepartamento identificador único
+     * @param nombre nombre del departamento
+     * @param descripcion descripción
+     * @param activo {@code true} si el departamento está activo
+     * @param fechaCreacion fecha y hora de creación
+     */
     public Departamento(int codDepartamento, String nombre, String descripcion, boolean activo, LocalDateTime fechaCreacion) {
         this.codDepartamento = codDepartamento;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.activo = activo;
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public int getCodDepartamento() {
-        return codDepartamento;
-    }
-
-    public void setCodDepartamento(int codDepartamento) {
-        this.codDepartamento = codDepartamento;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
-    }
-
-    public LocalDateTime getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(LocalDateTime fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
