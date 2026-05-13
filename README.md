@@ -1,8 +1,14 @@
+<div align="center"> 
+  
 # GAERHA
+
+
+<img src="https://github.com/DaniPraivet/GAERHA/blob/master/src/main/resources/dev/danipraivet/logo/foto_github.png" width=200></img>
 
 **G**estor de **A**sistencia para **E**mpleados, **R**RHH y **A**dministradores.
 
 Aplicación de escritorio para el control de fichajes, gestión de empleados y generación de informes. Hecha con JavaFX y MySQL.
+
 
 
 ### Inicio de sesión
@@ -16,6 +22,8 @@ Aplicación de escritorio para el control de fichajes, gestión de empleados y g
 
 ### Admin
 <img src="https://github.com/DaniPraivet/GAERHA/blob/master/src/main/resources/dev/danipraivet/imagenes/Admin.png" width=400></img>
+
+</div>
 
 ---
 
@@ -40,6 +48,8 @@ Aplicación de escritorio para el control de fichajes, gestión de empleados y g
 
 Estos son algunos de los usuarios de prueba, si quieres verlos todos puedes acceder al usuario de recursos humanos y tienes libertad de añadir o dar de baja los que quieras.
 
+<div align="center"> 
+
 | Usuario      | Contraseña  | Rol      |
 |--------------|-------------|----------|
 | cgarcia      | Admin1234!  | ADMIN    |
@@ -47,6 +57,8 @@ Estos son algunos de los usuarios de prueba, si quieres verlos todos puedes acce
 | jrodriguez   | Emp1234!    | EMPLEADO |
 
 El resto de empleados usan la misma contraseña que `jrodriguez` en los datos de prueba.
+
+</div>
 
 ---
 
