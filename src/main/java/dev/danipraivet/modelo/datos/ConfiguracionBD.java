@@ -9,7 +9,7 @@ import java.util.Properties;
 
 /**
  * Configuracion de la base de datos.
- * Los parametros se cargan desde el fichero externo {@code db.properties},
+ * Los parámetros se cargan desde el fichero externo {@code db.properties},
  * en la ruta ({@code src/main/resources/db.properties}).
  * @author Daniel Rodríguez Pérez
  */

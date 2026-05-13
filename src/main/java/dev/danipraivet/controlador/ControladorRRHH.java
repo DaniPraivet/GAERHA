@@ -37,6 +37,10 @@ import java.util.*;
 
 import static javafx.scene.control.TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS;
 
+/**
+ * Backend de la vista de Recursos Humanos
+ * @author Daniel Rodríguez Pérez
+ */
 public class ControladorRRHH implements Initializable {
 
     private static final Logger log = LoggerFactory.getLogger(ControladorRRHH.class);
@@ -537,7 +541,7 @@ public class ControladorRRHH implements Initializable {
     }
 
     /**
-     * Mostrar mensaje generérico a la hora de realizar operaciones en el formulario
+     * Mostrar mensaje genérico a la hora de realizar operaciones en el formulario
      * @param msg contenido de la alerta
      * @param exito tipo de la alerta, si éxito o error
      */

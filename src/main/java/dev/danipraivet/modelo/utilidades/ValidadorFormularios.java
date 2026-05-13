@@ -2,7 +2,10 @@ package dev.danipraivet.modelo.utilidades;
 
 import java.util.regex.Pattern;
 
-// Validaciones de formulario centralizadas. Evita duplicar logica en los controladores.
+/**
+ * Validaciones de formulario centralizadas. Evita duplicar logica en los controladores.
+ * @author Daniel Rodríguez Pérez
+ */
 public final class ValidadorFormularios {
     // 8 números y 1 letra entre A y H, J y N, P y T o V-Z (Todas las letras menos la I,O,U y Ñ)
     private static final Pattern PATRON_DNI = Pattern.compile("^[0-9]{8}[A-HJ-NP-TV-Z]$");

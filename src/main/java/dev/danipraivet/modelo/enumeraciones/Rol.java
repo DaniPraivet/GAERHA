@@ -1,9 +1,12 @@
 package dev.danipraivet.modelo.enumeraciones;
 
+import lombok.Getter;
+
 /**
  * Roles del sistema
  * @author Daniel Rodríguez Pérez
  */
+@Getter
 public enum Rol {
 
     EMPLEADO("Empleado"), RRHH("Recursos Humanos"), ADMIN("Administrador");
@@ -26,10 +29,6 @@ public enum Rol {
             case "ADMIN" -> ADMIN;
             default -> EMPLEADO;
         };
-    }
-
-    public String getEtiqueta() {
-        return etiqueta;
     }
 
     @Override

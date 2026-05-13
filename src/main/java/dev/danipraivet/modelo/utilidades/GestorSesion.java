@@ -4,7 +4,7 @@ import dev.danipraivet.modelo.entidades.Empleado;
 import dev.danipraivet.modelo.enumeraciones.Rol;
 
 /**
- * Gestiona la sesion del usuario autenticado. Solo puede haber una sesión activa a la vez.
+ * Gestiona la sesión del usuario autenticado. Solo puede haber una sesión activa a la vez.
  * @author Daniel Rodríguez Pérez
  */
 public final class GestorSesion {

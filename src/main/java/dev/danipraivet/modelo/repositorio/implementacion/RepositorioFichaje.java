@@ -100,7 +100,7 @@ public class RepositorioFichaje implements IRepositorioFichaje {
      * @param codEmpleado valor numérico identificador del empleado
      * @param desde fecha inicio
      * @param hasta fecha fin
-     * @return
+     * @return devuelve una lista con los fichajes encontrados
      */
     @Override
     public List<Fichaje> buscarPorEmpleadoYRango(int codEmpleado, LocalDate desde, LocalDate hasta) {
@@ -149,7 +149,7 @@ public class RepositorioFichaje implements IRepositorioFichaje {
      * Lista, fichajes con datos del empleado incluidos
      * @param desde fecha de inicio
      * @param hasta fecha de fin
-     * @return
+     * @return devuelve una lista de todos los fichajes encontrados
      */
     @Override
     public List<Fichaje> listarTodosConEmpleado(LocalDate desde, LocalDate hasta) {

@@ -27,7 +27,7 @@ import java.util.ResourceBundle;
 import static javafx.scene.control.TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS;
 
 /**
- * Backend de la vista de administrador
+ * Backend de la vista de empleado
  * @author Daniel Rodríguez Pérez
  */
 public class ControladorEmpleado implements Initializable {

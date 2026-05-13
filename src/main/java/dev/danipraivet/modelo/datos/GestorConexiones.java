@@ -47,7 +47,7 @@ public class GestorConexiones {
     }
 
     /**
-     * Devuelve una conexion del pool, si esta vacia, crea una nueva
+     * Devuelve una conexión del pool, si esta vacía, crea una nueva
      * @param rol qué tipo de rol tiene el usuario
      * @return una conexión con la base de datos que se almacena en una pool
      * @throws SQLException lanza una excepción si no se ha podido establecer conexión con el servidor
@@ -72,7 +72,7 @@ public class GestorConexiones {
     }
 
     /**
-     * Devuelve una conexion al pool para reutilizarla
+     * Devuelve una conexión al pool para reutilizarla
      * @param rol rol del empleado para debug
      * @param con conexión a liberar
      */
