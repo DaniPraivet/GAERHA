@@ -1,0 +1,12 @@
+dev.danipraivet
+dev.danipraivet.controlador
+dev.danipraivet.modelo.datos
+dev.danipraivet.modelo.entidades
+dev.danipraivet.modelo.enumeraciones
+dev.danipraivet.modelo.repositorio.contratos
+dev.danipraivet.modelo.repositorio.implementacion
+dev.danipraivet.modelo.seguridad
+dev.danipraivet.modelo.servicio
+dev.danipraivet.modelo.utilidades
+dev.danipraivet.vista
+dev.danipraivet.vista.utilidades
