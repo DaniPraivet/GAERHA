@@ -3,7 +3,10 @@ package dev.danipraivet.modelo.utilidades;
 import dev.danipraivet.modelo.entidades.Empleado;
 import dev.danipraivet.modelo.enumeraciones.Rol;
 
-// Gestiona la sesion del usuario autenticado. Solo puede haber una sesion activa a la vez.
+/**
+ * Gestiona la sesion del usuario autenticado. Solo puede haber una sesión activa a la vez.
+ * @author Daniel Rodríguez Pérez
+ */
 public final class GestorSesion {
 
     private static Empleado empleadoActual = null;
@@ -57,18 +60,30 @@ public final class GestorSesion {
         }
     }
 
+    /**
+     * @return {@code true} si el usuario en sesión tiene rol EMPLEADO
+     */
     public static boolean esEmpleado() {
         return haySesionActiva() && empleadoActual.getRol() == Rol.EMPLEADO;
     }
 
+    /**
+     * @return {@code true} si el usuario en sesión tiene rol RRHH
+     */
     public static boolean esRRHH() {
         return haySesionActiva() && empleadoActual.getRol() == Rol.RRHH;
     }
 
+    /**
+     * @return {@code true} si el usuario en sesión tiene rol ADMIN
+     */
     public static boolean esAdmin() {
         return haySesionActiva() && empleadoActual.getRol() == Rol.ADMIN;
     }
 
+    /**
+     * @return {@code true} si el usuario puede realizar tareas de gestión (RRHH o ADMIN)
+     */
     public static boolean tienePermisoGestion() {
         return esRRHH() || esAdmin();
     }

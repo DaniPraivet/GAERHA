@@ -10,20 +10,37 @@ import javafx.scene.control.Alert;
 import javafx.scene.input.InputEvent;
 import javafx.util.Duration;
 
+/**
+ * Controla la inactividad del usuario en la interfaz gráfica.
+ * Tras {@value #TIEMPO_AVISO} segundos sin actividad muestra una alerta,
+ * y a los {@value #TIEMPO_TOTAL} segundos cierra la sesión automáticamente.
+ *
+ * @author Daniel Rodríguez Pérez
+ */
 public class GestorInactividad {
-    // TIEMPO_TOTAL - TIEMPO_AVISO = Tiempo en el que sale la alerta antes de que finalice el tiempo
-    // 180 - 150 = 30 segundos antes de que te eche la sesión
+    /*
+    TIEMPO_TOTAL - TIEMPO_AVISO = Tiempo en el que sale la alerta antes de que finalice el tiempo
+    180 - 150 = 30 segundos antes de que te eche la sesión
+     */
     private static final int TIEMPO_TOTAL = 180;
     private static final int TIEMPO_AVISO = 150;
 
     private static Timeline timeline;
     private static Alert alertaActual;
 
+    /**
+     * Registra los listeners de actividad sobre la escena y arranca el temporizador.
+     *
+     * @param escena escena principal sobre la que se monitorizan los eventos
+     */
     public static void iniciar(Scene escena) {
         escena.addEventFilter(InputEvent.ANY, e -> resetear());
         programar();
     }
 
+    /**
+     * Reinicia el contador de inactividad (llamado al detectar cualquier evento).
+     */
     public static void resetear() {
         if (alertaActual != null && alertaActual.isShowing()) {
             Platform.runLater(() -> alertaActual.close());
@@ -31,6 +48,9 @@ public class GestorInactividad {
         programar();
     }
 
+    /**
+     * Programa el temporizador con los 2 casos, aviso y cierre de sesión.
+     */
     private static void programar() {
         // Detener cualquier temporizador que haya activo
         detener();
@@ -44,6 +64,9 @@ public class GestorInactividad {
         timeline.play();
     }
 
+    /**
+     * Muestra un diálogo de advertencia cuando queda poco para la expulsión.
+     */
     private static void mostrarAviso() {
         Platform.runLater(() -> {
             alertaActual = new Alert(Alert.AlertType.WARNING);
@@ -54,6 +77,9 @@ public class GestorInactividad {
         });
     }
 
+    /**
+     * Cierra la sesión del usuario y redirige al login.
+     */
     private static void cerrarSesion() {
         if (!GestorSesion.haySesionActiva()) return;
 
@@ -66,6 +92,9 @@ public class GestorInactividad {
         });
     }
 
+    /**
+     * Detiene el temporizador de inactividad.
+     */
     public static void detener() {
         if (timeline != null) timeline.stop();
     }

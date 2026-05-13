@@ -85,6 +85,12 @@ public class ServicioEmpleado {
         return ok ? ResultadoCRUD.ok("Empleado creado correctamente.") : ResultadoCRUD.error("Error al guardar en la base de datos.");
     }
 
+    /**
+     * Actualiza los datos de un empleado existente
+     *
+     * @param empleado empleado con los datos modificados
+     * @return resultado de la operación con mensaje descriptivo
+     */
     public ResultadoCRUD actualizar(Empleado empleado) {
         if (!ValidadorFormularios.dniValido(empleado.getDni())) return ResultadoCRUD.error("DNI invalido.");
 
@@ -92,6 +98,13 @@ public class ServicioEmpleado {
         return ok ? ResultadoCRUD.ok("Datos actualizados correctamente.") : ResultadoCRUD.error("Error al actualizar en la base de datos.");
     }
 
+    /**
+     * Cambia la contraseña de un empleado tras validar la nueva
+     *
+     * @param codEmpleado código del empleado
+     * @param nuevaContrasenaPlana nueva contraseña en texto plano
+     * @return resultado de la operación con mensaje descriptivo
+     */
     public ResultadoCRUD cambiarContrasena(int codEmpleado, String nuevaContrasenaPlana) {
         String err = ValidadorFormularios.mensajeContrasena(nuevaContrasenaPlana);
         if (err != null) return ResultadoCRUD.error(err);
@@ -105,7 +118,11 @@ public class ServicioEmpleado {
         return ok ? ResultadoCRUD.ok("Contrasena actualizada correctamente.") : ResultadoCRUD.error("Error al actualizar la contrasena.");
     }
 
-    // Desactiva el empleado sin borrar su historial de fichajes
+    /**
+     * Desactiva el empleado sin borrar su historial de fichajes
+     * @param codEmpleado código del empleado
+     * @return resultado de la operación con mensaje descriptivo
+     */
     public ResultadoCRUD darDeBaja(int codEmpleado) {
         if (GestorSesion.getCodEmpleado() == codEmpleado)
             return ResultadoCRUD.error("No puedes darte de baja a ti mismo.");
@@ -114,13 +131,21 @@ public class ServicioEmpleado {
         return ok ? ResultadoCRUD.ok("Empleado dado de baja correctamente.") : ResultadoCRUD.error("Error al dar de baja al empleado.");
     }
 
-    // Reactiva un empleado que estaba de baja
+    /**
+     * Reactiva un empleado que estaba de baja
+     * @param codEmpleado código del empleado
+     * @return resultado de la operación con mensaje descriptivo
+     */
     public ResultadoCRUD recuperar(int codEmpleado) {
         boolean ok = repo.recuperar(codEmpleado);
         return ok ? ResultadoCRUD.ok("Empleado reactivado correctamente.") : ResultadoCRUD.error("Error al reactivar el empleado.");
     }
 
-    // Eliminacion fisica (solo Admin). Borra tambien todos sus fichajes en cascada.
+    /**
+     * Eliminación física, borra también todos sus fichajes en cascada
+     * @param codEmpleado código del empleado
+     * @return resultado de la operación con mensaje descriptivo
+     */
     public ResultadoCRUD eliminar(int codEmpleado) {
         if (GestorSesion.getCodEmpleado() == codEmpleado)
             return ResultadoCRUD.error("No puedes eliminarte a ti mismo.");
@@ -129,6 +154,12 @@ public class ServicioEmpleado {
         return ok ? ResultadoCRUD.ok("Empleado eliminado definitivamente.") : ResultadoCRUD.error("Error al eliminar el empleado.");
     }
 
+    /**
+     * Desbloquea la cuenta de un empleado y reinicia el contador de intentos fallidos.
+     *
+     * @param codEmpleado código del empleado
+     * @return resultado de la operación con mensaje descriptivo
+     */
     public ResultadoCRUD desbloquear(int codEmpleado) {
         Optional<Empleado> opt = repo.buscarPorCodigo(codEmpleado);
         if (opt.isEmpty()) return ResultadoCRUD.error("Empleado no encontrado.");
@@ -140,7 +171,11 @@ public class ServicioEmpleado {
         return ok ? ResultadoCRUD.ok("Cuenta desbloqueada.") : ResultadoCRUD.error("Error al desbloquear la cuenta.");
     }
 
-    // Resultado de una operacion CRUD con exito/fallo y mensaje descriptivo
+    /**
+     * Resultado de una operación CRUD con exito/fallo y mensaje descriptivo
+     * @param exito si la operación ha sido realizada con éxito
+     * @param mensaje el contenido del mensaje
+     */
     public record ResultadoCRUD(boolean exito, String mensaje) {
         public static ResultadoCRUD ok(String msg) {
             return new ResultadoCRUD(true, msg);

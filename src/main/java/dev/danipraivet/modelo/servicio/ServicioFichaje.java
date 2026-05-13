@@ -47,44 +47,100 @@ public class ServicioFichaje {
         return repo.registrarFichaje(codEmpleado);
     }
 
-    // Devuelve true si el empleado en sesion tiene una entrada abierta hoy
+    /**
+     * Indica si el empleado en sesión tiene una entrada abierta hoy.
+     *
+     * @return {@code true} si ya fichó la entrada pero no la salida
+     */
     public boolean estaFichadoHoy() {
         return repo.estaFichadoHoy(GestorSesion.getCodEmpleado());
     }
 
+    /**
+     * Obtiene el fichaje de hoy del empleado en sesión.
+     *
+     * @return un Optional con el fichaje si existe
+     */
     public Optional<Fichaje> getFichajeHoy() {
         return repo.buscarFichajeHoy(GestorSesion.getCodEmpleado());
     }
 
+    /**
+     * Obtiene el fichaje de hoy de un empleado específico.
+     *
+     * @param codEmpleado código del empleado
+     * @return un Optional con el fichaje si existe
+     */
     public Optional<Fichaje> getFichajeHoyDe(int codEmpleado) {
         return repo.buscarFichajeHoy(codEmpleado);
     }
 
-    // Historial del empleado en sesión para el mes actual
+    /**
+     * Historial del empleado en sesión para el mes actual
+     * @return devolver una lista con los fichajes realizados este mes
+     */
     public List<Fichaje> getMesActual() {
         LocalDate hoy = LocalDate.now();
         return repo.buscarPorEmpleadoYRango(GestorSesion.getCodEmpleado(), hoy.withDayOfMonth(1), hoy);
     }
 
+    /**
+     * Devuelve el historial de fichajes de un empleado en un rango de fechas.
+     *
+     * @param codEmpleado código del empleado
+     * @param desde fecha de inicio incluida
+     * @param hasta fecha de fin incluida
+     * @return lista de fichajes en el período
+     */
     public List<Fichaje> getHistorial(int codEmpleado, LocalDate desde, LocalDate hasta) {
         return repo.buscarPorEmpleadoYRango(codEmpleado, desde, hasta);
     }
 
+    /**
+     * Obtiene todos los fichajes de una fecha en concreto.
+     *
+     * @param fecha día a consultar
+     * @return lista de fichajes de esa fecha
+     */
     public List<Fichaje> getFichajesPorFecha(LocalDate fecha) {
         return repo.buscarPorFecha(fecha);
     }
 
+    /**
+     * Obtiene fichajes de todos los empleados en un rango de fechas,
+     * incluyendo los datos básicos de cada empleado.
+     *
+     * @param desde fecha de inicio incluida
+     * @param hasta fecha de fin incluida
+     * @return lista de fichajes con información del empleado
+     */
     public List<Fichaje> getTodosConEmpleado(LocalDate desde, LocalDate hasta) {
         return repo.listarTodosConEmpleado(desde, hasta);
     }
 
+    /**
+     * Actualiza un fichaje entero
+     *
+     * @param fichaje fichaje con los datos modificados
+     * @return {@code true} si se guardó correctamente
+     */
     public boolean actualizar(Fichaje fichaje) {
         return repo.actualizar(fichaje);
     }
 
+    /**
+     * Elimina un fichaje
+     *
+     * @param id identificador del fichaje
+     * @return {@code true} si se eliminó correctamente
+     */
     public boolean eliminar(int id) {
         return repo.eliminar(id);
     }
+
+    /**
+     * @return número de empleados que están actualmente fichados (entrada sin salida)
+     */
     public int contarFichadosHoy() {
         return repo.contarFichadosHoy();
     }

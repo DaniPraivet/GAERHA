@@ -34,6 +34,8 @@ import java.util.List;
  * El controlador abre el FileChooser, obtiene el File destino
  * y llama a estos métodos. La lógica de presentación del informe
  * vive aquí, no en el controlador.
+ *
+ * @author Daniel Rodríguez Pérez
  */
 public class ServicioInformes {
 
@@ -43,7 +45,7 @@ public class ServicioInformes {
     private static final DateTimeFormatter FMT_HORA = DateTimeFormatter.ofPattern("HH:mm");
 
     //Colores globales
-    private static final DeviceRgb COLOR_CABECERA = new DeviceRgb(21, 101, 192); // Azul
+    private static final DeviceRgb COLOR_CABECERA = new DeviceRgb(21, 101, 192);
     private static final DeviceRgb COLOR_FILA_PAR = new DeviceRgb(232, 240, 254);
     private static final DeviceRgb COLOR_FILA_IMPAR = new DeviceRgb(255, 255, 255);
 

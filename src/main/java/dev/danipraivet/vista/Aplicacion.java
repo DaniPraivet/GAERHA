@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,14 +23,28 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Clase principal de la aplicación JavaFX.
+ * Gestiona la ventana principal, la navegación entre vistas,
+ * la aplicación de temas MaterialFX y el scheduler de refresco.
+ *
+ * @author Daniel Rodríguez Pérez
+ */
 public class Aplicacion extends Application {
 
     private static final Logger log = LoggerFactory.getLogger(Aplicacion.class);
     private static final double ANCHO = 1100;
     private static final double ALTO = 700;
+    @Getter
     private static Stage escenarioPrincipal;
     private static ScheduledExecutorService scheduler;
 
+    /**
+     * Carga la vista FXML indicada y la muestra en el escenario principal.
+     * Si la vista es "Login" detiene el temporizador de inactividad.
+     *
+     * @param vista código de la vista
+     */
     public static void navegarA(String vista) {
         try {
             String ruta = "/dev/danipraivet/" + vista + ".fxml";
@@ -55,10 +70,6 @@ public class Aplicacion extends Application {
         }
     }
 
-    public static Stage getEscenarioPrincipal() {
-        return escenarioPrincipal;
-    }
-
     private static void aplicarCSS(Scene escena) {
         URL cssUrl = Aplicacion.class.getResource("/styles.css");
         if (cssUrl != null) {
@@ -68,10 +79,20 @@ public class Aplicacion extends Application {
         }
     }
 
+    /**
+     * Lanza la aplicación JavaFX.
+     *
+     * @param args argumentos de línea de comandos (no se utilizan)
+     */
     public static void main(String[] args) {
         launch(args);
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Configura el escenario, comprueba la conexión a la BD y muestra la vista de login.
+     */
     @Override
     public void start(Stage stage) {
         escenarioPrincipal = stage;
@@ -94,6 +115,11 @@ public class Aplicacion extends Application {
         log.info("Aplicacion iniciada correctamente");
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Cierra el pool de conexiones y detiene los temporizadores.
+     */
     @Override
     public void stop() {
         log.info("Cerrando aplicacion y liberando conexiones...");
@@ -113,11 +139,20 @@ public class Aplicacion extends Application {
         escenarioPrincipal.show();
     }
 
+    /**
+     * Inicia un scheduler que ejecuta una tarea periódicamente.
+     *
+     * @param tarea tarea a ejecutar
+     * @param intervaloSegundos intervalo en segundos entre ejecuciones
+     */
     public static void iniciarScheduler(Runnable tarea, int intervaloSegundos) {
         scheduler = Executors.newSingleThreadScheduledExecutor();
         scheduler.scheduleAtFixedRate(tarea, intervaloSegundos, intervaloSegundos, TimeUnit.SECONDS);
     }
 
+    /**
+     * Detiene el scheduler si estaba en funcionamiento.
+     */
     public static void pararScheduler() {
         if (scheduler != null && !scheduler.isShutdown()) {
             scheduler.shutdown();
