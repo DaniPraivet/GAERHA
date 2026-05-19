@@ -29,7 +29,7 @@ dependencies {
     implementation("com.mysql:mysql-connector-j:8.3.0")
     implementation("org.mindrot:jbcrypt:0.4")
     implementation("com.itextpdf:itext7-core:7.2.5")
-    implementation("org.apache.poi:poi-ooxml:5.4.0")
+    implementation("org.apache.poi:poi-ooxml:5.5.1")
     compileOnly("org.projectlombok:lombok:1.18.30")
     annotationProcessor("org.projectlombok:lombok:1.18.30")
     implementation("ch.qos.logback:logback-classic:1.5.13")
