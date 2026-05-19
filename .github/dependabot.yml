@@ -1,0 +1,32 @@
+version: 2
+updates:
+  - package-ecosystem: "gradle" 
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Madrid"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "java"
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      itext:
+        patterns:
+          - "com.itextpdf*"
+      apache-poi:
+        patterns:
+          - "org.apache.poi*"
+      javafx:
+        patterns:
+          - "org.openjfx*"
+      logging:
+        patterns:
+          - "org.slf4j*"
+          - "ch.qos.logback*"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
